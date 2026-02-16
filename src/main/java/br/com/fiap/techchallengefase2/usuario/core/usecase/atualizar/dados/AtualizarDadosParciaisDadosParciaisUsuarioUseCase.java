@@ -5,7 +5,7 @@ import br.com.fiap.techchallengefase2.usuario.core.dto.DadosParciaisUsuarioDTO;
 import br.com.fiap.techchallengefase2.usuario.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.usuario.core.rule.credenciais.RuleCredenciaisUsuario;
 import br.com.fiap.techchallengefase2.usuario.core.rule.dados.RuleDadosUsuario;
-import br.com.fiap.techchallengefase2.usuario.core.usecase.buscar.BuscarUsuarioPorIdUseCase;
+import br.com.fiap.techchallengefase2.usuario.core.usecase.buscar.id.BuscarUsuarioPorIdUseCase;
 
 import java.util.List;
 

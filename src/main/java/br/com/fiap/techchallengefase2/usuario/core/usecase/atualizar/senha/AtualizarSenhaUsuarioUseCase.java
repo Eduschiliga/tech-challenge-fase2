@@ -5,7 +5,7 @@ import br.com.fiap.techchallengefase2.usuario.core.dto.senha.AtualizarSenhaDTO;
 import br.com.fiap.techchallengefase2.usuario.core.gateway.CodificadorSenhaGateway;
 import br.com.fiap.techchallengefase2.usuario.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.usuario.core.rule.senha.RuleAtualizarSenhaUsuario;
-import br.com.fiap.techchallengefase2.usuario.core.usecase.buscar.BuscarUsuarioPorIdUseCase;
+import br.com.fiap.techchallengefase2.usuario.core.usecase.buscar.id.BuscarUsuarioPorIdUseCase;
 
 import java.util.Comparator;
 import java.util.List;

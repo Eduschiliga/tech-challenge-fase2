@@ -1,29 +1,30 @@
-package br.com.fiap.techchallengefase2.usuario.core.usecase.usuario;
+package br.com.fiap.techchallengefase2.usuario.core.usecase.criar;
 
-import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.Usuario;
+import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.usuario.core.gateway.CodificadorSenhaGateway;
 import br.com.fiap.techchallengefase2.usuario.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.usuario.core.rule.usuario.RuleCriarUsuario;
+import br.com.fiap.techchallengefase2.usuario.core.rule.dados.RuleDadosUsuario;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class CriarUsuarioUseCase {
+public class CriarUsuarioUseCase implements CriarUsuario {
     private final CodificadorSenhaGateway codificadorSenhaGateway;
-    private final List<RuleCriarUsuario> ruleCriarUsuarioList;
+    private final List<RuleDadosUsuario> ruleDadosUsuarioList;
     private final UsuarioGateway usuarioGateway;
 
     public CriarUsuarioUseCase(
             CodificadorSenhaGateway codificadorSenhaGateway,
             UsuarioGateway usuarioGateway,
-            List<RuleCriarUsuario> ruleCriarUsuarioList
+            List<RuleDadosUsuario> ruleDadosUsuarioList
     ) {
         this.codificadorSenhaGateway = codificadorSenhaGateway;
-        this.ruleCriarUsuarioList = ruleCriarUsuarioList;
+        this.ruleDadosUsuarioList = ruleDadosUsuarioList;
         this.usuarioGateway = usuarioGateway;
     }
 
-    public Long criar(Usuario usuario) {
+    @Override
+    public Long criar(UsuarioBase usuario) {
         validarUsuario(usuario);
 
         atribuirSenhaCodificada(usuario);
@@ -31,14 +32,15 @@ public class CriarUsuarioUseCase {
         return usuarioGateway.salvar(usuario);
     }
 
-    private void validarUsuario(Usuario usuario) {
+    private void validarUsuario(UsuarioBase usuario) {
         // Ordena as rules pela prioridade antes de executar
-        ruleCriarUsuarioList.stream()
-                .sorted(Comparator.comparingInt(RuleCriarUsuario::getOrdemValidacao))
+
+        ruleDadosUsuarioList.stream()
+                .sorted(Comparator.comparingInt(RuleDadosUsuario::getOrdemValidacao))
                 .forEach(rule -> rule.validar(usuario));
     }
 
-    private void atribuirSenhaCodificada(Usuario usuario) {
+    private void atribuirSenhaCodificada(UsuarioBase usuario) {
         String senhaCodificada = codificadorSenhaGateway.codificar(usuario.getSenha());
         usuario.atribuirSenhaCodificada(senhaCodificada);
     }

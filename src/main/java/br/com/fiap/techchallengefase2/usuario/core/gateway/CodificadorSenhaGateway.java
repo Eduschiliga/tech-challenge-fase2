@@ -4,4 +4,5 @@ public interface CodificadorSenhaGateway {
 
     String codificar(String senha);
 
+    String decodificar(String senhaCodificada);
 }

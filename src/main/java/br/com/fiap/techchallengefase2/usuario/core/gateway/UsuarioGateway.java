@@ -1,14 +1,18 @@
 package br.com.fiap.techchallengefase2.usuario.core.gateway;
 
-import br.com.fiap.techchallengefase2.usuario.core.domain.tipousuario.TipoUsuarioBase;
-import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.Usuario;
+import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
 
 import java.util.Optional;
 
 public interface UsuarioGateway {
 
-    Optional<TipoUsuarioBase> buscarPorId(Long usuarioBaseId);
+    Optional<UsuarioBase> buscarPorId(Long usuarioId);
 
-    Long salvar(Usuario usuario);
+    void deletarPorId(Long usuarioId);
 
+    Long salvar(UsuarioBase usuario);
+
+    boolean existeUsuarioComLogin(String login);
+
+    boolean existeUsuarioComEmail(String email);
 }

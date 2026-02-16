@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.usuario.core.usecase.atualizar.dados;
 
-import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.usuario.core.dto.DadosParciaisUsuarioDTO;
 
 public interface AtualizarDadosParciaisUsuario {
-    Long atualizar(Long usuarioLogadoId, UsuarioBase usuario);
+    Long atualizar(Long usuarioLogadoId, DadosParciaisUsuarioDTO dadosParciaisDto);
 }

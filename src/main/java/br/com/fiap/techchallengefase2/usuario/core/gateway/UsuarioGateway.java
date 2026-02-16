@@ -11,6 +11,7 @@ public interface UsuarioGateway {
     void deletarPorId(Long usuarioId);
 
     Long salvar(UsuarioBase usuario);
+    Long atualizarSenha(String senhaCodificada, Long usuarioId);
 
     boolean existeUsuarioComLogin(String login);
 

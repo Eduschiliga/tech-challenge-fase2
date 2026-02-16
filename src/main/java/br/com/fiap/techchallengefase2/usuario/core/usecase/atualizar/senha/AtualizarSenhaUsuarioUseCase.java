@@ -31,13 +31,12 @@ public class AtualizarSenhaUsuarioUseCase implements AtualizarSenhaUsuario {
     @Override
     public Long atualizar(Long usuarioLogadoId, AtualizarSenhaDTO atualizarSenhaDto) {
         UsuarioBase usuario = buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId);
+
         validarSenha(usuario, atualizarSenhaDto);
 
         String novaSenhaCodificada = codificadorSenhaGateway.codificar(atualizarSenhaDto.getNovaSenha());
 
-        usuario.atribuirSenhaCodificada(novaSenhaCodificada);
-
-        return usuarioGateway.salvar(usuario);
+        return usuarioGateway.atualizarSenha(novaSenhaCodificada, usuarioLogadoId);
     }
 
     private void validarSenha(UsuarioBase usuario, AtualizarSenhaDTO atualizarSenhaDto) {

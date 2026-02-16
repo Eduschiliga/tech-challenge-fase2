@@ -1,14 +1,13 @@
 package br.com.fiap.techchallengefase2.usuario.core.domain.usuario;
 
-import java.util.Objects;
-
 public abstract class UsuarioBase {
-    protected Long usuarioId;
+    private Long usuarioId;
     private String nome;
     private String email;
     private String login;
     private String senha;
     private String endereco;
+    private Integer categoriaUsuario;
 
     public UsuarioBase(
             Long usuarioId,
@@ -16,7 +15,8 @@ public abstract class UsuarioBase {
             String email,
             String login,
             String senha,
-            String endereco
+            String endereco,
+            Integer categoriaUsuario
     ) {
         this.usuarioId = usuarioId;
         this.nome = nome;
@@ -24,6 +24,11 @@ public abstract class UsuarioBase {
         this.login = login;
         this.senha = senha;
         this.endereco = endereco;
+        this.categoriaUsuario = categoriaUsuario;
+    }
+
+    public Integer getCategoriaUsuario() {
+        return categoriaUsuario;
     }
 
     public Long getUsuarioId() {
@@ -48,20 +53,5 @@ public abstract class UsuarioBase {
 
     public String getEndereco() {
         return endereco;
-    }
-
-    public void atribuirSenhaCodificada(String senhaCodificada) {
-        if (Objects.isNull(senhaCodificada) || senhaCodificada.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-
-        this.senha = senhaCodificada;
-    }
-
-    public void atualizarDadosParciais(UsuarioBase usuario) {
-        this.nome = usuario.getNome();
-        this.email = usuario.getEmail();
-        this.endereco = usuario.getEndereco();
-        this.login = usuario.getLogin();
     }
 }

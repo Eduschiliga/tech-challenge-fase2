@@ -1,12 +1,8 @@
 package br.com.fiap.techchallengefase2.usuario.core.rule.dados;
 
-import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.usuario.core.dto.DadosParciaisUsuarioDTO;
 
 public interface RuleDadosUsuario {
 
-    void validar(UsuarioBase usuario);
-
-    default int getOrdemValidacao() {
-        return 100;
-    }
+    void validar(DadosParciaisUsuarioDTO dadosParciaisDto);
 }

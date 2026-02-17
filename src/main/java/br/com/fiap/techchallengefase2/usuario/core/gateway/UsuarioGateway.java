@@ -11,11 +11,9 @@ public interface UsuarioGateway {
 
     void deletarPorId(Long usuarioId);
 
-    Long salvar(UsuarioBase usuario);
+    UsuarioBase salvar(UsuarioBase usuario);
 
-    Long atualizarSenha(String senhaCodificada, Long usuarioId);
-
-    Long atualizarCategoria(Long usuarioId, Integer categoriaUsuario);
+    UsuarioBase atualizarSenha(String senhaCodificada, Long usuarioId);
 
     boolean existeUsuarioComLogin(String login);
 

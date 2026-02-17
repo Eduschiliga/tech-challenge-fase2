@@ -3,7 +3,7 @@ package br.com.fiap.techchallengefase2.usuario.core.domain.factory;
 import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.usuario.core.dto.DadosParciaisUsuarioDTO;
+import br.com.fiap.techchallengefase2.usuario.core.dto.DadosUsuarioInputDTO;
 
 import java.util.ArrayList;
 
@@ -15,40 +15,21 @@ public class UsuarioFactory {
     public static final int TIPO_USUARIO_DONO = 0;
     public static final int TIPO_USUARIO_CLIENTE = 1;
 
-    /**
-     * Cria uma nova instância de usuário com dados parciais atualizados.
-     *
-     * @param usuarioAtual            o usuário atual com dados antigos
-     * @param dadosParciaisUsuarioDto usuário contendo os novos dados (parciais)
-     * @return uma nova instância do usuário com os dados parciais atualizados
-     */
     public static UsuarioBase atualizarDadosParciais(
             UsuarioBase usuarioAtual,
-            DadosParciaisUsuarioDTO dadosParciaisUsuarioDto) {
+            DadosUsuarioInputDTO dadosUsuarioInputDto) {
 
         return criarCopiaComNovosDados(
                 usuarioAtual,
-                dadosParciaisUsuarioDto.getNome(),
-                dadosParciaisUsuarioDto.getEmail(),
-                dadosParciaisUsuarioDto.getLogin(),
-                dadosParciaisUsuarioDto.getEndereco(),
+                dadosUsuarioInputDto.getNome(),
+                dadosUsuarioInputDto.getEmail(),
+                dadosUsuarioInputDto.getLogin(),
+                dadosUsuarioInputDto.getEndereco(),
                 usuarioAtual.getSenha(),
                 usuarioAtual.getCategoriaUsuario()
         );
     }
 
-    /**
-     * Método auxiliar privado para criar uma cópia do usuário com novos dados.
-     * Este método é responsável por manter a imutabilidade do domínio.
-     *
-     * @param usuarioOriginal o usuário original
-     * @param nome            novo nome
-     * @param email           novo email
-     * @param login           novo login
-     * @param endereco        novo endereço
-     * @param senha           nova senha
-     * @return nova instância do usuário com os dados atualizados
-     */
     private static UsuarioBase criarCopiaComNovosDados(
             UsuarioBase usuarioOriginal,
             String nome,
@@ -92,7 +73,7 @@ public class UsuarioFactory {
             String nome,
             String email,
             String login,
-            String senhaCodificada,
+            String senha,
             String endereco
     ) {
         return switch (categoriaUsuario) {
@@ -101,7 +82,7 @@ public class UsuarioFactory {
                     nome,
                     email,
                     login,
-                    senhaCodificada,
+                    senha,
                     endereco,
                     new ArrayList<>()
             );
@@ -111,7 +92,7 @@ public class UsuarioFactory {
                     nome,
                     email,
                     login,
-                    senhaCodificada,
+                    senha,
                     endereco
             );
 

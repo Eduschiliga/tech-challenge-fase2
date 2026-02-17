@@ -1,11 +1,11 @@
 package br.com.fiap.techchallengefase2.usuario.core.rule.senha;
 
-import br.com.fiap.techchallengefase2.usuario.core.dto.senha.AtualizarSenhaDTO;
+import br.com.fiap.techchallengefase2.usuario.core.dto.AtualizarSenhaInputDTO;
 
 public class ValidaSenhaAtual implements RuleAtualizarSenhaUsuario {
     @Override
-    public void validar(String senhaAtual, AtualizarSenhaDTO atualizarSenhaDto) {
-        if (!senhaAtual.equals(atualizarSenhaDto.getSenhaAtual())) {
+    public void validar(String senhaAtual, AtualizarSenhaInputDTO atualizarSenhaInputDto) {
+        if (!senhaAtual.equals(atualizarSenhaInputDto.getSenhaAtual())) {
             throw new IllegalArgumentException("Senha atual não confere");
         }
     }

@@ -2,7 +2,7 @@ package br.com.fiap.techchallengefase2.usuario.core.usecase.deletar;
 
 import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.usuario.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.usuario.core.usecase.buscar.id.BuscarUsuarioPorIdUseCase;
+import br.com.fiap.techchallengefase2.usuario.core.usecase.consultar.id.BuscarUsuarioPorIdUseCase;
 
 import java.util.Objects;
 

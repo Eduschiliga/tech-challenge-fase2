@@ -1,14 +1,12 @@
-package br.com.fiap.techchallengefase2.usuario.core.usecase.buscar.id;
+package br.com.fiap.techchallengefase2.usuario.core.usecase.consultar.id;
 
 import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.usuario.core.gateway.UsuarioGateway;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class BuscarUsuarioPorIdUseCase implements BuscarUsuarioPorId {
     private final UsuarioGateway usuarioGateway;
-
-    public BuscarUsuarioPorIdUseCase(UsuarioGateway usuarioGateway) {
-        this.usuarioGateway = usuarioGateway;
-    }
 
     @Override
     public UsuarioBase buscarPorId(Long usuarioId) {

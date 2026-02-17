@@ -1,4 +1,4 @@
-package br.com.fiap.techchallengefase2.usuario.core.usecase.buscar.id;
+package br.com.fiap.techchallengefase2.usuario.core.usecase.consultar.id;
 
 import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
 

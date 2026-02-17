@@ -1,5 +1,12 @@
 package br.com.fiap.techchallengefase2.usuario.core.domain.usuario;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class UsuarioBase {
     private Long usuarioId;
     private String nome;
@@ -9,49 +16,7 @@ public abstract class UsuarioBase {
     private String endereco;
     private Integer categoriaUsuario;
 
-    public UsuarioBase(
-            Long usuarioId,
-            String nome,
-            String email,
-            String login,
-            String senha,
-            String endereco,
-            Integer categoriaUsuario
-    ) {
-        this.usuarioId = usuarioId;
-        this.nome = nome;
-        this.email = email;
-        this.login = login;
-        this.senha = senha;
-        this.endereco = endereco;
-        this.categoriaUsuario = categoriaUsuario;
-    }
-
-    public Integer getCategoriaUsuario() {
-        return categoriaUsuario;
-    }
-
-    public Long getUsuarioId() {
-        return usuarioId;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public String getEndereco() {
-        return endereco;
+    public void atribuirSenhaCodificada(String senhaCodificada) {
+        this.senha = senhaCodificada;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class ValidaSePossuiNome implements RuleDadosUsuario {
     @Override
     public void validar(UsuarioBase usuarioBase) {
-        if (Objects.isNull(usuarioBase.getNome()) || usuarioBase.getNome().isEmpty()) {
+        if (Objects.isNull(usuarioBase.getNome()) || usuarioBase.getNome().isEmpty() || usuarioBase.getNome().isBlank()) {
             throw new IllegalArgumentException();
         }
     }

@@ -4,7 +4,7 @@ import br.com.fiap.techchallengefase2.usuario.core.dto.AtualizarSenhaInputDTO;
 
 import java.util.Objects;
 
-public class ValidaSenhaValida implements RuleAtualizarSenhaUsuario {
+public class ValidaSenha implements RuleAtualizarSenhaUsuario {
     @Override
     public void validar(String senhaAtual, AtualizarSenhaInputDTO atualizarSenhaInputDto) {
         String novaSenha = atualizarSenhaInputDto.getNovaSenha();

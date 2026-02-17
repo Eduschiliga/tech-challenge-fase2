@@ -7,7 +7,7 @@ import java.util.Objects;
 public class ValidaSePossuiLogin implements RuleDadosUsuario {
     @Override
     public void validar(UsuarioBase usuarioBase) {
-        if (Objects.isNull(usuarioBase.getLogin()) || usuarioBase.getLogin().isEmpty()) {
+        if (Objects.isNull(usuarioBase.getLogin()) || usuarioBase.getLogin().isEmpty() || usuarioBase.getLogin().isBlank()) {
             throw new IllegalArgumentException();
         }
     }

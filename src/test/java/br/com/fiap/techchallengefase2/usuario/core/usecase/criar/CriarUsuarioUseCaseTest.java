@@ -1,17 +1,13 @@
 package br.com.fiap.techchallengefase2.usuario.core.usecase.criar;
 
-import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.Cliente;
-import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.Dono;
-import br.com.fiap.techchallengefase2.usuario.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.usuario.core.gateway.CodificadorSenhaGateway;
-import br.com.fiap.techchallengefase2.usuario.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.usuario.core.rule.credenciais.RuleCredenciaisUsuario;
-import br.com.fiap.techchallengefase2.usuario.core.rule.credenciais.ValidaSeJaExisteEmail;
-import br.com.fiap.techchallengefase2.usuario.core.rule.credenciais.ValidaSeJaExisteLogin;
-import br.com.fiap.techchallengefase2.usuario.core.rule.dados.RuleDadosUsuario;
-import br.com.fiap.techchallengefase2.usuario.core.rule.dados.ValidaSePossuiEmail;
-import br.com.fiap.techchallengefase2.usuario.core.rule.dados.ValidaSePossuiLogin;
-import br.com.fiap.techchallengefase2.usuario.core.rule.dados.ValidaSePossuiNome;
+import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
+import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
+import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.core.gateway.CodificadorSenhaGateway;
+import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
+import br.com.fiap.techchallengefase2.core.rule.credenciais.RuleCredenciaisUsuario;
+import br.com.fiap.techchallengefase2.core.rule.dados.RuleDadosUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.criar.CriarUsuarioUseCase;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
@@ -90,16 +87,9 @@ class CriarUsuarioUseCaseTest {
                 "Rua Principal, 123"
         );
 
-        List<RuleDadosUsuario> ruleDadosUsuarioList = List.of(
-                new ValidaSePossuiEmail(),
-                new ValidaSePossuiLogin(),
-                new ValidaSePossuiNome()
-        );
+        List<RuleDadosUsuario> ruleDadosUsuarioList = List.of(Mockito.mock(RuleDadosUsuario.class));
 
-        List<RuleCredenciaisUsuario> ruleCredenciaisUsuarioList = List.of(
-                new ValidaSeJaExisteEmail(usuarioGateway),
-                new ValidaSeJaExisteLogin(usuarioGateway)
-        );
+        List<RuleCredenciaisUsuario> ruleCredenciaisUsuarioList = List.of(Mockito.mock(RuleCredenciaisUsuario.class));
 
         criarUsuarioUseCase = new CriarUsuarioUseCase(
                 codificadorSenhaGateway,

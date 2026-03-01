@@ -5,7 +5,7 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorIdUseCase;
-import br.com.fiap.techchallengefase2.core.usecase.ususario.consultar.id.BuscarUsuarioPorIdUseCase;
+import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

@@ -3,7 +3,6 @@ package br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.todos;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.core.usecase.ususario.consultar.todos.BuscarTodosUsuariosUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,9 +30,25 @@ class BuscarTodosUsuariosUseCaseTest {
         // Arrange
         List<UsuarioBase> usuarios = new ArrayList<>();
 
-        Cliente usuario1 = new Cliente(1L, null, null, null, null, null);
+        Cliente usuario1 = new Cliente(
+                1L,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
 
-        Cliente usuario2 = new Cliente(2L, null, null, null, null, null);
+        Cliente usuario2 = new Cliente(
+                2L,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
 
         usuarios.add(usuario1);
         usuarios.add(usuario2);

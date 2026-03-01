@@ -2,7 +2,6 @@ package br.com.fiap.techchallengefase2.core.gateway;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 

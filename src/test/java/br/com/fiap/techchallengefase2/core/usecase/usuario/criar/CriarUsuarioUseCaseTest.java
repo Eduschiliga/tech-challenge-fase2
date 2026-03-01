@@ -5,9 +5,8 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.gateway.CodificadorSenhaGateway;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.RuleCredenciaisUsuario;
 import br.com.fiap.techchallengefase2.core.rule.dados.RuleDadosUsuario;
-import br.com.fiap.techchallengefase2.core.usecase.ususario.criar.CriarUsuarioUseCase;
+import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.RuleCredenciaisUsuario;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -56,6 +55,7 @@ class CriarUsuarioUseCaseTest {
                 "maria.login",
                 "any-senha",
                 "Av. Secundária, 456",
+                new ArrayList<>(),
                 new ArrayList<>()
         );
 
@@ -66,6 +66,7 @@ class CriarUsuarioUseCaseTest {
                 "maria.login",
                 HASHED_PASSWORD,
                 "Av. Secundária, 456",
+                new ArrayList<>(),
                 new ArrayList<>()
         );
 
@@ -75,7 +76,8 @@ class CriarUsuarioUseCaseTest {
                 "joao.silva@email.com",
                 "joao.login",
                 HASHED_PASSWORD,
-                "Rua Principal, 123"
+                "Rua Principal, 123",
+                new ArrayList<>()
         );
 
         clienteValido = new Cliente(
@@ -84,7 +86,8 @@ class CriarUsuarioUseCaseTest {
                 "joao.silva@email.com",
                 "joao.login",
                 "any-senha",
-                "Rua Principal, 123"
+                "Rua Principal, 123",
+                new ArrayList<>()
         );
 
         List<RuleDadosUsuario> ruleDadosUsuarioList = List.of(Mockito.mock(RuleDadosUsuario.class));

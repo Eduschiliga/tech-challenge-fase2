@@ -1,4 +1,4 @@
-package br.com.fiap.techchallengefase2.core.usecase.ususario.consultar.id;
+package br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
@@ -30,7 +30,16 @@ class BuscarUsuarioPorIdUseCaseTest {
     @DisplayName("Deve retornar um Dono quando a categoria for 0")
     void deveRetornarDonoQuandoCategoriaForZero() {
         Long usuarioId = 1L;
-        Dono dono = new Dono(usuarioId, "Dono Teste", "dono@test.com", "dono.login", "senha", "End", new ArrayList<>());
+        Dono dono = new Dono(
+                usuarioId,
+                "Dono Teste",
+                "dono@test.com",
+                "dono.login",
+                "senha",
+                "End",
+                new ArrayList<>(),
+                new ArrayList<>()
+        );
 
         when(usuarioGateway.buscarPorId(usuarioId)).thenReturn(Optional.of(dono));
 
@@ -45,7 +54,15 @@ class BuscarUsuarioPorIdUseCaseTest {
     @DisplayName("Deve retornar um Cliente quando a categoria for 1")
     void deveRetornarClienteQuandoCategoriaForUm() {
         Long usuarioId = 2L;
-        Cliente cliente = new Cliente(usuarioId, "Cliente Teste", "cli@test.com", "cli.login", "senha", "End");
+        Cliente cliente = new Cliente(
+                usuarioId,
+                "Cliente Teste",
+                "cli@test.com",
+                "cli.login",
+                "senha",
+                "End",
+                new ArrayList<>()
+        );
 
         when(usuarioGateway.buscarPorId(usuarioId)).thenReturn(Optional.of(cliente));
 
@@ -73,7 +90,16 @@ class BuscarUsuarioPorIdUseCaseTest {
     @DisplayName("Deve lançar exceção quando a categoria for inválida")
     void deveLancarExcecaoQuandoCategoriaInvalida() {
         Long usuarioId = 1L;
-        UsuarioBase usuarioInvalido = new UsuarioBase(usuarioId, "Nome", "email", "login", "senha", "End", 99) {
+        UsuarioBase usuarioInvalido = new UsuarioBase(
+                usuarioId,
+                "Nome",
+                "email",
+                "login",
+                "senha",
+                "End",
+                99,
+                new ArrayList<>()
+        ) {
         };
 
         when(usuarioGateway.buscarPorId(usuarioId)).thenReturn(Optional.of(usuarioInvalido));

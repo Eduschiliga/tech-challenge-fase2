@@ -5,7 +5,7 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.CategoriaUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.core.dto.DadosUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.dto.usuario.DadosUsuarioInputDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +42,7 @@ class UsuarioFactoryTest {
     @Test
     @DisplayName("Deve atualizar os dados parciais de um Dono mantendo a lista de restaurantes")
     void deveAtualizarDadosParciaisDeDono() {
-        List<Restaurante> restaurantes = List.of(new Restaurante(10L, "Restaurante A"));
+        List<Restaurante> restaurantes = List.of(new Restaurante(10L, "Restaurante A", "any-endereco", "any-tipo-cozinha", "any-horario", 1L));
         Dono donoAtual = new Dono(1L, "Nome Antigo", "antigo@email.com", "login.antigo", "senha123", "Endereço Antigo", restaurantes);
         DadosUsuarioInputDTO dto = new DadosUsuarioInputDTO("Nome Novo", "novo@email.com", "login.novo", "Endereço Novo");
 
@@ -94,7 +94,16 @@ class UsuarioFactoryTest {
         DadosUsuarioInputDTO dto = new DadosUsuarioInputDTO("Nome", "email", "login", "Endereço");
 
         // Criando uma classe anônima para simular um tipo não mapeado no switch
-        UsuarioBase usuarioInvalido = new UsuarioBase(1L, "Nome", "email", "login", "senha", "Endereço", 99) {
+        UsuarioBase usuarioInvalido = new UsuarioBase(
+                1L,
+                "Nome",
+                "email",
+                "login",
+                "senha",
+                "Endereço",
+                99,
+                new ArrayList<>()
+        ) {
         };
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->

@@ -2,8 +2,7 @@ package br.com.fiap.techchallengefase2.core.usecase.usuario.deletar;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.core.usecase.ususario.consultar.id.BuscarUsuarioPorIdUseCase;
-import br.com.fiap.techchallengefase2.core.usecase.ususario.deletar.DeletarUsuarioUseCase;
+import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

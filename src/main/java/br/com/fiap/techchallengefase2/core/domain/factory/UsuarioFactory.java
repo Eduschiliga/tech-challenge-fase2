@@ -4,11 +4,15 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.CategoriaUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.core.dto.DadosUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.dto.usuario.DadosUsuarioInputDTO;
 
 import java.util.ArrayList;
 
 public class UsuarioFactory {
+
+    private UsuarioFactory() {
+        throw new IllegalArgumentException("Usuario Factory não pode ser instanciada");
+    }
 
     public static <T extends UsuarioBase> T obterInstancia(UsuarioBase usuarioBase, Class<T> tipoDestino) {
         if (tipoDestino.isInstance(usuarioBase)) {
@@ -48,7 +52,8 @@ public class UsuarioFactory {
                     login,
                     dono.getSenha(),
                     endereco,
-                    dono.getRestaurantes()
+                    dono.getRestaurantes(),
+                    usuarioOriginal.getTipoUsuarioList()
             );
 
             case Cliente cliente -> new Cliente(
@@ -57,7 +62,8 @@ public class UsuarioFactory {
                     email,
                     login,
                     cliente.getSenha(),
-                    endereco
+                    endereco,
+                    usuarioOriginal.getTipoUsuarioList()
             );
 
             default -> throw new IllegalArgumentException("Tipo de usuário não suportado na atualização");
@@ -82,6 +88,7 @@ public class UsuarioFactory {
                     login,
                     senha,
                     endereco,
+                    new ArrayList<>(),
                     new ArrayList<>()
             );
             case CLIENTE -> new Cliente(
@@ -90,7 +97,8 @@ public class UsuarioFactory {
                     email,
                     login,
                     senha,
-                    endereco
+                    endereco,
+                    new ArrayList<>()
             );
 
             default -> throw new IllegalArgumentException("Tipo de usuário inválido");

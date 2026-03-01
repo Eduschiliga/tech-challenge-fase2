@@ -1,7 +1,6 @@
 package br.com.fiap.techchallengefase2.core.rule.dados;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
-import br.com.fiap.techchallengefase2.core.rule.dados.ValidaSePossuiEmail;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -29,7 +30,8 @@ class ValidaSePossuiEmailTest {
                 "usuario.sobrenome@email.com",
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -49,7 +51,8 @@ class ValidaSePossuiEmailTest {
                 "usuario123@email456.com",
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -69,7 +72,8 @@ class ValidaSePossuiEmailTest {
                 "usuario_teste@emailempresa.com",
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -89,7 +93,8 @@ class ValidaSePossuiEmailTest {
                 "usuario@empresa-grande.com",
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -109,7 +114,8 @@ class ValidaSePossuiEmailTest {
                 "usuario@empresa.co.uk",
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -129,7 +135,8 @@ class ValidaSePossuiEmailTest {
                 "joao.silva@email.com",
                 "joao.login",
                 "senha@123456",
-                "Rua Principal, 123"
+                "Rua Principal, 123",
+                new ArrayList<>()
         );
 
         // Act & Assert
@@ -154,7 +161,8 @@ class ValidaSePossuiEmailTest {
                 email,
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -174,7 +182,8 @@ class ValidaSePossuiEmailTest {
                 null,
                 "joao.login",
                 "senha@123456",
-                "Rua Principal, 123"
+                "Rua Principal, 123",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -195,7 +204,8 @@ class ValidaSePossuiEmailTest {
                 "",
                 "joao.login",
                 "senha@123456",
-                "Rua Principal, 123"
+                "Rua Principal, 123",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -227,7 +237,8 @@ class ValidaSePossuiEmailTest {
                 emailInvalido,
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -247,7 +258,8 @@ class ValidaSePossuiEmailTest {
                 "usuario @example.com",
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();
@@ -267,7 +279,8 @@ class ValidaSePossuiEmailTest {
                 "usuario#@example.com",
                 "login",
                 "senha@123456",
-                "Endereço"
+                "Endereço",
+                new ArrayList<>()
         );
 
         ValidaSePossuiEmail validaSePossuiEmail = new ValidaSePossuiEmail();

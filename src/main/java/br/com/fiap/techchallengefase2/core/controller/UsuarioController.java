@@ -4,12 +4,12 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.dto.AtualizarSenhaInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.CriarUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.DadosUsuarioInputDTO;
-import br.com.fiap.techchallengefase2.core.usecase.atualizar.dados.AtualizarUsuario;
-import br.com.fiap.techchallengefase2.core.usecase.atualizar.senha.AtualizarSenhaUsuario;
-import br.com.fiap.techchallengefase2.core.usecase.consultar.id.BuscarUsuarioPorId;
-import br.com.fiap.techchallengefase2.core.usecase.consultar.todos.BuscarTodosUsuarios;
-import br.com.fiap.techchallengefase2.core.usecase.criar.CriarUsuario;
-import br.com.fiap.techchallengefase2.core.usecase.deletar.DeletarUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.ususario.atualizar.dados.AtualizarUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.ususario.atualizar.senha.AtualizarSenhaUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.ususario.consultar.id.BuscarUsuarioPorId;
+import br.com.fiap.techchallengefase2.core.usecase.ususario.consultar.todos.BuscarTodosUsuarios;
+import br.com.fiap.techchallengefase2.core.usecase.ususario.criar.CriarUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.ususario.deletar.DeletarUsuario;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;

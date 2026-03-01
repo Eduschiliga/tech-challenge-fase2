@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.usuario.core.rule.senha;
 
 import br.com.fiap.techchallengefase2.core.dto.AtualizarSenhaInputDTO;
-import br.com.fiap.techchallengefase2.core.rule.senha.ValidaSenha;
+import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.ValidaSenha;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

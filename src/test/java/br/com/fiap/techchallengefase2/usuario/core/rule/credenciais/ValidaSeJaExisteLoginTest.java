@@ -3,7 +3,7 @@ package br.com.fiap.techchallengefase2.usuario.core.rule.credenciais;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.core.rule.credenciais.ValidaSeJaExisteLogin;
+import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.ValidaSeJaExisteLogin;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

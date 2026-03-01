@@ -5,7 +5,6 @@ import lombok.Getter;
 
 import java.util.List;
 
-import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.TIPO_USUARIO_DONO;
 
 @Getter
 public class Dono extends UsuarioBase {
@@ -20,7 +19,7 @@ public class Dono extends UsuarioBase {
             String endereco,
             List<Restaurante> restaurantes
     ) {
-        super(usuarioId, nome, email, login, senha, endereco, TIPO_USUARIO_DONO);
+        super(usuarioId, nome, email, login, senha, endereco, CategoriaUsuario.DONO.getCodigo());
         this.restaurantes = restaurantes;
     }
 

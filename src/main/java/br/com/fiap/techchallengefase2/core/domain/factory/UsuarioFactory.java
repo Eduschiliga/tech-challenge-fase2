@@ -1,5 +1,6 @@
 package br.com.fiap.techchallengefase2.core.domain.factory;
 
+import br.com.fiap.techchallengefase2.core.domain.usuario.CategoriaUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
@@ -8,10 +9,8 @@ import br.com.fiap.techchallengefase2.core.dto.DadosUsuarioInputDTO;
 import java.util.ArrayList;
 
 public class UsuarioFactory {
-    public static final int TIPO_USUARIO_DONO = 0;
-    public static final int TIPO_USUARIO_CLIENTE = 1;
 
-    public static  <T extends UsuarioBase> T obterInstancia(UsuarioBase usuarioBase, Class<T> tipoDestino) {
+    public static <T extends UsuarioBase> T obterInstancia(UsuarioBase usuarioBase, Class<T> tipoDestino) {
         if (tipoDestino.isInstance(usuarioBase)) {
             return tipoDestino.cast(usuarioBase);
         }
@@ -19,12 +18,11 @@ public class UsuarioFactory {
         throw new IllegalArgumentException("O usuário não é do tipo esperado: " + tipoDestino.getSimpleName());
     }
 
-    public static <T extends UsuarioBase> T atualizarDadosParciais(
-            T usuarioAtual,
+    public static UsuarioBase atualizarDadosParciais(
+            UsuarioBase usuarioAtual,
             DadosUsuarioInputDTO dadosUsuarioInputDto
     ) {
-
-        return (T) criarCopiaComNovosDados(
+        return criarCopiaComNovosDados(
                 usuarioAtual,
                 dadosUsuarioInputDto.getNome(),
                 dadosUsuarioInputDto.getEmail(),
@@ -66,16 +64,18 @@ public class UsuarioFactory {
         };
     }
 
-    public static <T extends UsuarioBase> T criarUsuario(
-            Integer categoriaUsuario,
+    public static UsuarioBase criarUsuario(
+            Integer categoriaUsuarioId,
             String nome,
             String email,
             String login,
             String senha,
             String endereco
     ) {
-        return (T) switch (categoriaUsuario) {
-            case TIPO_USUARIO_DONO -> new Dono(
+        CategoriaUsuario categoria = CategoriaUsuario.fromCodigo(categoriaUsuarioId);
+
+        return switch (categoria) {
+            case DONO -> new Dono(
                     null,
                     nome,
                     email,
@@ -84,8 +84,7 @@ public class UsuarioFactory {
                     endereco,
                     new ArrayList<>()
             );
-
-            case TIPO_USUARIO_CLIENTE -> new Cliente(
+            case CLIENTE -> new Cliente(
                     null,
                     nome,
                     email,
@@ -94,7 +93,7 @@ public class UsuarioFactory {
                     endereco
             );
 
-            default -> throw new IllegalArgumentException("Categoria de usuário " + categoriaUsuario + " não suportada");
+            default -> throw new IllegalArgumentException("Tipo de usuário inválido");
         };
     }
 }

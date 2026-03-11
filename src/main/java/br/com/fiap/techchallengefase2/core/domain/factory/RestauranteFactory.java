@@ -1,7 +1,6 @@
 package br.com.fiap.techchallengefase2.core.domain.factory;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
-import br.com.fiap.techchallengefase2.core.dto.restaurante.DadosRestauranteInputDTO;
 
 public class RestauranteFactory {
 
@@ -10,16 +9,20 @@ public class RestauranteFactory {
     }
 
     public static Restaurante atualizar(
-            Restaurante restaurante,
-            DadosRestauranteInputDTO dadosRestauranteInputDTO
+            Long restauranteId,
+            String nome,
+            String endereco,
+            String tipoCozinha,
+            String horarioFuncionamento,
+            Long usuarioId
     ) {
         return new Restaurante(
-                restaurante.getRestauranteId(),
-                dadosRestauranteInputDTO.nome(),
-                dadosRestauranteInputDTO.endereco(),
-                dadosRestauranteInputDTO.tipoCozinha(),
-                dadosRestauranteInputDTO.horarioFuncionamento(),
-                restaurante.getUsuarioId()
+                restauranteId,
+                nome,
+                endereco,
+                tipoCozinha,
+                horarioFuncionamento,
+                usuarioId
         );
     }
 }

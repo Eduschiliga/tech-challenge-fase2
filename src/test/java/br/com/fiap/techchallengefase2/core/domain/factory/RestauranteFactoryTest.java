@@ -27,7 +27,14 @@ class RestauranteFactoryTest {
         when(dto.tipoCozinha()).thenReturn("Italiana");
         when(dto.horarioFuncionamento()).thenReturn("10h-22h");
 
-        Restaurante restauranteNovo = RestauranteFactory.atualizar(restauranteAntigo, dto);
+        Restaurante restauranteNovo = RestauranteFactory.atualizar(
+                restauranteAntigo.getRestauranteId(),
+                dto.nome(),
+                dto.endereco(),
+                dto.tipoCozinha(),
+                dto.horarioFuncionamento(),
+                restauranteAntigo.getUsuarioId()
+        );
 
         assertNotNull(restauranteNovo);
         assertEquals(10L, restauranteNovo.getRestauranteId());

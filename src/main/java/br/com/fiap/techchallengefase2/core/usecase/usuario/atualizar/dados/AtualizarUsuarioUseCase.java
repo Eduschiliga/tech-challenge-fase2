@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.atualizarDadosParciais;
+import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.criarCopiaComNovosDados;
 
 @RequiredArgsConstructor
 public class AtualizarUsuarioUseCase implements AtualizarUsuario {
@@ -24,7 +24,13 @@ public class AtualizarUsuarioUseCase implements AtualizarUsuario {
     @Override
     public UsuarioBase atualizar(Long usuarioLogadoId, DadosUsuarioInputDTO dadosParciaisDto) {
         UsuarioBase usuarioAtual = buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId);
-        UsuarioBase usuarioAtualizado = atualizarDadosParciais(usuarioAtual, dadosParciaisDto);
+        UsuarioBase usuarioAtualizado = criarCopiaComNovosDados(
+                usuarioAtual,
+                dadosParciaisDto.getNome(),
+                dadosParciaisDto.getEmail(),
+                dadosParciaisDto.getLogin(),
+                dadosParciaisDto.getEndereco()
+        );
 
         validarCredenciais(usuarioAtual, usuarioAtualizado);
         validarDadosBasicos(usuarioAtualizado);

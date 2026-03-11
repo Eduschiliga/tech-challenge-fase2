@@ -17,7 +17,14 @@ public class AtualizarRestauranteUseCase implements AtualizarRestaurante {
         Restaurante restaurante = buscarRestaurantePorIdUseCase
                 .buscarPorId(usuarioLogadoId, restauranteId);
 
-        Restaurante restauranteAtualizado = RestauranteFactory.atualizar(restaurante, dados);
+        Restaurante restauranteAtualizado = RestauranteFactory.atualizar(
+                restaurante.getRestauranteId(),
+                dados.nome(),
+                dados.endereco(),
+                dados.tipoCozinha(),
+                dados.horarioFuncionamento(),
+                restaurante.getUsuarioId()
+        );
 
         return restauranteGateway.salvar(restauranteAtualizado);
     }

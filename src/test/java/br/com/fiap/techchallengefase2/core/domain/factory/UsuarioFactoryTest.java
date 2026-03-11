@@ -46,7 +46,13 @@ class UsuarioFactoryTest {
         Dono donoAtual = new Dono(1L, "Nome Antigo", "antigo@email.com", "login.antigo", "senha123", "Endereço Antigo", restaurantes);
         DadosUsuarioInputDTO dto = new DadosUsuarioInputDTO("Nome Novo", "novo@email.com", "login.novo", "Endereço Novo");
 
-        UsuarioBase usuarioAtualizado = UsuarioFactory.atualizarDadosParciais(donoAtual, dto);
+        UsuarioBase usuarioAtualizado = UsuarioFactory.criarCopiaComNovosDados(
+                donoAtual,
+                dto.getNome(),
+                dto.getEmail(),
+                dto.getLogin(),
+                dto.getEndereco()
+        );
 
         assertInstanceOf(Dono.class, usuarioAtualizado);
         Dono donoAtualizado = (Dono) usuarioAtualizado;
@@ -66,7 +72,13 @@ class UsuarioFactoryTest {
         Cliente clienteAtual = new Cliente(2L, "Nome Antigo", "antigo@email.com", "login.antigo", "senha123", "Endereço Antigo");
         DadosUsuarioInputDTO dto = new DadosUsuarioInputDTO("Nome Novo", "novo@email.com", "login.novo", "Endereço Novo");
 
-        UsuarioBase usuarioAtualizado = UsuarioFactory.atualizarDadosParciais(clienteAtual, dto);
+        UsuarioBase usuarioAtualizado = UsuarioFactory.criarCopiaComNovosDados(
+                clienteAtual,
+                dto.getNome(),
+                dto.getEmail(),
+                dto.getLogin(),
+                dto.getEndereco()
+        );
 
         assertInstanceOf(Cliente.class, usuarioAtualizado);
         assertEquals(2L, usuarioAtualizado.getUsuarioId());
@@ -82,7 +94,13 @@ class UsuarioFactoryTest {
         DadosUsuarioInputDTO dto = new DadosUsuarioInputDTO("Nome", "email", "login", "Endereço");
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                UsuarioFactory.atualizarDadosParciais(null, dto)
+                UsuarioFactory.criarCopiaComNovosDados(
+                        null,
+                        dto.getNome(),
+                        dto.getEmail(),
+                        dto.getLogin(),
+                        dto.getEndereco()
+                )
         );
 
         assertEquals("Usuário base não pode ser null", exception.getMessage());
@@ -107,7 +125,13 @@ class UsuarioFactoryTest {
         };
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
-                UsuarioFactory.atualizarDadosParciais(usuarioInvalido, dto)
+                UsuarioFactory.criarCopiaComNovosDados(
+                        usuarioInvalido,
+                        dto.getNome(),
+                        dto.getEmail(),
+                        dto.getLogin(),
+                        dto.getEndereco()
+                )
         );
 
         assertEquals("Tipo de usuário não suportado na atualização", exception.getMessage());

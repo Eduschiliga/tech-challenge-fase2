@@ -22,20 +22,8 @@ public class UsuarioFactory {
         throw new IllegalArgumentException("O usuário não é do tipo esperado: " + tipoDestino.getSimpleName());
     }
 
-    public static UsuarioBase atualizarDadosParciais(
-            UsuarioBase usuarioAtual,
-            DadosUsuarioInputDTO dadosUsuarioInputDto
-    ) {
-        return criarCopiaComNovosDados(
-                usuarioAtual,
-                dadosUsuarioInputDto.getNome(),
-                dadosUsuarioInputDto.getEmail(),
-                dadosUsuarioInputDto.getLogin(),
-                dadosUsuarioInputDto.getEndereco()
-        );
-    }
 
-    private static UsuarioBase criarCopiaComNovosDados(
+    public static UsuarioBase criarCopiaComNovosDados(
             UsuarioBase usuarioOriginal,
             String nome,
             String email,
@@ -53,7 +41,7 @@ public class UsuarioFactory {
                     dono.getSenha(),
                     endereco,
                     dono.getRestaurantes(),
-                    usuarioOriginal.getTipoUsuarioList()
+                    dono.getTipoUsuarioList()
             );
 
             case Cliente cliente -> new Cliente(

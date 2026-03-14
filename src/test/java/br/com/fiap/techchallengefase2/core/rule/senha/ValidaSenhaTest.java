@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.senha;
 
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.NovaSenhaInvalidaException;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.ValidaSenha;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,10 +23,10 @@ class ValidaSenhaTest {
         AtualizarSenhaInputDTO dto = new AtualizarSenhaInputDTO(null, senhaAtual);
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        NovaSenhaInvalidaException exception = assertThrows(NovaSenhaInvalidaException.class,
                 () -> validaSenha.validar(senhaAtual, dto));
 
-        assertEquals("Nova senha não pode ser nula ou vazia", exception.getMessage());
+        assertEquals("Nova senha não pode ser vazia ou menor que 8 caracteres", exception.getMessage());
     }
 
     @Test
@@ -35,10 +36,10 @@ class ValidaSenhaTest {
         AtualizarSenhaInputDTO dto = new AtualizarSenhaInputDTO("", senhaAtual);
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        NovaSenhaInvalidaException exception = assertThrows(NovaSenhaInvalidaException.class,
                 () -> validaSenha.validar(senhaAtual, dto));
 
-        assertEquals("Nova senha não pode ser nula ou vazia", exception.getMessage());
+        assertEquals("Nova senha não pode ser vazia ou menor que 8 caracteres", exception.getMessage());
     }
 
     @Test
@@ -49,10 +50,10 @@ class ValidaSenhaTest {
         AtualizarSenhaInputDTO dto = new AtualizarSenhaInputDTO(novaSenha, senhaAtual);
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        NovaSenhaInvalidaException exception = assertThrows(NovaSenhaInvalidaException.class,
                 () -> validaSenha.validar(senhaAtual, dto));
 
-        assertEquals("Nova senha não pode ser menor que 8 caracteres", exception.getMessage());
+        assertEquals("Nova senha não pode ser vazia ou menor que 8 caracteres", exception.getMessage());
     }
 
     @Test

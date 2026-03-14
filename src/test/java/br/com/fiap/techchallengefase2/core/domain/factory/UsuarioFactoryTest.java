@@ -6,6 +6,10 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.dto.usuario.DadosUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.CategoriaInvalidaException;
+import br.com.fiap.techchallengefase2.core.exception.CategoriaNaoEncontradaException;
+import br.com.fiap.techchallengefase2.core.exception.DadosUsuarioInvalidosException;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +36,11 @@ class UsuarioFactoryTest {
     void deveLancarExcecaoAoObterInstanciaIncompativel() {
         UsuarioBase usuarioCliente = new Cliente(1L, "Nome", "email", "login", "senha", "Endereço");
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+        CategoriaInvalidaException exception = assertThrows(CategoriaInvalidaException.class, () ->
                 UsuarioFactory.obterInstancia(usuarioCliente, Dono.class)
         );
 
-        assertEquals("O usuário não é do tipo esperado: Dono", exception.getMessage());
+        assertEquals("Tipo de usuário inválido", exception.getMessage());
     }
 
     @Test
@@ -93,7 +97,7 @@ class UsuarioFactoryTest {
     void deveLancarExcecaoAoAtualizarUsuarioNulo() {
         DadosUsuarioInputDTO dto = new DadosUsuarioInputDTO("Nome", "email", "login", "Endereço");
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+        DadosUsuarioInvalidosException exception = assertThrows(DadosUsuarioInvalidosException.class, () ->
                 UsuarioFactory.criarCopiaComNovosDados(
                         null,
                         dto.getNome(),
@@ -103,7 +107,7 @@ class UsuarioFactoryTest {
                 )
         );
 
-        assertEquals("Usuário base não pode ser null", exception.getMessage());
+        assertEquals("Usuário não pode ser nullo", exception.getMessage());
     }
 
     @Test
@@ -124,7 +128,7 @@ class UsuarioFactoryTest {
         ) {
         };
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+        CategoriaInvalidaException exception = assertThrows(CategoriaInvalidaException.class, () ->
                 UsuarioFactory.criarCopiaComNovosDados(
                         usuarioInvalido,
                         dto.getNome(),
@@ -134,7 +138,7 @@ class UsuarioFactoryTest {
                 )
         );
 
-        assertEquals("Tipo de usuário não suportado na atualização", exception.getMessage());
+        assertEquals("Tipo de usuário inválido", exception.getMessage());
     }
 
     @Test
@@ -178,7 +182,7 @@ class UsuarioFactoryTest {
     void deveLancarExcecaoAoCriarUsuarioComCategoriaInvalida() {
         Integer categoriaInvalida = 99;
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(CategoriaNaoEncontradaException.class, () ->
                 UsuarioFactory.criarUsuario(
                         categoriaInvalida,
                         "Nome",

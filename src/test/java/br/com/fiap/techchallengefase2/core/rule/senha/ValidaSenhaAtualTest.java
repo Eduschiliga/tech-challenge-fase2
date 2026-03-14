@@ -1,6 +1,8 @@
 package br.com.fiap.techchallengefase2.core.rule.senha;
 
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.NovaSenhaInvalidaException;
+import br.com.fiap.techchallengefase2.core.exception.SenhaAtualIncorretaException;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.ValidaSenhaAtual;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +24,7 @@ class ValidaSenhaAtualTest {
         AtualizarSenhaInputDTO dto = new AtualizarSenhaInputDTO("any-senhahahah", "senhaIncorreta456");
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        SenhaAtualIncorretaException exception = assertThrows(SenhaAtualIncorretaException.class,
                 () -> validaSenhaAtual.validar(senhaAtual, dto));
 
         assertEquals("Senha atual não confere", exception.getMessage());

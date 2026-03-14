@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.usecase.itemcardapio.deletar;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.ItemCardapioGateway;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.id.BuscarItemCardapioPorIdUseCase;
 import org.junit.jupiter.api.Test;
@@ -46,9 +47,9 @@ class DeletarItemCardapioUseCaseTest {
         Long itemCardapioId = 100L;
 
         when(buscarItemCardapioPorIdUseCase.buscarPorId(usuarioLogadoId, itemCardapioId))
-                .thenThrow(IllegalArgumentException.class);
+                .thenThrow(UsuarioNaoDonoException.class);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 deletarItemCardapioUseCase.deletarPorId(usuarioLogadoId, itemCardapioId)
         );
 

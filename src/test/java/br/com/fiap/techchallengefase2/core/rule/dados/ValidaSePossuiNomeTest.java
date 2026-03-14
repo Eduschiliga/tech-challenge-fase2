@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
+import br.com.fiap.techchallengefase2.core.exception.DadosUsuarioInvalidosException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,7 +56,7 @@ class ValidaSePossuiNomeTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiNome.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DadosUsuarioInvalidosException.class);
     }
 
     @Test
@@ -74,7 +75,7 @@ class ValidaSePossuiNomeTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiNome.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DadosUsuarioInvalidosException.class);
     }
 
     @ParameterizedTest
@@ -121,7 +122,7 @@ class ValidaSePossuiNomeTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiNome.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DadosUsuarioInvalidosException.class);
     }
 
     @Test

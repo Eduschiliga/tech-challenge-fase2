@@ -4,6 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.core.exception.CategoriaInvalidaException;
 import br.com.fiap.techchallengefase2.core.exception.TipoUsuarioNaoEncontradoException;
 import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
@@ -30,6 +31,6 @@ public class BuscarUsuarioPorIdUseCase implements BuscarUsuarioPorId {
             return UsuarioFactory.obterInstancia(usuarioBase, Cliente.class);
         }
 
-        throw new TipoUsuarioNaoEncontradoException();
+        throw new CategoriaInvalidaException();
     }
 }

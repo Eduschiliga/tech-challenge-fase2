@@ -3,6 +3,7 @@ package br.com.fiap.techchallengefase2.core.usecase.restaurante.criar;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.dto.restaurante.DadosRestauranteInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.RestauranteGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
@@ -69,11 +70,11 @@ class CriarRestauranteUseCaseTest {
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
 
-        doThrow(new IllegalArgumentException("Usuário não é da Categoria Dono de Restaurante"))
+        doThrow(new UsuarioNaoDonoException())
                 .when(validaSeUsuarioDono).validar(donoMock);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 criarRestauranteUseCase.criar(usuarioLogadoId, inputDTO)
         );
 

@@ -2,6 +2,7 @@ package br.com.fiap.techchallengefase2.core.usecase.restaurante.atualizar;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.core.dto.restaurante.DadosRestauranteInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.RestauranteGateway;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorIdUseCase;
 import org.junit.jupiter.api.DisplayName;
@@ -83,10 +84,10 @@ class AtualizarRestauranteUseCaseTest {
 
         // Como a regra foi delegada para a busca, precisamos mockar a busca estourando o erro
         when(buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId))
-                .thenThrow(IllegalArgumentException.class);
+                .thenThrow(UsuarioNaoDonoException.class);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 atualizarRestauranteUseCase.atualizar(usuarioLogadoId, restauranteId, dadosDTO)
         );
 
@@ -102,10 +103,10 @@ class AtualizarRestauranteUseCaseTest {
         DadosRestauranteInputDTO dadosDTO = mock(DadosRestauranteInputDTO.class);
 
         when(buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId))
-                .thenThrow(IllegalArgumentException.class);
+                .thenThrow(UsuarioNaoDonoException.class);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 atualizarRestauranteUseCase.atualizar(usuarioLogadoId, restauranteId, dadosDTO)
         );
 

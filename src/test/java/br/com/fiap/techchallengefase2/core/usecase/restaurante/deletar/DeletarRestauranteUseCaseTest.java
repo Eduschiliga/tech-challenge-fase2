@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.usecase.restaurante.deletar;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.RestauranteGateway;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorIdUseCase;
 import org.junit.jupiter.api.DisplayName;
@@ -55,10 +56,10 @@ class DeletarRestauranteUseCaseTest {
         Long restauranteId = 10L;
 
         when(buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId))
-                .thenThrow(IllegalArgumentException.class);
+                .thenThrow(UsuarioNaoDonoException.class);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 deletarRestauranteUseCase.deletarPorId(usuarioLogadoId, restauranteId)
         );
 

@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
+import br.com.fiap.techchallengefase2.core.exception.EmailInvalidoException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -190,8 +191,7 @@ class ValidaSePossuiEmailTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiEmail.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("E-mail não pode ser nulo ou vazio");
+                .isInstanceOf(EmailInvalidoException.class);
     }
 
     @Test
@@ -212,8 +212,7 @@ class ValidaSePossuiEmailTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiEmail.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("E-mail não pode ser nulo ou vazio");
+                .isInstanceOf(EmailInvalidoException.class);
     }
 
     @ParameterizedTest
@@ -245,7 +244,7 @@ class ValidaSePossuiEmailTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiEmail.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(EmailInvalidoException.class);
     }
 
     @Test
@@ -266,7 +265,7 @@ class ValidaSePossuiEmailTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiEmail.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(EmailInvalidoException.class);
     }
 
     @Test
@@ -287,6 +286,6 @@ class ValidaSePossuiEmailTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiEmail.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(EmailInvalidoException.class);
     }
 }

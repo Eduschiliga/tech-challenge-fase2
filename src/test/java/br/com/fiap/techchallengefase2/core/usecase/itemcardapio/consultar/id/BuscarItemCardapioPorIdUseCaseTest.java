@@ -2,6 +2,8 @@ package br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.id;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
+import br.com.fiap.techchallengefase2.core.exception.ItemCardapioNaoEncontradoException;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.ItemCardapioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
@@ -64,9 +66,9 @@ class BuscarItemCardapioPorIdUseCaseTest {
         Dono donoMock = mock(Dono.class);
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
-        doThrow(IllegalArgumentException.class).when(validaSeUsuarioDono).validar(donoMock);
+        doThrow(UsuarioNaoDonoException.class).when(validaSeUsuarioDono).validar(donoMock);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 buscarItemCardapioPorIdUseCase.buscarPorId(usuarioLogadoId, itemCardapioId)
         );
 
@@ -83,7 +85,7 @@ class BuscarItemCardapioPorIdUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
         when(itemCardapioGateway.buscarPorId(itemCardapioId)).thenReturn(Optional.empty());
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(ItemCardapioNaoEncontradoException.class, () ->
                 buscarItemCardapioPorIdUseCase.buscarPorId(usuarioLogadoId, itemCardapioId)
         );
 
@@ -103,9 +105,9 @@ class BuscarItemCardapioPorIdUseCaseTest {
         when(itemCardapioGateway.buscarPorId(itemCardapioId)).thenReturn(Optional.of(itemMock));
         when(itemMock.getRestauranteId()).thenReturn(restauranteId);
 
-        doThrow(IllegalArgumentException.class).when(validaSeUsuarioDonoRestaurante).validar(donoMock, restauranteId);
+        doThrow(UsuarioNaoDonoException.class).when(validaSeUsuarioDonoRestaurante).validar(donoMock, restauranteId);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 buscarItemCardapioPorIdUseCase.buscarPorId(usuarioLogadoId, itemCardapioId)
         );
     }

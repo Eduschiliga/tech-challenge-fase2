@@ -2,6 +2,8 @@ package br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
+import br.com.fiap.techchallengefase2.core.exception.RestauranteNaoEncontradoException;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.RestauranteGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
@@ -67,10 +69,10 @@ class BuscarRestaurantePorIdUseCaseTest {
         Dono donoMock = mock(Dono.class);
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
-        doThrow(new IllegalArgumentException("Usuário não é da Categoria Dono"))
+        doThrow(new UsuarioNaoDonoException())
                 .when(validaSeUsuarioDono).validar(donoMock);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId)
         );
 
@@ -88,7 +90,7 @@ class BuscarRestaurantePorIdUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
         when(restauranteGateway.buscarPorId(restauranteId)).thenReturn(Optional.empty());
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(RestauranteNaoEncontradoException.class, () ->
                 buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId)
         );
 
@@ -108,10 +110,10 @@ class BuscarRestaurantePorIdUseCaseTest {
         when(restauranteGateway.buscarPorId(restauranteId)).thenReturn(Optional.of(restauranteMock));
         when(restauranteMock.getRestauranteId()).thenReturn(restauranteId);
 
-        doThrow(IllegalArgumentException.class)
+        doThrow(UsuarioNaoDonoException.class)
                 .when(validaSeUsuarioDonoRestaurante).validar(donoMock, restauranteId);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId)
         );
     }

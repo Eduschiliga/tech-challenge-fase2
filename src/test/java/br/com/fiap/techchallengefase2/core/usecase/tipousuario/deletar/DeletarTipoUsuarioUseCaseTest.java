@@ -2,6 +2,8 @@ package br.com.fiap.techchallengefase2.core.usecase.tipousuario.deletar;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
+import br.com.fiap.techchallengefase2.core.exception.TipoUsuarioNaoEncontradoException;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorIdUseCase;
@@ -65,10 +67,10 @@ class DeletarTipoUsuarioUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(usuarioComumMock);
 
         // Simula a falha da regra de negócio
-        doThrow(IllegalArgumentException.class).when(validaSeUsuarioDono).validar(usuarioComumMock);
+        doThrow(UsuarioNaoDonoException.class).when(validaSeUsuarioDono).validar(usuarioComumMock);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 deletarTipoUsuarioUseCase.deletarPorId(usuarioLogadoId, 100L)
         );
 
@@ -86,10 +88,10 @@ class DeletarTipoUsuarioUseCaseTest {
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
         when(buscarTipoUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId, tipoUsuarioId))
-                .thenThrow(IllegalArgumentException.class);
+                .thenThrow(TipoUsuarioNaoEncontradoException.class);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(TipoUsuarioNaoEncontradoException.class, () ->
                 deletarTipoUsuarioUseCase.deletarPorId(usuarioLogadoId, tipoUsuarioId)
         );
 

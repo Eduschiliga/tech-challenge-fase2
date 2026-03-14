@@ -2,6 +2,8 @@ package br.com.fiap.techchallengefase2.core.usecase.tipousuario.criar;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
+import br.com.fiap.techchallengefase2.core.exception.DadosUsuarioInvalidosException;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
@@ -78,7 +80,7 @@ class CriarTipoUsuarioUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(DadosUsuarioInvalidosException.class, () ->
                 criarTipoUsuarioUseCase.criar(usuarioLogadoId, restauranteId, null)
         );
 
@@ -96,7 +98,7 @@ class CriarTipoUsuarioUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(DadosUsuarioInvalidosException.class, () ->
                 criarTipoUsuarioUseCase.criar(usuarioLogadoId, restauranteId, "   ")
         );
 
@@ -111,11 +113,11 @@ class CriarTipoUsuarioUseCaseTest {
         Dono donoMock = mock(Dono.class);
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
-        doThrow(IllegalArgumentException.class)
+        doThrow(UsuarioNaoDonoException.class)
                 .when(validaSeUsuarioDono).validar(donoMock);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 criarTipoUsuarioUseCase.criar(usuarioLogadoId, 10L, "Admin")
         );
 

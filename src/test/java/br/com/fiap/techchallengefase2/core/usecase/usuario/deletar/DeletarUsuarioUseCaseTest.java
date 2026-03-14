@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.usecase.usuario.deletar;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
+import br.com.fiap.techchallengefase2.core.exception.DeletarUsuarioException;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 import org.junit.jupiter.api.Test;
@@ -53,7 +54,7 @@ class DeletarUsuarioUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioId)).thenReturn(usuario);
 
         // Act & Assert
-        assertThrows(IllegalArgumentException.class, () -> deletarUsuarioUseCase.deletarPorId(usuarioLogadoId, usuarioId));
+        assertThrows(DeletarUsuarioException.class, () -> deletarUsuarioUseCase.deletarPorId(usuarioLogadoId, usuarioId));
 
         verify(usuarioGateway, never()).deletarPorId(anyLong());
     }

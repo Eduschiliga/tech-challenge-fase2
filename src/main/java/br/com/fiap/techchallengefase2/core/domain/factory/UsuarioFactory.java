@@ -5,8 +5,10 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.exception.CategoriaInvalidaException;
+import br.com.fiap.techchallengefase2.core.exception.DadosUsuarioInvalidosException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UsuarioFactory {
 
@@ -29,6 +31,10 @@ public class UsuarioFactory {
             String login,
             String endereco
     ) {
+        if (Objects.isNull(usuarioOriginal)) {
+            throw new DadosUsuarioInvalidosException("Usuário não pode ser nullo");
+        }
+
         return switch (usuarioOriginal) {
             case Dono dono -> new Dono(
                     dono.getUsuarioId(),

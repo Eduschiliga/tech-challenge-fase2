@@ -2,6 +2,7 @@ package br.com.fiap.techchallengefase2.core.rule.credenciais;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
+import br.com.fiap.techchallengefase2.core.exception.LoginJaCadastradoException;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.ValidaSeJaExisteLogin;
 import org.junit.jupiter.api.DisplayName;
@@ -64,7 +65,7 @@ class ValidaSeJaExisteLoginTest {
                 .thenReturn(true);
 
         // Act & Assert
-        assertThatThrownBy(() -> validaSeJaExisteLogin.validar(cliente)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> validaSeJaExisteLogin.validar(cliente)).isInstanceOf(LoginJaCadastradoException.class);
     }
 
     @ParameterizedTest
@@ -153,7 +154,7 @@ class ValidaSeJaExisteLoginTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSeJaExisteLogin.validar(dono))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(LoginJaCadastradoException.class);
     }
 
     @Test

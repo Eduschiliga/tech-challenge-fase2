@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
+import br.com.fiap.techchallengefase2.core.exception.DadosUsuarioInvalidosException;
 import br.com.fiap.techchallengefase2.core.rule.dados.ValidaSePossuiLogin;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,7 @@ class ValidaSePossuiLoginTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiLogin.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DadosUsuarioInvalidosException.class);
     }
 
     @Test
@@ -70,7 +71,7 @@ class ValidaSePossuiLoginTest {
 
         // Act & Assert
         assertThatThrownBy(() -> validaSePossuiLogin.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DadosUsuarioInvalidosException.class);
     }
 
     @ParameterizedTest
@@ -116,6 +117,6 @@ class ValidaSePossuiLoginTest {
         // Act & Assert
         // Dependendo da implementação, pode ser tratado como vazio
         assertThatThrownBy(() -> validaSePossuiLogin.validar(cliente))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(DadosUsuarioInvalidosException.class);
     }
 }

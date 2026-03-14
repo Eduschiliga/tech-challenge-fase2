@@ -2,6 +2,8 @@ package br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
+import br.com.fiap.techchallengefase2.core.exception.TipoUsuarioNaoEncontradoException;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
@@ -67,7 +69,7 @@ class BuscarTipoUsuarioPorIdUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
         when(tipoUsuarioGateway.buscarPorId(tipoId)).thenReturn(Optional.empty());
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(TipoUsuarioNaoEncontradoException.class, () ->
                 buscarTipoUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId, tipoId)
         );
 
@@ -87,9 +89,9 @@ class BuscarTipoUsuarioPorIdUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
         when(tipoUsuarioGateway.buscarPorId(tipoId)).thenReturn(Optional.of(tipoMock));
 
-        doThrow(IllegalArgumentException.class).when(validaSeUsuarioDonoRestaurante).validar(donoMock, restauranteId);
+        doThrow(UsuarioNaoDonoException.class).when(validaSeUsuarioDonoRestaurante).validar(donoMock, restauranteId);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 buscarTipoUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId, tipoId)
         );
     }

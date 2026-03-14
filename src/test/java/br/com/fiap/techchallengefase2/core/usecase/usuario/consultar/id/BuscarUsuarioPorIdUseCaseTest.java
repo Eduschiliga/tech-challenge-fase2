@@ -3,6 +3,8 @@ package br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.core.exception.CategoriaInvalidaException;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoEncontradoException;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -79,11 +81,11 @@ class BuscarUsuarioPorIdUseCaseTest {
         Long usuarioId = 1L;
         when(usuarioGateway.buscarPorId(usuarioId)).thenReturn(Optional.empty());
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+        UsuarioNaoEncontradoException exception = assertThrows(UsuarioNaoEncontradoException.class, () ->
                 buscarUsuarioPorIdUseCase.buscarPorId(usuarioId)
         );
 
-        assertEquals("Usuário com o Id: 1 não encontrado.", exception.getMessage());
+        assertEquals("Usuário não encontrado", exception.getMessage());
     }
 
     @Test
@@ -104,7 +106,7 @@ class BuscarUsuarioPorIdUseCaseTest {
 
         when(usuarioGateway.buscarPorId(usuarioId)).thenReturn(Optional.of(usuarioInvalido));
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(CategoriaInvalidaException.class, () ->
                 buscarUsuarioPorIdUseCase.buscarPorId(usuarioId)
         );
     }

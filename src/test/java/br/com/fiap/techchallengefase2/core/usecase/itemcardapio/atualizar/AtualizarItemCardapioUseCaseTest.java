@@ -2,6 +2,7 @@ package br.com.fiap.techchallengefase2.core.usecase.itemcardapio.atualizar;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
 import br.com.fiap.techchallengefase2.core.dto.itemcardapio.DadosItemCardapioInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.ItemCardapioGateway;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.id.BuscarItemCardapioPorIdUseCase;
 import org.junit.jupiter.api.Test;
@@ -52,9 +53,9 @@ class AtualizarItemCardapioUseCaseTest {
         DadosItemCardapioInputDTO dados = new DadosItemCardapioInputDTO("Novo", "Desc", 60.0, false, "/foto.png");
 
         when(buscarItemCardapioPorIdUseCase.buscarPorId(usuarioLogadoId, itemCardapioId))
-                .thenThrow(IllegalArgumentException.class);
+                .thenThrow(UsuarioNaoDonoException.class);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 atualizarItemCardapioUseCase.atualizar(usuarioLogadoId, itemCardapioId, dados)
         );
 

@@ -4,6 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.SenhaAtualIncorretaException;
 import br.com.fiap.techchallengefase2.core.gateway.CodificadorSenhaGateway;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleAtualizarSenhaUsuario;
@@ -90,7 +91,7 @@ class AtualizarSenhaUsuarioUseCaseTest {
         when(codificadorSenhaGateway.decodificar(usuario.getSenha())).thenReturn("senhaAtualCorreta");
 
         // Act & Assert
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        SenhaAtualIncorretaException exception = assertThrows(SenhaAtualIncorretaException.class,
                 () -> atualizarSenhaUsuarioUseCase.atualizar(usuarioLogadoId, atualizarSenhaInputDTO));
 
         assertEquals("Senha atual não confere", exception.getMessage());

@@ -3,6 +3,7 @@ package br.com.fiap.techchallengefase2.core.usecase.itemcardapio.criar;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.dto.itemcardapio.DadosItemCardapioInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.ItemCardapioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
@@ -65,9 +66,9 @@ class CriarItemCardapioUseCaseTest {
         Dono donoMock = mock(Dono.class);
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
-        doThrow(IllegalArgumentException.class).when(validaSeUsuarioDono).validar(donoMock);
+        doThrow(UsuarioNaoDonoException.class).when(validaSeUsuarioDono).validar(donoMock);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 criarItemCardapioUseCase.criar(usuarioLogadoId, restauranteId, dados)
         );
 
@@ -83,9 +84,9 @@ class CriarItemCardapioUseCaseTest {
         Dono donoMock = mock(Dono.class);
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(donoMock);
-        doThrow(IllegalArgumentException.class).when(validaSeUsuarioDonoRestaurante).validar(donoMock, restauranteId);
+        doThrow(UsuarioNaoDonoException.class).when(validaSeUsuarioDonoRestaurante).validar(donoMock, restauranteId);
 
-        assertThrows(IllegalArgumentException.class, () ->
+        assertThrows(UsuarioNaoDonoException.class, () ->
                 criarItemCardapioUseCase.criar(usuarioLogadoId, restauranteId, dados)
         );
 

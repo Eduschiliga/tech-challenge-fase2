@@ -30,6 +30,7 @@ public class ItemCardapioEntityJPA {
     @Column(name = "caminho_foto")
     private String caminhoFoto;
 
-    @Column(name = "restaurante_id", nullable = false)
-    private Long restauranteId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cardapio_id", nullable = false)
+    private CardapioEntityJPA cardapio;
 }

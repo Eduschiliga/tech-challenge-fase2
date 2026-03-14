@@ -1,9 +1,11 @@
 package br.com.fiap.techchallengefase2.infra.config;
 
-import br.com.fiap.techchallengefase2.core.controller.ItemCardapioController;
-import br.com.fiap.techchallengefase2.core.controller.RestauranteController;
-import br.com.fiap.techchallengefase2.core.controller.TipoUsuarioController;
-import br.com.fiap.techchallengefase2.core.controller.UsuarioController;
+import br.com.fiap.techchallengefase2.core.controller.*;
+import br.com.fiap.techchallengefase2.core.usecase.cardapio.atualizar.AtualizarCardapio;
+import br.com.fiap.techchallengefase2.core.usecase.cardapio.consultar.id.BuscarCardapioPorId;
+import br.com.fiap.techchallengefase2.core.usecase.cardapio.consultar.todosporrestaurante.BuscarTodosCardapiosPorRestaurante;
+import br.com.fiap.techchallengefase2.core.usecase.cardapio.criar.CriarCardapio;
+import br.com.fiap.techchallengefase2.core.usecase.cardapio.deletar.DeletarCardapio;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.atualizar.AtualizarItemCardapio;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.id.BuscarItemCardapioPorId;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.todos.BuscarItensPorRestaurante;
@@ -70,6 +72,22 @@ public class ControllerConfig {
                 buscarItemCardapioPorId,
                 buscarItensPorRestaurante,
                 deletarItemCardapio
+        );
+    }
+
+    @Bean
+    public CardapioController cardapioController(
+            CriarCardapio criarCardapio,
+            AtualizarCardapio atualizarCardapio,
+            BuscarCardapioPorId buscarCardapioPorId,
+            BuscarTodosCardapiosPorRestaurante buscarTodosCardapiosPorRestaurante,
+            DeletarCardapio deletarCardapio) {
+        return new CardapioController(
+                criarCardapio,
+                atualizarCardapio,
+                buscarCardapioPorId,
+                buscarTodosCardapiosPorRestaurante,
+                deletarCardapio
         );
     }
 

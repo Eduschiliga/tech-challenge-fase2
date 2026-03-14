@@ -57,8 +57,8 @@ class UsuarioGatewayImplTest {
         RestauranteEntityJPA rest = RestauranteEntityJPA.builder().restauranteId(10L).nome("Rest").build();
 
         when(usuarioRepository.findById(1L)).thenReturn(Optional.of(entity));
-        when(tipoUsuarioRepository.findAllByUsuarioId(1L)).thenReturn(List.of(tipo));
-        when(restauranteRepository.findAllByUsuarioId(1L)).thenReturn(List.of(rest));
+        when(tipoUsuarioRepository.findAllByUsuario_UsuarioId(1L)).thenReturn(List.of(tipo));
+        when(restauranteRepository.findAllByUsuario_UsuarioId(1L)).thenReturn(List.of(rest));
 
         Optional<UsuarioBase> resultado = usuarioGateway.buscarPorId(1L);
 
@@ -86,7 +86,7 @@ class UsuarioGatewayImplTest {
         TipoUsuarioEntityJPA tipo = TipoUsuarioEntityJPA.builder().tipoUsuarioId(1L).nome("Cliente VIP").build();
 
         when(usuarioRepository.findById(2L)).thenReturn(Optional.of(entity));
-        when(tipoUsuarioRepository.findAllByUsuarioId(2L)).thenReturn(List.of(tipo));
+        when(tipoUsuarioRepository.findAllByUsuario_UsuarioId(2L)).thenReturn(List.of(tipo));
 
         Optional<UsuarioBase> resultado = usuarioGateway.buscarPorId(2L);
 

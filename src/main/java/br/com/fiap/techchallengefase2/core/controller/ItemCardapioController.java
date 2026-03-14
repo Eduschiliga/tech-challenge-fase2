@@ -22,8 +22,8 @@ public class ItemCardapioController {
     private final BuscarItensPorRestaurante buscarItensPorRestaurante;
     private final DeletarItemCardapio deletarItemCardapio;
 
-    public Long criar(Long usuarioLogadoId, Long restauranteId, DadosItemCardapioInputDTO dados) {
-        return criarItemCardapio.criar(usuarioLogadoId, restauranteId, dados);
+    public Long criar(Long usuarioLogadoId, Long cardapioId, DadosItemCardapioInputDTO dados) {
+        return criarItemCardapio.criar(usuarioLogadoId, cardapioId, dados);
     }
 
     public Long atualizar(Long usuarioLogadoId, Long itemCardapioId, DadosItemCardapioInputDTO dados) {
@@ -35,8 +35,8 @@ public class ItemCardapioController {
         return ItemCardapioOutputDTO.fromDomain(item);
     }
 
-    public List<ItemCardapioOutputDTO> buscarTodosPorRestaurante(Long usuarioLogadoId, Long restauranteId) {
-        return buscarItensPorRestaurante.buscarTodos(usuarioLogadoId, restauranteId)
+    public List<ItemCardapioOutputDTO> buscarTodosPorCardapio(Long usuarioLogadoId, Long cardapioId) {
+        return buscarItensPorRestaurante.buscarTodos(usuarioLogadoId, cardapioId)
                 .stream()
                 .map(ItemCardapioOutputDTO::fromDomain)
                 .collect(Collectors.toList());

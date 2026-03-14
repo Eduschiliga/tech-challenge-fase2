@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface RestauranteRepository extends JpaRepository<RestauranteEntityJPA, Long> {
-    List<RestauranteEntityJPA> findAllByUsuarioId(Long usuarioId);
+    List<RestauranteEntityJPA> findAllByUsuario_UsuarioId(Long usuarioId);
 }

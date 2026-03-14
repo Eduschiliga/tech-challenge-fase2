@@ -62,20 +62,20 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     }
 
     private UsuarioBase toDomain(UsuarioEntityJPA entity) {
-        List<TipoUsuario> tipos = tipoUsuarioRepository.findAllByUsuarioId(entity.getUsuarioId()).stream()
-                .map(t -> new TipoUsuario(t.getTipoUsuarioId(), t.getRestauranteId(), t.getNome()))
+        List<TipoUsuario> tipos = tipoUsuarioRepository.findAllByUsuario_UsuarioId(entity.getUsuarioId()).stream()
+                .map(t -> new TipoUsuario(t.getTipoUsuarioId(), t.getRestaurante() != null ? t.getRestaurante().getRestauranteId() : null, t.getNome()))
                 .toList();
 
         if (entity.getCategoria() == CategoriaUsuario.DONO) {
             // Busca os restaurantes onde este usuário é o dono
-            List<Restaurante> restaurantes = restauranteRepository.findAllByUsuarioId(entity.getUsuarioId()).stream()
+            List<Restaurante> restaurantes = restauranteRepository.findAllByUsuario_UsuarioId(entity.getUsuarioId()).stream()
                     .map(r -> new Restaurante(
                             r.getRestauranteId(),
                             r.getNome(),
                             r.getEndereco(),
                             r.getTipoCozinha(),
                             r.getHorarioFuncionamento(),
-                            r.getUsuarioId()))
+                            r.getUsuario() != null ? r.getUsuario().getUsuarioId() : null))
                     .toList();
 
             return new Dono(

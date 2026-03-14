@@ -2,6 +2,7 @@ package br.com.fiap.techchallengefase2.infra.gateway;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,7 +49,7 @@ class RestauranteGatewayImplTest {
                 .endereco("End")
                 .tipoCozinha("Italiana")
                 .horarioFuncionamento("08-18")
-                .usuarioId(100L)
+                .usuario(UsuarioEntityJPA.builder().usuarioId(100L).build())
                 .build();
 
         when(repository.findById(1L)).thenReturn(Optional.of(entity));
@@ -62,10 +63,10 @@ class RestauranteGatewayImplTest {
 
     @Test
     void deveBuscarTodosPorUsuarioId() {
-        RestauranteEntityJPA entity1 = RestauranteEntityJPA.builder().restauranteId(1L).usuarioId(100L).build();
-        RestauranteEntityJPA entity2 = RestauranteEntityJPA.builder().restauranteId(2L).usuarioId(100L).build();
+        RestauranteEntityJPA entity1 = RestauranteEntityJPA.builder().restauranteId(1L).usuario(UsuarioEntityJPA.builder().usuarioId(100L).build()).build();
+        RestauranteEntityJPA entity2 = RestauranteEntityJPA.builder().restauranteId(2L).usuario(UsuarioEntityJPA.builder().usuarioId(100L).build()).build();
 
-        when(repository.findAllByUsuarioId(100L)).thenReturn(List.of(entity1, entity2));
+        when(repository.findAllByUsuario_UsuarioId(100L)).thenReturn(List.of(entity1, entity2));
 
         List<Restaurante> resultados = restauranteGateway.buscarTodosPorUsuarioId(100L);
 

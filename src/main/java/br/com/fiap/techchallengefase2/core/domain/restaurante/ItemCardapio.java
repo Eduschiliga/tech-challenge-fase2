@@ -3,10 +3,10 @@ package br.com.fiap.techchallengefase2.core.domain.restaurante;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemCardapio {
@@ -16,7 +16,7 @@ public class ItemCardapio {
     private Double preco;
     private Boolean disponivelApenasRestaurante;
     private String caminhoFoto;
-    private Long restauranteId;
+    private Long cardapioId;
 
     public void atualizarDados(
             String nome,

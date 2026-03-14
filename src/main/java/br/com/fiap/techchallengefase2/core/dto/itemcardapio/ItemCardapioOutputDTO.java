@@ -9,7 +9,7 @@ public record ItemCardapioOutputDTO(
         Double preco,
         Boolean disponivelApenasRestaurante,
         String caminhoFoto,
-        Long restauranteId
+        Long cardapioId
 ) {
 
     public static ItemCardapioOutputDTO fromDomain(ItemCardapio itemCardapio) {
@@ -20,7 +20,7 @@ public record ItemCardapioOutputDTO(
                 itemCardapio.getPreco(),
                 itemCardapio.getDisponivelApenasRestaurante(),
                 itemCardapio.getCaminhoFoto(),
-                itemCardapio.getRestauranteId()
+                itemCardapio.getCardapioId()
         );
     }
 }

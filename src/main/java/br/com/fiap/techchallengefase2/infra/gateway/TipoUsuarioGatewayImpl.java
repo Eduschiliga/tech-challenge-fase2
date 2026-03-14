@@ -2,6 +2,7 @@ package br.com.fiap.techchallengefase2.infra.gateway;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.tipousuario.TipoUsuarioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.TipoUsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,8 @@ public class TipoUsuarioGatewayImpl implements TipoUsuarioGateway {
         TipoUsuarioEntityJPA entity = TipoUsuarioEntityJPA.builder()
                 .tipoUsuarioId(tipoUsuario.getTipoUsuarioId())
                 .nome(tipoUsuario.getNome())
-                .restauranteId(tipoUsuario.getRestauranteId())
-                .usuarioId(null)
+                .restaurante(RestauranteEntityJPA.builder().restauranteId(tipoUsuario.getRestauranteId()).build())
+                .usuario(null)
                 .build();
 
         return repository.save(entity).getTipoUsuarioId();
@@ -40,7 +41,7 @@ public class TipoUsuarioGatewayImpl implements TipoUsuarioGateway {
 
     @Override
     public List<TipoUsuario> buscarTodosPorRestauranteId(Long restauranteId) {
-        return repository.findAllByRestauranteId(restauranteId).stream()
+        return repository.findAllByRestaurante_RestauranteId(restauranteId).stream()
                 .map(this::toDomain)
                 .toList();
     }
@@ -48,7 +49,7 @@ public class TipoUsuarioGatewayImpl implements TipoUsuarioGateway {
     private TipoUsuario toDomain(TipoUsuarioEntityJPA entity) {
         return new TipoUsuario(
                 entity.getTipoUsuarioId(),
-                entity.getRestauranteId(),
+                entity.getRestaurante() != null ? entity.getRestaurante().getRestauranteId() : null,
                 entity.getNome()
         );
     }

@@ -1,8 +1,11 @@
 package br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante;
 
 
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEntityJPA;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +32,10 @@ public class RestauranteEntityJPA {
     @Column(name = "horario_funcionamento", nullable = false)
     private String horarioFuncionamento;
 
-    @Column(name = "usuario_id", nullable = false)
-    private Long usuarioId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private UsuarioEntityJPA usuario;
+
+    @OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CardapioEntityJPA> cardapios;
 }

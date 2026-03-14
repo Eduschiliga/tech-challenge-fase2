@@ -11,7 +11,7 @@ public interface ItemCardapioGateway {
 
     Optional<ItemCardapio> buscarPorId(Long itemCardapioId);
 
-    List<ItemCardapio> buscarTodosPorRestauranteId(Long restauranteId);
+    List<ItemCardapio> buscarTodosPorCardapioId(Long cardapioId);
 
     void deletarPorId(Long itemCardapioId);
 }

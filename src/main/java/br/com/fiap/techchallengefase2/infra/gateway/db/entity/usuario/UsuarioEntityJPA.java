@@ -1,8 +1,12 @@
 package br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario;
 
 
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.tipousuario.TipoUsuarioEntityJPA;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,4 +38,10 @@ public class UsuarioEntityJPA {
 
     @Column(nullable = false)
     private CategoriaUsuario categoria;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RestauranteEntityJPA> restaurantes;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TipoUsuarioEntityJPA> tiposUsuario;
 }

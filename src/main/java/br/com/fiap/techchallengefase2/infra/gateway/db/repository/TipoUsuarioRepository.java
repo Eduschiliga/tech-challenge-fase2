@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface TipoUsuarioRepository extends JpaRepository<TipoUsuarioEntityJPA, Long> {
-    List<TipoUsuarioEntityJPA> findAllByRestauranteId(Long restauranteId);
+    List<TipoUsuarioEntityJPA> findAllByRestaurante_RestauranteId(Long restauranteId);
 
-    List<TipoUsuarioEntityJPA> findAllByUsuarioId(Long usuarioId);
+    List<TipoUsuarioEntityJPA> findAllByUsuario_UsuarioId(Long usuarioId);
 }

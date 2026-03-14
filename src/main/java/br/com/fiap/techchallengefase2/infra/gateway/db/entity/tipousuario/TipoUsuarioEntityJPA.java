@@ -1,5 +1,7 @@
 package br.com.fiap.techchallengefase2.infra.gateway.db.entity.tipousuario;
 
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEntityJPA;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,9 +20,11 @@ public class TipoUsuarioEntityJPA {
     @Column(nullable = false)
     private String nome;
 
-    @Column(name = "restaurante_id", nullable = false)
-    private Long restauranteId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurante_id", nullable = false)
+    private RestauranteEntityJPA restaurante;
 
-    @Column(name = "usuario_id", nullable = false)
-    private Long usuarioId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private UsuarioEntityJPA usuario;
 }

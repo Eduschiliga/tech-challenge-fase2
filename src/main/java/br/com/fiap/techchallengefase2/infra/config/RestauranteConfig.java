@@ -2,9 +2,9 @@ package br.com.fiap.techchallengefase2.infra.config;
 
 import br.com.fiap.techchallengefase2.core.gateway.RestauranteGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
-import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.atualizar.AtualizarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.atualizar.AtualizarRestauranteUseCase;
+import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorId;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorIdUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarRestaurantePorUsuarioId;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarRestaurantePorUsuarioIdUseCase;
@@ -22,11 +22,14 @@ public class RestauranteConfig {
     @Bean
     public BuscarRestaurantePorIdUseCase buscarRestaurantePorIdUseCase(
             BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
-            ValidaSeUsuarioDono validaSeUsuarioDono,
-            ValidaSeUsuarioDonoRestaurante validaSeUsuarioDonoRestaurante,
             RestauranteGateway restauranteGateway
     ) {
-        return new BuscarRestaurantePorIdUseCase(buscarUsuarioPorIdUseCase, validaSeUsuarioDono, validaSeUsuarioDonoRestaurante, restauranteGateway);
+        return new BuscarRestaurantePorIdUseCase(buscarUsuarioPorIdUseCase, restauranteGateway);
+    }
+
+    @Bean
+    public BuscarRestaurantePorId buscarRestaurantePorId(BuscarRestaurantePorIdUseCase buscarRestaurantePorIdUseCase) {
+        return buscarRestaurantePorIdUseCase;
     }
 
     @Bean

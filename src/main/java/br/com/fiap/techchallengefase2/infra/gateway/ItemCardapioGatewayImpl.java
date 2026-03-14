@@ -2,6 +2,7 @@ package br.com.fiap.techchallengefase2.infra.gateway;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
 import br.com.fiap.techchallengefase2.core.gateway.ItemCardapioGateway;
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.CardapioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.ItemCardapioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.ItemCardapioRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class ItemCardapioGatewayImpl implements ItemCardapioGateway {
                 .preco(itemCardapio.getPreco())
                 .disponivelApenasRestaurante(itemCardapio.getDisponivelApenasRestaurante())
                 .caminhoFoto(itemCardapio.getCaminhoFoto())
-                .restauranteId(itemCardapio.getRestauranteId())
+                .cardapio(CardapioEntityJPA.builder().id(itemCardapio.getCardapioId()).build())
                 .build();
 
         return repository.save(entity).getItemCardapioId();
@@ -37,8 +38,8 @@ public class ItemCardapioGatewayImpl implements ItemCardapioGateway {
     }
 
     @Override
-    public List<ItemCardapio> buscarTodosPorRestauranteId(Long restauranteId) {
-        return repository.findAllByRestauranteId(restauranteId).stream()
+    public List<ItemCardapio> buscarTodosPorCardapioId(Long cardapioId) {
+        return repository.findAllByCardapio_Id(cardapioId).stream()
                 .map(this::toDomain)
                 .toList();
     }
@@ -56,7 +57,7 @@ public class ItemCardapioGatewayImpl implements ItemCardapioGateway {
                 entity.getPreco(),
                 entity.getDisponivelApenasRestaurante(),
                 entity.getCaminhoFoto(),
-                entity.getRestauranteId()
+                entity.getCardapio() != null ? entity.getCardapio().getId() : null
         );
     }
 }

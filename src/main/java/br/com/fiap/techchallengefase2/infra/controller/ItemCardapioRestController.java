@@ -19,10 +19,10 @@ public class ItemCardapioRestController {
 
     private final ItemCardapioController itemCardapioController;
 
-    @PostMapping("/restaurantes/{restauranteId}")
+    @PostMapping("/cardapios/{cardapioId}")
     public ResponseEntity<Long> criar(
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
-            @PathVariable Long restauranteId,
+            @PathVariable Long cardapioId,
             @RequestBody ItemCardapioJson json) {
 
         DadosItemCardapioInputDTO input = new DadosItemCardapioInputDTO(
@@ -33,7 +33,7 @@ public class ItemCardapioRestController {
                 json.caminhoFoto()
         );
 
-        var output = itemCardapioController.criar(usuarioLogadoId, restauranteId, input);
+        var output = itemCardapioController.criar(usuarioLogadoId, cardapioId, input);
         return ResponseEntity.status(HttpStatus.CREATED).body(output);
     }
 
@@ -64,12 +64,12 @@ public class ItemCardapioRestController {
         return ResponseEntity.ok(output);
     }
 
-    @GetMapping("/restaurantes/{restauranteId}")
-    public ResponseEntity<List<ItemCardapioOutputDTO>> buscarTodosPorRestaurante(
+    @GetMapping("/cardapios/{cardapioId}")
+    public ResponseEntity<List<ItemCardapioOutputDTO>> buscarTodosPorCardapio(
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
-            @PathVariable Long restauranteId) {
+            @PathVariable Long cardapioId) {
 
-        var output = itemCardapioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId);
+        var output = itemCardapioController.buscarTodosPorCardapio(usuarioLogadoId, cardapioId);
         return ResponseEntity.ok(output);
     }
 

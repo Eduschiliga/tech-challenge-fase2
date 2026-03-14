@@ -3,6 +3,7 @@ package br.com.fiap.techchallengefase2.infra.gateway;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.core.gateway.RestauranteGateway;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
                 .endereco(restaurante.getEndereco())
                 .tipoCozinha(restaurante.getTipoCozinha())
                 .horarioFuncionamento(restaurante.getHorarioFuncionamento())
-                .usuarioId(restaurante.getUsuarioId())
+                .usuario(UsuarioEntityJPA.builder().usuarioId(restaurante.getUsuarioId()).build())
                 .build();
 
         return repository.save(entity).getRestauranteId();
@@ -37,7 +38,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
 
     @Override
     public List<Restaurante> buscarTodosPorUsuarioId(Long usuarioId) {
-        return repository.findAllByUsuarioId(usuarioId).stream()
+        return repository.findAllByUsuario_UsuarioId(usuarioId).stream()
                 .map(this::toDomain)
                 .toList();
     }
@@ -54,7 +55,7 @@ public class RestauranteGatewayImpl implements RestauranteGateway {
                 entity.getEndereco(),
                 entity.getTipoCozinha(),
                 entity.getHorarioFuncionamento(),
-                entity.getUsuarioId()
+                entity.getUsuario() != null ? entity.getUsuario().getUsuarioId() : null
         );
     }
 }

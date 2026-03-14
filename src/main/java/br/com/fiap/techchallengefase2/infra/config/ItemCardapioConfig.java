@@ -3,8 +3,10 @@ package br.com.fiap.techchallengefase2.infra.config;
 import br.com.fiap.techchallengefase2.core.gateway.ItemCardapioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
+import br.com.fiap.techchallengefase2.core.usecase.cardapio.consultar.id.BuscarCardapioPorIdUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.atualizar.AtualizarItemCardapio;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.atualizar.AtualizarItemCardapioUseCase;
+import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.id.BuscarItemCardapioPorId;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.id.BuscarItemCardapioPorIdUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.todos.BuscarItensPorRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.consultar.todos.BuscarItensPorRestauranteUseCase;
@@ -21,47 +23,75 @@ public class ItemCardapioConfig {
 
     @Bean
     public BuscarItemCardapioPorIdUseCase buscarItemCardapioPorIdUseCase(
-            BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
-            ValidaSeUsuarioDono validaSeUsuarioDono,
-            ValidaSeUsuarioDonoRestaurante validaSeUsuarioDonoRestaurante,
             ItemCardapioGateway itemCardapioGateway
     ) {
-        return new BuscarItemCardapioPorIdUseCase(buscarUsuarioPorIdUseCase, validaSeUsuarioDono, validaSeUsuarioDonoRestaurante, itemCardapioGateway);
+        return new BuscarItemCardapioPorIdUseCase(itemCardapioGateway);
+    }
+
+    @Bean
+    public BuscarItemCardapioPorId buscarItemCardapioPorId(BuscarItemCardapioPorIdUseCase buscarItemCardapioPorIdUseCase) {
+        return buscarItemCardapioPorIdUseCase;
     }
 
     @Bean
     public BuscarItensPorRestaurante buscarItensPorRestaurante(
-            BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
-            ValidaSeUsuarioDono validaSeUsuarioDono,
-            ValidaSeUsuarioDonoRestaurante validaSeUsuarioDonoRestaurante,
             ItemCardapioGateway itemCardapioGateway
     ) {
-        return new BuscarItensPorRestauranteUseCase(buscarUsuarioPorIdUseCase, validaSeUsuarioDono, validaSeUsuarioDonoRestaurante, itemCardapioGateway);
+        return new BuscarItensPorRestauranteUseCase(itemCardapioGateway);
     }
 
     @Bean
     public CriarItemCardapio criarItemCardapio(
             BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
             ItemCardapioGateway itemCardapioGateway,
+            BuscarCardapioPorIdUseCase buscarCardapioPorIdUseCase,
             ValidaSeUsuarioDono validaSeUsuarioDono,
             ValidaSeUsuarioDonoRestaurante validaSeUsuarioDonoRestaurante
     ) {
-        return new CriarItemCardapioUseCase(buscarUsuarioPorIdUseCase, itemCardapioGateway, validaSeUsuarioDono, validaSeUsuarioDonoRestaurante);
+        return new CriarItemCardapioUseCase(
+                buscarUsuarioPorIdUseCase,
+                itemCardapioGateway,
+                buscarCardapioPorIdUseCase,
+                validaSeUsuarioDono,
+                validaSeUsuarioDonoRestaurante
+        );
     }
 
     @Bean
     public AtualizarItemCardapio atualizarItemCardapio(
             BuscarItemCardapioPorIdUseCase buscarItemCardapioPorIdUseCase,
-            ItemCardapioGateway itemCardapioGateway
+            ItemCardapioGateway itemCardapioGateway,
+            ValidaSeUsuarioDono validaSeUsuarioDono,
+            ValidaSeUsuarioDonoRestaurante validaSeUsuarioDonoRestaurante,
+            BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
+            BuscarCardapioPorIdUseCase buscarCardapioPorIdUseCase
     ) {
-        return new AtualizarItemCardapioUseCase(buscarItemCardapioPorIdUseCase, itemCardapioGateway);
+        return new AtualizarItemCardapioUseCase(
+                buscarItemCardapioPorIdUseCase,
+                itemCardapioGateway,
+                validaSeUsuarioDono,
+                validaSeUsuarioDonoRestaurante,
+                buscarUsuarioPorIdUseCase,
+                buscarCardapioPorIdUseCase
+        );
     }
 
     @Bean
     public DeletarItemCardapio deletarItemCardapio(
             BuscarItemCardapioPorIdUseCase buscarItemCardapioPorIdUseCase,
-            ItemCardapioGateway itemCardapioGateway
+            ItemCardapioGateway itemCardapioGateway,
+            BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
+            ValidaSeUsuarioDonoRestaurante validaSeUsuarioDonoRestaurante,
+            ValidaSeUsuarioDono validaSeUsuarioDono,
+            BuscarCardapioPorIdUseCase buscarCardapioPorIdUseCase
     ) {
-        return new DeletarItemCardapioUseCase(buscarItemCardapioPorIdUseCase, itemCardapioGateway);
+        return new DeletarItemCardapioUseCase(
+                buscarItemCardapioPorIdUseCase,
+                itemCardapioGateway,
+                buscarUsuarioPorIdUseCase,
+                validaSeUsuarioDonoRestaurante,
+                validaSeUsuarioDono,
+                buscarCardapioPorIdUseCase
+        );
     }
 }

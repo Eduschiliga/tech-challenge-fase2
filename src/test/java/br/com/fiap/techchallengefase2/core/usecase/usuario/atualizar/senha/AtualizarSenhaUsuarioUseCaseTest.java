@@ -53,21 +53,30 @@ class AtualizarSenhaUsuarioUseCaseTest {
         // Arrange
         Long usuarioLogadoId = 1L;
         AtualizarSenhaInputDTO atualizarSenhaInputDTO = new AtualizarSenhaInputDTO("novaSenha123", "senhaAtual123");
-        Dono usuario = new Dono(usuarioLogadoId, "Nome", "email@test.com", "login123", "senhaCodificada", "endereco", null);
+
+        // Criamos o usuário inicial com a senha antiga
+        Dono usuario = new Dono(usuarioLogadoId, "Nome", "email@test.com", "login123", "senhaCodificadaVelha", "endereco", null);
 
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(usuario);
         when(codificadorSenhaGateway.decodificar(usuario.getSenha())).thenReturn("senhaAtual123");
         when(codificadorSenhaGateway.codificar(atualizarSenhaInputDTO.getNovaSenha())).thenReturn("novaSenhaCodificada");
-        when(usuarioGateway.atualizarSenha("novaSenhaCodificada", usuarioLogadoId)).thenReturn(usuario);
+
+        // O Gateway agora devolve o objeto salvo
+        when(usuarioGateway.salvar(usuario)).thenReturn(usuario);
 
         // Act
         UsuarioBase resultado = atualizarSenhaUsuarioUseCase.atualizar(usuarioLogadoId, atualizarSenhaInputDTO);
 
         // Assert
         assertNotNull(resultado);
+        // Validamos se a Entidade recebeu corretamente a nova senha antes de salvar
+        assertEquals("novaSenhaCodificada", resultado.getSenha());
         assertEquals(usuario, resultado);
+
         verify(codificadorSenhaGateway, times(1)).codificar(atualizarSenhaInputDTO.getNovaSenha());
-        verify(usuarioGateway, times(1)).atualizarSenha("novaSenhaCodificada", usuarioLogadoId);
+
+        // Certificamos que o comportamento mudou: o Gateway salva a entidade inteira
+        verify(usuarioGateway, times(1)).salvar(usuario);
     }
 
     @Test
@@ -80,12 +89,13 @@ class AtualizarSenhaUsuarioUseCaseTest {
         when(buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId)).thenReturn(usuario);
         when(codificadorSenhaGateway.decodificar(usuario.getSenha())).thenReturn("senhaAtualCorreta");
 
-
         // Act & Assert
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> atualizarSenhaUsuarioUseCase.atualizar(usuarioLogadoId, atualizarSenhaInputDTO));
 
         assertEquals("Senha atual não confere", exception.getMessage());
-        verify(usuarioGateway, never()).atualizarSenha(anyString(), anyLong());
+
+        // Asseguramos que não chamou o salvar caso haja erro
+        verify(usuarioGateway, never()).salvar(any(UsuarioBase.class));
     }
 }

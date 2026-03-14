@@ -2,10 +2,9 @@ package br.com.fiap.techchallengefase2.infra.controller;
 
 
 import br.com.fiap.techchallengefase2.core.controller.ItemCardapioController;
-import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
 import br.com.fiap.techchallengefase2.core.dto.itemcardapio.DadosItemCardapioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.itemcardapio.ItemCardapioOutputDTO;
-import br.com.fiap.techchallengefase2.infra.controller.model.request.ItemCardapioJson;
+import br.com.fiap.techchallengefase2.infra.controller.model.request.cardapio.ItemCardapioJson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,8 +60,8 @@ public class ItemCardapioRestController {
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
             @PathVariable Long itemCardapioId) {
 
-        ItemCardapio output = itemCardapioController.buscarPorId(usuarioLogadoId, itemCardapioId);
-        return ResponseEntity.ok(ItemCardapioOutputDTO.fromDomain(output));
+        var output = itemCardapioController.buscarPorId(usuarioLogadoId, itemCardapioId);
+        return ResponseEntity.ok(output);
     }
 
     @GetMapping("/restaurantes/{restauranteId}")
@@ -70,11 +69,8 @@ public class ItemCardapioRestController {
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
             @PathVariable Long restauranteId) {
 
-        List<ItemCardapio> output = itemCardapioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId);
-
-        List<ItemCardapioOutputDTO> itemCardapioDtoList = output.stream().map(ItemCardapioOutputDTO::fromDomain).toList();
-
-        return ResponseEntity.ok(itemCardapioDtoList);
+        var output = itemCardapioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId);
+        return ResponseEntity.ok(output);
     }
 
     @DeleteMapping("/{itemCardapioId}")

@@ -115,24 +115,6 @@ class UsuarioGatewayImplTest {
     }
 
     @Test
-    void deveAtualizarSenhaComSucesso() {
-        UsuarioEntityJPA entity = UsuarioEntityJPA.builder()
-                .usuarioId(1L)
-                .senha("senhaVelha")
-                .categoria(CategoriaUsuario.CLIENTE)
-                .build();
-
-        when(usuarioRepository.findById(1L)).thenReturn(Optional.of(entity));
-        when(usuarioRepository.save(any(UsuarioEntityJPA.class))).thenReturn(entity);
-
-        UsuarioBase resultado = usuarioGateway.atualizarSenha("novaSenha", 1L);
-
-        assertEquals("novaSenha", entity.getSenha());
-        assertNotNull(resultado);
-        verify(usuarioRepository).save(entity);
-    }
-
-    @Test
     void deveRetornarTrueSeExisteUsuarioComLogin() {
         when(usuarioRepository.findByLogin("login123")).thenReturn(Optional.of(new UsuarioEntityJPA()));
         assertTrue(usuarioGateway.existeUsuarioComLogin("login123"));

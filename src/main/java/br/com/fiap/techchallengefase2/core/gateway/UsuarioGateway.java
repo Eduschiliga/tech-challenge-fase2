@@ -13,8 +13,6 @@ public interface UsuarioGateway {
 
     UsuarioBase salvar(UsuarioBase usuario);
 
-    UsuarioBase atualizarSenha(String senhaCodificada, Long usuarioId);
-
     boolean existeUsuarioComLogin(String login);
 
     boolean existeUsuarioComEmail(String email);

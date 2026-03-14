@@ -4,7 +4,7 @@ import br.com.fiap.techchallengefase2.core.controller.TipoUsuarioController;
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.AtualizarTipoUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.CriarTipoUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.TipoUsuarioOutputDTO;
-import br.com.fiap.techchallengefase2.infra.controller.model.request.TipoUsuarioJson;
+import br.com.fiap.techchallengefase2.infra.controller.model.request.tipousuario.TipoUsuarioJson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,8 +55,8 @@ public class TipoUsuarioRestController {
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
             @PathVariable Long tipoUsuarioId) {
 
-        var tipoUsuario = tipoUsuarioController.buscarPorId(usuarioLogadoId, tipoUsuarioId);
-        return ResponseEntity.ok(TipoUsuarioOutputDTO.fromDomain(tipoUsuario));
+        var output = tipoUsuarioController.buscarPorId(usuarioLogadoId, tipoUsuarioId);
+        return ResponseEntity.ok(output);
     }
 
     @GetMapping("/restaurantes/{restauranteId}")
@@ -64,10 +64,8 @@ public class TipoUsuarioRestController {
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
             @PathVariable Long restauranteId) {
 
-        List<TipoUsuarioOutputDTO> tipos = tipoUsuarioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId).stream()
-                .map(TipoUsuarioOutputDTO::fromDomain)
-                .toList();
-        return ResponseEntity.ok(tipos);
+        var output = tipoUsuarioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId);
+        return ResponseEntity.ok(output); 
     }
 
     @DeleteMapping("/{tipoUsuarioId}")

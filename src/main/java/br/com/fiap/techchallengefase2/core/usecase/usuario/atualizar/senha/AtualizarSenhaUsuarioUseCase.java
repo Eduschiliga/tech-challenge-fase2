@@ -25,8 +25,9 @@ public class AtualizarSenhaUsuarioUseCase implements AtualizarSenhaUsuario {
         validarSenha(usuario, atualizarSenhaInputDto);
 
         String novaSenhaCodificada = codificadorSenhaGateway.codificar(atualizarSenhaInputDto.getNovaSenha());
+        usuario.atribuirSenhaCodificada(novaSenhaCodificada);
 
-        return usuarioGateway.atualizarSenha(novaSenhaCodificada, usuarioLogadoId);
+        return usuarioGateway.salvar(usuario);
     }
 
     private void validarSenha(UsuarioBase usuario, AtualizarSenhaInputDTO atualizarSenhaInputDto) {

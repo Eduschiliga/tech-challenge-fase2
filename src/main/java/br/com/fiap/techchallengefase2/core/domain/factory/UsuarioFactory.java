@@ -4,7 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.CategoriaUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.core.dto.usuario.DadosUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.exception.CategoriaInvalidaException;
 
 import java.util.ArrayList;
 
@@ -19,9 +19,8 @@ public class UsuarioFactory {
             return tipoDestino.cast(usuarioBase);
         }
 
-        throw new IllegalArgumentException("O usuário não é do tipo esperado: " + tipoDestino.getSimpleName());
+        throw new CategoriaInvalidaException();
     }
-
 
     public static UsuarioBase criarCopiaComNovosDados(
             UsuarioBase usuarioOriginal,
@@ -31,8 +30,6 @@ public class UsuarioFactory {
             String endereco
     ) {
         return switch (usuarioOriginal) {
-            case null -> throw new IllegalArgumentException("Usuário base não pode ser null");
-
             case Dono dono -> new Dono(
                     dono.getUsuarioId(),
                     nome,
@@ -54,7 +51,7 @@ public class UsuarioFactory {
                     usuarioOriginal.getTipoUsuarioList()
             );
 
-            default -> throw new IllegalArgumentException("Tipo de usuário não suportado na atualização");
+            default -> throw new CategoriaInvalidaException();
         };
     }
 
@@ -88,8 +85,6 @@ public class UsuarioFactory {
                     endereco,
                     new ArrayList<>()
             );
-
-            default -> throw new IllegalArgumentException("Tipo de usuário inválido");
         };
     }
 }

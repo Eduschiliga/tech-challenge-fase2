@@ -1,4 +1,4 @@
-package br.com.fiap.techchallengefase2.infra.controller.model.request;
+package br.com.fiap.techchallengefase2.infra.controller.model.request.restaurante;
 
 public record RestauranteJson(
         String nome,

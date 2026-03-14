@@ -45,17 +45,6 @@ public class UsuarioGatewayImpl implements UsuarioGateway {
     }
 
     @Override
-    public UsuarioBase atualizarSenha(String senhaCodificada, Long usuarioId) {
-        UsuarioEntityJPA entity = repository.findById(usuarioId)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
-
-        entity.setSenha(senhaCodificada);
-        UsuarioEntityJPA savedEntity = repository.save(entity);
-
-        return toDomain(savedEntity);
-    }
-
-    @Override
     public boolean existeUsuarioComLogin(String login) {
         return repository.findByLogin(login).isPresent();
     }

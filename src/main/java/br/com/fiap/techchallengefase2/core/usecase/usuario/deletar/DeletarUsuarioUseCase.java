@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.usecase.usuario.deletar;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.core.exception.DeletarUsuarioException;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 
@@ -24,7 +25,7 @@ public class DeletarUsuarioUseCase implements DeletarUsuario {
         UsuarioBase usuario = buscarUsuarioPorIdUseCase.buscarPorId(usuarioId);
 
         if (!Objects.equals(usuario.getUsuarioId(), usuarioLogadoId)) {
-            throw new IllegalArgumentException("Não é possível deletar o registro de outros usuários");
+            throw new DeletarUsuarioException();
         }
 
         usuarioGateway.deletarPorId(usuarioId);

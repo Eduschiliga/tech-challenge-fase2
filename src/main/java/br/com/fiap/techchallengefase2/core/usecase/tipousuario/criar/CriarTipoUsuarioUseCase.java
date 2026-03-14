@@ -3,6 +3,7 @@ package br.com.fiap.techchallengefase2.core.usecase.tipousuario.criar;
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.core.exception.DadosUsuarioInvalidosException;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
@@ -37,7 +38,7 @@ public class CriarTipoUsuarioUseCase implements CriarTipoUsuario {
 
     private void validarNome(String nomeTipo) {
         if (Objects.isNull(nomeTipo) || nomeTipo.isBlank()) {
-            throw new IllegalArgumentException("Nome do Tipo não pode ser vazio");
+            throw new DadosUsuarioInvalidosException("Nome do Tipo de usuário não pode ser vazio");
         }
     }
 }

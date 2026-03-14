@@ -1,5 +1,6 @@
 package br.com.fiap.techchallengefase2.core.domain.usuario;
 
+import br.com.fiap.techchallengefase2.core.exception.CategoriaNaoEncontradaException;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -19,6 +20,6 @@ public enum CategoriaUsuario {
         return Arrays.stream(values())
                 .filter(c -> c.getCodigo() == codigo)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Categoria de usuário " + codigo + " não suportada"));
+                .orElseThrow(CategoriaNaoEncontradaException::new);
     }
 }

@@ -3,7 +3,7 @@ package br.com.fiap.techchallengefase2.infra.controller;
 import br.com.fiap.techchallengefase2.core.controller.RestauranteController;
 import br.com.fiap.techchallengefase2.core.dto.restaurante.DadosRestauranteInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.restaurante.RestauranteOutputDTO;
-import br.com.fiap.techchallengefase2.infra.controller.model.request.RestauranteJson;
+import br.com.fiap.techchallengefase2.infra.controller.model.request.restaurante.RestauranteJson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,19 +57,15 @@ public class RestauranteRestController {
             @PathVariable Long restauranteId) {
 
         var restaurante = restauranteController.buscarPorId(usuarioLogadoId, restauranteId);
-        return ResponseEntity.ok(RestauranteOutputDTO.fromDomain(restaurante));
+        return ResponseEntity.ok(restaurante); // Direto, sem conversão
     }
 
     @GetMapping
     public ResponseEntity<List<RestauranteOutputDTO>> buscarTodosPorUsuario(
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId) {
 
-        List<RestauranteOutputDTO> restaurantes = restauranteController.buscarTodosPorUsuarioId(usuarioLogadoId)
-                .stream()
-                .map(RestauranteOutputDTO::fromDomain)
-                .toList();
-
-        return ResponseEntity.ok(restaurantes);
+        var restaurantes = restauranteController.buscarTodosPorUsuarioId(usuarioLogadoId);
+        return ResponseEntity.ok(restaurantes); // Direto, sem conversão
     }
 
     @DeleteMapping("/{restauranteId}")

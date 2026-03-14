@@ -1,9 +1,12 @@
 package br.com.fiap.techchallengefase2.core.controller;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
+import br.com.fiap.techchallengefase2.core.dto.tipousuario.DesvincularUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.dto.tipousuario.VincularUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.usuario.CriarUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.usuario.DadosUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.dto.usuario.UsuarioOutputDTO;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.atualizar.dados.AtualizarUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.atualizar.senha.AtualizarSenhaUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorId;
@@ -14,7 +17,7 @@ import br.com.fiap.techchallengefase2.core.usecase.usuario.tipousuario.atribuir.
 import br.com.fiap.techchallengefase2.core.usecase.usuario.tipousuario.remover.RemoverTipoUsuario;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Collection;
+import java.util.List;
 
 import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.criarUsuario;
 
@@ -29,12 +32,20 @@ public class UsuarioController {
     private final AtribuirTipoUsuario atribuirTipoUsuario;
     private final RemoverTipoUsuario removerTipoUsuario;
 
-    public void atribuirTipoUsuario(Long usuarioLogadoId, Long tipoUsuarioId, Long usuarioParaAtribuirId) {
-        atribuirTipoUsuario.atribuirTipoUsuario(usuarioLogadoId, tipoUsuarioId, usuarioParaAtribuirId);
+    public void atribuirTipoUsuario(Long usuarioLogadoId, VincularUsuarioInputDTO input) {
+        atribuirTipoUsuario.atribuirTipoUsuario(
+                usuarioLogadoId,
+                input.tipoUsuarioId(),
+                input.usuarioParaAtribuirId()
+        );
     }
 
-    public void removerTipoUsuario(Long usuarioLogadoId, Long tipoUsuarioId, Long usuarioParaAtribuirId) {
-        removerTipoUsuario.removerTipoUsuario(usuarioLogadoId, tipoUsuarioId, usuarioParaAtribuirId);
+    public void removerTipoUsuario(Long usuarioLogadoId, DesvincularUsuarioInputDTO input) {
+        removerTipoUsuario.removerTipoUsuario(
+                usuarioLogadoId,
+                input.tipoUsuarioId(),
+                input.usuarioParaAtribuirId()
+        );
     }
 
     public void deletarUsuarioPorId(Long usuarioLogadoId, Long usuarioId) {
@@ -54,22 +65,27 @@ public class UsuarioController {
         return criarUsuario.criar(usuario).getUsuarioId();
     }
 
-    public Collection<UsuarioBase> buscarTodosUsuarios(Long usuarioLogadoId) {
-        return buscarTodosUsuarios.buscarTodos();
+    public List<UsuarioOutputDTO> buscarTodosUsuarios(Long usuarioLogadoId) {
+        return buscarTodosUsuarios.buscarTodos().stream()
+                .map(UsuarioOutputDTO::fromDomain)
+                .toList();
     }
 
-    public UsuarioBase buscarUsuarioPorId(Long usuarioLogadoId, Long usuarioId) {
-        return buscarUsuarioPorId.buscarPorId(usuarioId);
+    public UsuarioOutputDTO buscarUsuarioPorId(Long usuarioLogadoId, Long usuarioId) {
+        UsuarioBase usuario = buscarUsuarioPorId.buscarPorId(usuarioId);
+        return UsuarioOutputDTO.fromDomain(usuario);
     }
 
-    public UsuarioBase atualizarSenhaUsuario(Long usuarioLogadoId, AtualizarSenhaInputDTO atualizarSenhaInputDto) {
-        return atualizarSenhaUsuario.atualizar(usuarioLogadoId, atualizarSenhaInputDto);
+    public UsuarioOutputDTO atualizarSenhaUsuario(Long usuarioLogadoId, AtualizarSenhaInputDTO atualizarSenhaInputDto) {
+        UsuarioBase usuario = atualizarSenhaUsuario.atualizar(usuarioLogadoId, atualizarSenhaInputDto);
+        return UsuarioOutputDTO.fromDomain(usuario);
     }
 
-    public UsuarioBase atualizarDadosParciaisUsuario(
+    public UsuarioOutputDTO atualizarDadosParciaisUsuario(
             Long usuarioLogadoId,
             DadosUsuarioInputDTO dadosParciaisUsuario
     ) {
-        return atualizarUsuario.atualizar(usuarioLogadoId, dadosParciaisUsuario);
+        UsuarioBase usuario = atualizarUsuario.atualizar(usuarioLogadoId, dadosParciaisUsuario);
+        return UsuarioOutputDTO.fromDomain(usuario);
     }
 }

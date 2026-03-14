@@ -14,4 +14,16 @@ public class Restaurante {
     private String tipoCozinha;
     private String horarioFuncionamento;
     private Long usuarioId;
+
+    public void atualizarDados(
+            String nome,
+            String endereco,
+            String tipoCozinha,
+            String horarioFuncionamento
+    ) {
+        this.nome = nome;
+        this.endereco = endereco;
+        this.tipoCozinha = tipoCozinha;
+        this.horarioFuncionamento = horarioFuncionamento;
+    }
 }

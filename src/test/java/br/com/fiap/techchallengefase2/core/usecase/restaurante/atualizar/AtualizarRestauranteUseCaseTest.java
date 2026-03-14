@@ -36,19 +36,26 @@ class AtualizarRestauranteUseCaseTest {
         Long restauranteId = 10L;
         Long idEsperado = 10L;
 
-        Restaurante restauranteMock = mock(Restaurante.class);
-        DadosRestauranteInputDTO dadosDTO = mock(DadosRestauranteInputDTO.class);
+        // Instanciamos um Restaurante real para validar a mutação de estado
+        Restaurante restaurante = new Restaurante(
+                restauranteId,
+                "Nome Antigo",
+                "Endereço Antigo",
+                "Cozinha Antiga",
+                "08h-18h",
+                usuarioLogadoId
+        );
 
-        when(restauranteMock.getRestauranteId()).thenReturn(restauranteId);
-        when(restauranteMock.getUsuarioId()).thenReturn(usuarioLogadoId);
+        // Usamos um DTO real com os novos dados
+        DadosRestauranteInputDTO dadosDTO = new DadosRestauranteInputDTO(
+                "Novo Nome",
+                "Novo Endereco",
+                "Japonesa",
+                "19h-23h"
+        );
 
-        when(dadosDTO.nome()).thenReturn("Novo Nome");
-        when(dadosDTO.endereco()).thenReturn("Novo Endereco");
-        when(dadosDTO.tipoCozinha()).thenReturn("Japonesa");
-        when(dadosDTO.horarioFuncionamento()).thenReturn("19h-23h");
-
-        when(buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId)).thenReturn(restauranteMock);
-        when(restauranteGateway.salvar(any(Restaurante.class))).thenReturn(idEsperado);
+        when(buscarRestaurantePorIdUseCase.buscarPorId(usuarioLogadoId, restauranteId)).thenReturn(restaurante);
+        when(restauranteGateway.salvar(restaurante)).thenReturn(idEsperado);
 
         // Act
         Long resultado = atualizarRestauranteUseCase.atualizar(usuarioLogadoId, restauranteId, dadosDTO);
@@ -56,10 +63,14 @@ class AtualizarRestauranteUseCaseTest {
         // Assert
         assertEquals(idEsperado, resultado);
 
-        verify(restauranteGateway).salvar(argThat(restaurante ->
-                restaurante.getNome().equals("Novo Nome") &&
-                        restaurante.getRestauranteId().equals(restauranteId)
-        ));
+        // Validamos se a própria Entidade de Domínio foi atualizada corretamente!
+        assertEquals("Novo Nome", restaurante.getNome());
+        assertEquals("Novo Endereco", restaurante.getEndereco());
+        assertEquals("Japonesa", restaurante.getTipoCozinha());
+        assertEquals("19h-23h", restaurante.getHorarioFuncionamento());
+
+        verify(buscarRestaurantePorIdUseCase).buscarPorId(usuarioLogadoId, restauranteId);
+        verify(restauranteGateway).salvar(restaurante);
     }
 
     @Test

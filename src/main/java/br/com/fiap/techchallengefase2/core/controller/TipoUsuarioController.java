@@ -2,15 +2,17 @@ package br.com.fiap.techchallengefase2.core.controller;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.AtualizarTipoUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.dto.tipousuario.CriarTipoUsuarioInputDTO;
+import br.com.fiap.techchallengefase2.core.dto.tipousuario.TipoUsuarioOutputDTO;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.atualizar.AtualizarTipoUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorId;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.todos.BuscarTipoUsuarioPorRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.criar.CriarTipoUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.deletar.DeletarTipoUsuario;
-import br.com.fiap.techchallengefase2.core.dto.tipousuario.CriarTipoUsuarioInputDTO;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class TipoUsuarioController {
@@ -28,12 +30,16 @@ public class TipoUsuarioController {
         return atualizarTipoUsuario.atualizar(usuarioLogadoId, input.tipoUsuarioId(), input.nome());
     }
 
-    public TipoUsuario buscarPorId(Long usuarioLogadoId, Long tipoUsuarioId) {
-        return buscarTipoUsuarioPorId.buscarPorId(usuarioLogadoId, tipoUsuarioId);
+    public TipoUsuarioOutputDTO buscarPorId(Long usuarioLogadoId, Long tipoUsuarioId) {
+        TipoUsuario tipoUsuario = buscarTipoUsuarioPorId.buscarPorId(usuarioLogadoId, tipoUsuarioId);
+        return TipoUsuarioOutputDTO.fromDomain(tipoUsuario);
     }
 
-    public List<TipoUsuario> buscarTodosPorRestaurante(Long usuarioLogadoId, Long restauranteId) {
-        return buscarTipoUsuarioPorRestaurante.buscarTodosPorRestauranteId(usuarioLogadoId, restauranteId);
+    public List<TipoUsuarioOutputDTO> buscarTodosPorRestaurante(Long usuarioLogadoId, Long restauranteId) {
+        return buscarTipoUsuarioPorRestaurante.buscarTodosPorRestauranteId(usuarioLogadoId, restauranteId)
+                .stream()
+                .map(TipoUsuarioOutputDTO::fromDomain)
+                .collect(Collectors.toList());
     }
 
     public void deletarTipoUsuario(Long usuarioLogadoId, Long tipoUsuarioId) {

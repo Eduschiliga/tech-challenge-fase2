@@ -6,6 +6,7 @@ import br.com.fiap.techchallengefase2.core.dto.restaurante.RestauranteOutputDTO;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.atualizar.AtualizarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorId;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarRestaurantePorUsuarioId;
+import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarTodosRestaurantes;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.criar.CriarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.deletar.DeletarRestaurante;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class RestauranteController {
     private final BuscarRestaurantePorId buscarRestaurantePorId;
     private final DeletarRestaurante deletarRestaurante;
     private final BuscarRestaurantePorUsuarioId buscarRestaurantePorUsuarioId;
+    private final BuscarTodosRestaurantes buscarTodosRestaurantes;
 
     public Long criar(Long usuarioLogadoId, DadosRestauranteInputDTO dadosRestauranteInputDTO) {
         return criarRestaurante.criar(usuarioLogadoId, dadosRestauranteInputDTO);
@@ -36,6 +38,13 @@ public class RestauranteController {
 
     public List<RestauranteOutputDTO> buscarTodosPorUsuarioId(Long usuarioLogadoId) {
         return buscarRestaurantePorUsuarioId.buscarTodos(usuarioLogadoId)
+                .stream()
+                .map(RestauranteOutputDTO::fromDomain)
+                .collect(Collectors.toList());
+    }
+
+    public List<RestauranteOutputDTO> buscarTodos() {
+        return buscarTodosRestaurantes.buscarTodos()
                 .stream()
                 .map(RestauranteOutputDTO::fromDomain)
                 .collect(Collectors.toList());

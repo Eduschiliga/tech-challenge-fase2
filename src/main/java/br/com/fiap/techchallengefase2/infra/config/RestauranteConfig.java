@@ -8,6 +8,8 @@ import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.Busc
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorIdUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarRestaurantePorUsuarioId;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarRestaurantePorUsuarioIdUseCase;
+import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarTodosRestaurantes;
+import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarTodosRestaurantesUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.criar.CriarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.criar.CriarRestauranteUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.deletar.DeletarRestaurante;
@@ -39,6 +41,11 @@ public class RestauranteConfig {
             RestauranteGateway restauranteGateway
     ) {
         return new BuscarRestaurantePorUsuarioIdUseCase(buscarUsuarioPorIdUseCase, validaSeUsuarioDono, restauranteGateway);
+    }
+
+    @Bean
+    public BuscarTodosRestaurantes buscarTodosRestaurantes(RestauranteGateway restauranteGateway) {
+        return new BuscarTodosRestaurantesUseCase(restauranteGateway);
     }
 
     @Bean

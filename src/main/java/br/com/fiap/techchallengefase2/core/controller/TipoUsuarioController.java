@@ -5,6 +5,7 @@ import br.com.fiap.techchallengefase2.core.dto.tipousuario.AtualizarTipoUsuarioI
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.CriarTipoUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.TipoUsuarioOutputDTO;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.atualizar.AtualizarTipoUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.BuscarTipoUsuarioPorUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorId;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.todos.BuscarTipoUsuarioPorRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.criar.CriarTipoUsuario;
@@ -21,6 +22,7 @@ public class TipoUsuarioController {
     private final BuscarTipoUsuarioPorId buscarTipoUsuarioPorId;
     private final DeletarTipoUsuario deletarTipoUsuario;
     private final BuscarTipoUsuarioPorRestaurante buscarTipoUsuarioPorRestaurante;
+    private final BuscarTipoUsuarioPorUsuario buscarTipoUsuarioPorUsuario;
 
     public Long criar(Long usuarioLogadoId, CriarTipoUsuarioInputDTO input) {
         return criarTipoUsuario.criar(usuarioLogadoId, input.restauranteId(), input.nome());
@@ -37,6 +39,13 @@ public class TipoUsuarioController {
 
     public List<TipoUsuarioOutputDTO> buscarTodosPorRestaurante(Long usuarioLogadoId, Long restauranteId) {
         return buscarTipoUsuarioPorRestaurante.buscarTodosPorRestauranteId(usuarioLogadoId, restauranteId)
+                .stream()
+                .map(TipoUsuarioOutputDTO::fromDomain)
+                .collect(Collectors.toList());
+    }
+
+    public List<TipoUsuarioOutputDTO> buscarTodosPorUsuario(Long usuarioLogadoId, Long usuarioId) {
+        return buscarTipoUsuarioPorUsuario.buscarPorUsuario(usuarioLogadoId, usuarioId)
                 .stream()
                 .map(TipoUsuarioOutputDTO::fromDomain)
                 .collect(Collectors.toList());

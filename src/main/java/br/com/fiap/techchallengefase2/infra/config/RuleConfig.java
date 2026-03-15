@@ -8,7 +8,7 @@ import br.com.fiap.techchallengefase2.core.rule.dados.ValidaSePossuiNome;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.RuleCredenciaisUsuario;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.ValidaSeJaExisteEmail;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.ValidaSeJaExisteLogin;
-import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleAtualizarSenhaUsuario;
+import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleSenhaUsuario;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.ValidaSenha;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.ValidaSenhaAtual;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
@@ -55,12 +55,12 @@ public class RuleConfig {
     }
 
     @Bean
-    public RuleAtualizarSenhaUsuario validaSenhaAtual() {
+    public RuleSenhaUsuario validaSenhaAtual() {
         return new ValidaSenhaAtual();
     }
 
     @Bean
-    public RuleAtualizarSenhaUsuario validaSenha() {
+    public RuleSenhaUsuario validaSenha() {
         return new ValidaSenha();
     }
 }

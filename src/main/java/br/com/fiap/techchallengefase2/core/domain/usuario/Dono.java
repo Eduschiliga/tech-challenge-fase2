@@ -19,10 +19,10 @@ public class Dono extends UsuarioBase {
             String login,
             String senha,
             String endereco,
-            List<Restaurante> restaurantes
+            List<Restaurante> restauranteList
     ) {
         super(usuarioId, nome, email, login, senha, endereco, CategoriaUsuario.DONO.getCodigo(), new ArrayList<>());
-        this.restaurantes = restaurantes;
+        this.restaurantes = restauranteList;
     }
 
     public Dono(

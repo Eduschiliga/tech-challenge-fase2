@@ -4,6 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
+import br.com.fiap.techchallengefase2.infra.gateway.jpa.RestauranteGatewayJPA;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,10 +21,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class RestauranteGatewayImplTest {
+class RestauranteGatewayJPATest {
 
     @InjectMocks
-    private RestauranteGatewayImpl restauranteGateway;
+    private RestauranteGatewayJPA restauranteGateway;
 
     @Mock
     private RestauranteRepository repository;

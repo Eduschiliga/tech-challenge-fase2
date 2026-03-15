@@ -10,6 +10,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEnt
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.TipoUsuarioRepository;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.UsuarioRepository;
+import br.com.fiap.techchallengefase2.infra.gateway.jpa.UsuarioGatewayJPA;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,10 +28,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class UsuarioGatewayImplTest {
+class UsuarioGatewayJPATest {
 
     @InjectMocks
-    private UsuarioGatewayImpl usuarioGateway;
+    private UsuarioGatewayJPA usuarioGateway;
 
     @Mock
     private UsuarioRepository usuarioRepository;

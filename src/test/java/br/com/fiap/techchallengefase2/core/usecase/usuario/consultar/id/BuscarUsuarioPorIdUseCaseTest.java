@@ -49,7 +49,7 @@ class BuscarUsuarioPorIdUseCaseTest {
 
         assertTrue(resultado instanceof Dono);
         assertEquals(usuarioId, resultado.getUsuarioId());
-        assertEquals(0, resultado.getCategoriaUsuario());
+        assertEquals(0, resultado.getCategoria());
     }
 
     @Test
@@ -72,7 +72,7 @@ class BuscarUsuarioPorIdUseCaseTest {
 
         assertTrue(resultado instanceof Cliente);
         assertEquals(usuarioId, resultado.getUsuarioId());
-        assertEquals(1, resultado.getCategoriaUsuario());
+        assertEquals(1, resultado.getCategoria());
     }
 
     @Test

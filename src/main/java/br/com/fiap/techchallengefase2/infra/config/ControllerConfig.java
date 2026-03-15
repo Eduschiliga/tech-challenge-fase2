@@ -14,9 +14,11 @@ import br.com.fiap.techchallengefase2.core.usecase.itemcardapio.deletar.DeletarI
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.atualizar.AtualizarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorId;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarRestaurantePorUsuarioId;
+import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarTodosRestaurantes;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.criar.CriarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.deletar.DeletarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.atualizar.AtualizarTipoUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.BuscarTipoUsuarioPorUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorId;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.todos.BuscarTipoUsuarioPorRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.criar.CriarTipoUsuario;
@@ -97,14 +99,16 @@ public class ControllerConfig {
             AtualizarRestaurante atualizarRestaurante,
             BuscarRestaurantePorId buscarRestaurantePorId,
             DeletarRestaurante deletarRestaurante,
-            BuscarRestaurantePorUsuarioId buscarRestaurantePorUsuarioId
+            BuscarRestaurantePorUsuarioId buscarRestaurantePorUsuarioId,
+            BuscarTodosRestaurantes buscarTodosRestaurantes
     ) {
         return new RestauranteController(
                 criarRestaurante,
                 atualizarRestaurante,
                 buscarRestaurantePorId,
                 deletarRestaurante,
-                buscarRestaurantePorUsuarioId
+                buscarRestaurantePorUsuarioId,
+                buscarTodosRestaurantes
         );
     }
 
@@ -114,14 +118,16 @@ public class ControllerConfig {
             AtualizarTipoUsuario atualizarTipoUsuario,
             BuscarTipoUsuarioPorId buscarTipoUsuarioPorId,
             DeletarTipoUsuario deletarTipoUsuario,
-            BuscarTipoUsuarioPorRestaurante buscarTipoUsuarioPorRestaurante
+            BuscarTipoUsuarioPorRestaurante buscarTipoUsuarioPorRestaurante,
+            BuscarTipoUsuarioPorUsuario buscarTipoUsuarioPorUsuario
     ) {
         return new TipoUsuarioController(
                 criarTipoUsuario,
                 atualizarTipoUsuario,
                 buscarTipoUsuarioPorId,
                 deletarTipoUsuario,
-                buscarTipoUsuarioPorRestaurante
+                buscarTipoUsuarioPorRestaurante,
+                buscarTipoUsuarioPorUsuario
         );
     }
 }

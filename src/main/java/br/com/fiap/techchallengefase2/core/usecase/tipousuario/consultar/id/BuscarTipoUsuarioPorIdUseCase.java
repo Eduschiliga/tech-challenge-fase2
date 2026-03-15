@@ -1,6 +1,6 @@
 package br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id;
 
-import br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory;
+import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory;
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;

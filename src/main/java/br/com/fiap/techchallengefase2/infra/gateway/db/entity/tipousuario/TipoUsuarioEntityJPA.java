@@ -5,6 +5,8 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEnt
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,7 +26,6 @@ public class TipoUsuarioEntityJPA {
     @JoinColumn(name = "restaurante_id", nullable = false)
     private RestauranteEntityJPA restaurante;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private UsuarioEntityJPA usuario;
+    @ManyToMany(mappedBy = "tipoUsuarioList")
+    private List<UsuarioEntityJPA> usuarios;
 }

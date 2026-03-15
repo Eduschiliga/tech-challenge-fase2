@@ -17,7 +17,7 @@ public record UsuarioOutputDTO(
                 usuario.getEmail(),
                 usuario.getLogin(),
                 usuario.getEndereco(),
-                usuario.getCategoriaUsuario()
+                usuario.getCategoria()
         );
     }
 }

@@ -5,7 +5,7 @@ import br.com.fiap.techchallengefase2.core.exception.NovaSenhaInvalidaException;
 
 import java.util.Objects;
 
-public class ValidaSenha implements RuleAtualizarSenhaUsuario {
+public class ValidaSenha implements RuleSenhaUsuario {
     @Override
     public void validar(String senhaAtual, AtualizarSenhaInputDTO atualizarSenhaInputDto) {
         String novaSenha = atualizarSenhaInputDto.getNovaSenha();

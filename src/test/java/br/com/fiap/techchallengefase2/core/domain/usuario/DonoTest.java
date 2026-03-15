@@ -62,6 +62,6 @@ class DonoTest {
     void deveAtribuirCategoriaCorreta() {
         Dono dono = new Dono(1L, "Dono Teste", "email@teste.com", "login", "senha", "Endereço", new ArrayList<>(), new ArrayList<>());
 
-        assertEquals(CategoriaUsuario.DONO.getCodigo(), dono.getCategoriaUsuario());
+        assertEquals(CategoriaUsuario.DONO.getCodigo(), dono.getCategoria());
     }
 }

@@ -19,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.criarUsuario;
+import static br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory.criarUsuario;
+
 
 @RequiredArgsConstructor
 public class UsuarioController {

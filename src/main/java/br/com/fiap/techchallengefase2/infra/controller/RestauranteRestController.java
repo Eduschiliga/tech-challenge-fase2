@@ -57,15 +57,21 @@ public class RestauranteRestController {
             @PathVariable Long restauranteId) {
 
         var restaurante = restauranteController.buscarPorId(usuarioLogadoId, restauranteId);
-        return ResponseEntity.ok(restaurante); // Direto, sem conversão
+        return ResponseEntity.ok(restaurante);
     }
 
-    @GetMapping
+    @GetMapping("/usuario")
     public ResponseEntity<List<RestauranteOutputDTO>> buscarTodosPorUsuario(
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId) {
 
         var restaurantes = restauranteController.buscarTodosPorUsuarioId(usuarioLogadoId);
-        return ResponseEntity.ok(restaurantes); // Direto, sem conversão
+        return ResponseEntity.ok(restaurantes);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<RestauranteOutputDTO>> buscarTodos() {
+        var restaurantes = restauranteController.buscarTodos();
+        return ResponseEntity.ok(restaurantes);
     }
 
     @DeleteMapping("/{restauranteId}")

@@ -10,10 +10,10 @@ import java.util.Base64;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-class CodificadorSenhaGatewayImplTest {
+class CodificadorSenhaGatewayBase64Test {
 
     @InjectMocks
-    private CodificadorSenhaGatewayImpl codificadorSenhaGateway;
+    private CodificadorSenhaGatewayBase64 codificadorSenhaGateway;
 
     @Test
     void deveCodificarSenhaComSucesso() {

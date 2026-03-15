@@ -4,6 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.CardapioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.ItemCardapioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.ItemCardapioRepository;
+import br.com.fiap.techchallengefase2.infra.gateway.jpa.ItemCardapioGatewayJPA;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,10 +21,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ItemCardapioGatewayImplTest {
+class ItemCardapioGatewayJPATest {
 
     @InjectMocks
-    private ItemCardapioGatewayImpl itemCardapioGateway;
+    private ItemCardapioGatewayJPA itemCardapioGateway;
 
     @Mock
     private ItemCardapioRepository repository;

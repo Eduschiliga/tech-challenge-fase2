@@ -12,11 +12,13 @@ public class ValidaSePossuiEmail implements RuleDadosUsuario {
 
     @Override
     public void validar(UsuarioBase usuarioBase) {
-        if (Objects.isNull(usuarioBase.getEmail()) || usuarioBase.getEmail().trim().isEmpty()) {
+        String email = usuarioBase.getEmail();
+        
+        if (Objects.isNull(email) || email.trim().isEmpty()) {
             throw new EmailInvalidoException("E-mail é obrigatório e não pode estar vazio.");
         }
 
-        if (!EMAIL_PATTERN.matcher(usuarioBase.getEmail()).matches()) {
+        if (!EMAIL_PATTERN.matcher(email.trim()).matches()) {
             throw new EmailInvalidoException("O formato do e-mail informado é inválido.");
         }
     }

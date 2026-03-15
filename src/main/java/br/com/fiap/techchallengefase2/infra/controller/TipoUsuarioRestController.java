@@ -68,6 +68,15 @@ public class TipoUsuarioRestController {
         return ResponseEntity.ok(output); 
     }
 
+    @GetMapping("/usuarios/{usuarioId}")
+    public ResponseEntity<List<TipoUsuarioOutputDTO>> buscarTodosPorUsuario(
+            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @PathVariable Long usuarioId) {
+
+        var output = tipoUsuarioController.buscarTodosPorUsuario(usuarioLogadoId, usuarioId);
+        return ResponseEntity.ok(output);
+    }
+
     @DeleteMapping("/{tipoUsuarioId}")
     public ResponseEntity<Void> deletar(
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,

@@ -40,8 +40,13 @@ public class UsuarioEntityJPA {
     private CategoriaUsuario categoria;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RestauranteEntityJPA> restaurantes;
+    private List<RestauranteEntityJPA> restauranteList;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TipoUsuarioEntityJPA> tiposUsuario;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "usuario_tipos",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "tipo_usuario_id")
+    )
+    private List<TipoUsuarioEntityJPA> tipoUsuarioList;
 }

@@ -4,7 +4,7 @@ import br.com.fiap.techchallengefase2.core.gateway.CodificadorSenhaGateway;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dados.RuleDadosUsuario;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.RuleCredenciaisUsuario;
-import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleAtualizarSenhaUsuario;
+import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleSenhaUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorIdUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.atualizar.dados.AtualizarUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.atualizar.dados.AtualizarUsuarioUseCase;
@@ -64,9 +64,9 @@ public class UsuarioConfig {
             CodificadorSenhaGateway codificadorSenhaGateway,
             UsuarioGateway usuarioGateway,
             BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
-            List<RuleAtualizarSenhaUsuario> ruleAtualizarSenhaUsuarioList
+            List<RuleSenhaUsuario> ruleSenhaUsuarioList
     ) {
-        return new AtualizarSenhaUsuarioUseCase(codificadorSenhaGateway, usuarioGateway, buscarUsuarioPorIdUseCase, ruleAtualizarSenhaUsuarioList);
+        return new AtualizarSenhaUsuarioUseCase(codificadorSenhaGateway, usuarioGateway, buscarUsuarioPorIdUseCase, ruleSenhaUsuarioList);
     }
 
     @Bean

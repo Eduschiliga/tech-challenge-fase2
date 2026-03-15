@@ -3,16 +3,14 @@ package br.com.fiap.techchallengefase2.core.usecase.usuario.atualizar.dados;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.dto.usuario.DadosUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
+import br.com.fiap.techchallengefase2.core.rule.dados.RuleDadosUsuario;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.RuleCredenciaisUsuario;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.ValidaSeJaExisteEmail;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.ValidaSeJaExisteLogin;
-import br.com.fiap.techchallengefase2.core.rule.dados.RuleDadosUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-
-import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.criarCopiaComNovosDados;
 
 @RequiredArgsConstructor
 public class AtualizarUsuarioUseCase implements AtualizarUsuario {
@@ -24,8 +22,8 @@ public class AtualizarUsuarioUseCase implements AtualizarUsuario {
     @Override
     public UsuarioBase atualizar(Long usuarioLogadoId, DadosUsuarioInputDTO dadosParciaisDto) {
         UsuarioBase usuarioAtual = buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId);
-        UsuarioBase usuarioAtualizado = criarCopiaComNovosDados(
-                usuarioAtual,
+
+        UsuarioBase usuarioAtualizado = usuarioAtual.atualizar(
                 dadosParciaisDto.getNome(),
                 dadosParciaisDto.getEmail(),
                 dadosParciaisDto.getLogin(),

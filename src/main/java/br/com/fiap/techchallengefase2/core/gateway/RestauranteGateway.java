@@ -13,5 +13,7 @@ public interface RestauranteGateway {
 
     List<Restaurante> buscarTodosPorUsuarioId(Long usuarioLogadoId);
 
+    List<Restaurante> buscarTodos();
+
     void deletarPorId(Long restauranteId);
 }

@@ -7,7 +7,7 @@ import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
 import br.com.fiap.techchallengefase2.core.exception.SenhaAtualIncorretaException;
 import br.com.fiap.techchallengefase2.core.gateway.CodificadorSenhaGateway;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
-import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleAtualizarSenhaUsuario;
+import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleSenhaUsuario;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.ValidaSenhaAtual;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +39,7 @@ class AtualizarSenhaUsuarioUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        List<RuleAtualizarSenhaUsuario> ruleCredenciaisUsuarioList = List.of(new ValidaSenhaAtual());
+        List<RuleSenhaUsuario> ruleCredenciaisUsuarioList = List.of(new ValidaSenhaAtual());
 
         atualizarSenhaUsuarioUseCase = new AtualizarSenhaUsuarioUseCase(
                 codificadorSenhaGateway,

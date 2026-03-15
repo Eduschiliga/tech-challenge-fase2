@@ -10,6 +10,7 @@ import br.com.fiap.techchallengefase2.core.dto.usuario.UsuarioOutputDTO;
 import br.com.fiap.techchallengefase2.infra.controller.model.request.tipousuario.DesvincularUsuarioJson;
 import br.com.fiap.techchallengefase2.infra.controller.model.request.tipousuario.VincularUsuarioJson;
 import br.com.fiap.techchallengefase2.infra.controller.model.request.usuario.AtualizarSenhaJson;
+import br.com.fiap.techchallengefase2.infra.controller.model.request.usuario.AtualizarUsuarioJson;
 import br.com.fiap.techchallengefase2.infra.controller.model.request.usuario.UsuarioJson;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,12 @@ public class UsuarioRestController {
     @PostMapping
     public ResponseEntity<Long> criar(@RequestBody UsuarioJson json) {
         CriarUsuarioInputDTO input = new CriarUsuarioInputDTO(
-                json.nome(), json.endereco(), json.email(), json.login(), json.senha(), json.categoria()
+                json.nome(),
+                json.email(),
+                json.login(),
+                json.senha(),
+                json.endereco(),
+                json.categoria()
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioController.criar(input));
@@ -37,10 +43,10 @@ public class UsuarioRestController {
     @PutMapping("/{usuarioId}")
     public ResponseEntity<UsuarioOutputDTO> atualizar(
             @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
-            @RequestBody UsuarioJson json
+            @RequestBody AtualizarUsuarioJson json
     ) {
         DadosUsuarioInputDTO input = new DadosUsuarioInputDTO(
-                json.nome(), json.endereco(), json.email(), json.login()
+                json.nome(), json.email(), json.login(), json.endereco()
         );
 
         return ResponseEntity.ok(usuarioController.atualizarDadosParciaisUsuario(usuarioLogadoId, input));

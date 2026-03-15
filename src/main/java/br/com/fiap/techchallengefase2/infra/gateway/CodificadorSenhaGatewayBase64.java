@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Base64;
 
 @Component
-public class CodificadorSenhaGatewayImpl implements CodificadorSenhaGateway {
+public class CodificadorSenhaGatewayBase64 implements CodificadorSenhaGateway {
 
     @Override
     public String codificar(String senha) {

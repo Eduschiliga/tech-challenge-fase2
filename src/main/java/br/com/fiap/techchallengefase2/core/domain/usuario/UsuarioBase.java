@@ -1,6 +1,7 @@
 package br.com.fiap.techchallengefase2.core.domain.usuario;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
+import br.com.fiap.techchallengefase2.core.exception.CategoriaInvalidaException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public abstract class UsuarioBase {
     private String login;
     private String senha;
     private String endereco;
-    private Integer categoriaUsuario;
+    private Integer categoria;
     private List<TipoUsuario> tipoUsuarioList;
 
     public void atribuirTipoUsuario(TipoUsuario tipoUsuario) {
@@ -39,5 +40,39 @@ public abstract class UsuarioBase {
 
     public void atribuirSenhaCodificada(String senhaCodificada) {
         this.senha = senhaCodificada;
+    }
+
+
+
+    public UsuarioBase atualizar(
+            String nome,
+            String email,
+            String login,
+            String endereco
+    ) {
+        return switch (this) {
+            case Dono dono -> new Dono(
+                    dono.getUsuarioId(),
+                    nome,
+                    email,
+                    login,
+                    dono.getSenha(),
+                    endereco,
+                    dono.getRestaurantes(),
+                    dono.getTipoUsuarioList()
+            );
+
+            case Cliente cliente -> new Cliente(
+                    cliente.getUsuarioId(),
+                    nome,
+                    email,
+                    login,
+                    cliente.getSenha(),
+                    endereco,
+                    cliente.getTipoUsuarioList()
+            );
+
+            default -> throw new CategoriaInvalidaException();
+        };
     }
 }

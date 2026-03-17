@@ -10,6 +10,6 @@ public interface RestauranteMapperJPA {
 
     RestauranteEntityJPA toEntity(Restaurante restaurante);
 
-    @Mapping(target = "usuarioId", source = "usuario.usuarioId")
+    @Mapping(target = "usuarioId", source = "entity.usuario.usuarioId")
     Restaurante toDomain(RestauranteEntityJPA entity);
 }

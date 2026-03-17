@@ -1,6 +1,5 @@
 package br.com.fiap.techchallengefase2.core.usecase.cardapio.criar;
 
-import br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
@@ -15,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 
+import static br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory.obterInstancia;
+
 @RequiredArgsConstructor
 public class CriarItemCardapioUseCase implements CriarCardapio {
 
@@ -28,7 +29,7 @@ public class CriarItemCardapioUseCase implements CriarCardapio {
     public Long criar(Long usuarioLogadoId, CriarCardapioInputDTO input) {
         UsuarioBase usuarioBase = buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId);
         validaSeUsuarioDono.validar(usuarioBase);
-        Dono dono = UsuarioFactory.obterInstancia(usuarioBase, Dono.class);
+        Dono dono = obterInstancia(usuarioBase, Dono.class);
         validaSeUsuarioDonoRestaurante.validar(dono, input.restauranteId());
 
         Restaurante restaurante = buscarRestaurantePorIdUseCase.buscarPorId(

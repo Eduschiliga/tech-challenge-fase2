@@ -5,6 +5,8 @@ import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.atualizar.AtualizarTipoUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.atualizar.AtualizarTipoUsuarioUseCase;
+import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.BuscarTipoUsuarioPorUsuario;
+import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.BuscarTipoUsuarioPorUsuarioUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorIdUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.todos.BuscarTipoUsuarioPorRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.todos.BuscarTipoUsuarioPorRestautanteUseCase;
@@ -37,6 +39,14 @@ public class TipoUsuarioConfig {
             TipoUsuarioGateway tipoUsuarioGateway
     ) {
         return new BuscarTipoUsuarioPorRestautanteUseCase(buscarUsuarioPorIdUseCase, validaSeUsuarioDono, validaSeUsuarioDonoRestaurante, tipoUsuarioGateway);
+    }
+
+    @Bean
+    public BuscarTipoUsuarioPorUsuario buscarTipoUsuarioPorUsuario(
+            BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase,
+            ValidaSeUsuarioDono validaSeUsuarioDono
+    ) {
+        return new BuscarTipoUsuarioPorUsuarioUseCase(buscarUsuarioPorIdUseCase, validaSeUsuarioDono);
     }
 
     @Bean

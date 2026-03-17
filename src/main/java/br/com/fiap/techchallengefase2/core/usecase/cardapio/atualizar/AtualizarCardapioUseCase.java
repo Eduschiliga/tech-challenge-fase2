@@ -1,6 +1,5 @@
 package br.com.fiap.techchallengefase2.core.usecase.cardapio.atualizar;
 
-import br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
@@ -11,6 +10,8 @@ import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaura
 import br.com.fiap.techchallengefase2.core.usecase.cardapio.consultar.id.BuscarCardapioPorIdUseCase;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 import lombok.RequiredArgsConstructor;
+
+import static br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory.obterInstancia;
 
 @RequiredArgsConstructor
 public class AtualizarCardapioUseCase implements AtualizarCardapio {
@@ -26,7 +27,7 @@ public class AtualizarCardapioUseCase implements AtualizarCardapio {
         validaSeUsuarioDono.validar(usuarioBase);
 
         Cardapio cardapio = buscarCardapioPorIdUseCase.buscarPorId(input.cardapioId());
-        Dono dono = UsuarioFactory.obterInstancia(usuarioBase, Dono.class);
+        Dono dono = obterInstancia(usuarioBase, Dono.class);
         validaSeUsuarioDonoRestaurante.validar(dono, cardapio.getRestaurante().getRestauranteId());
 
         cardapio.atualizarNome(input.nome());

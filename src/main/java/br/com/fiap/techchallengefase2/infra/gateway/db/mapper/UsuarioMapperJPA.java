@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory.obterInstancia;
+
 @Component
 @RequiredArgsConstructor
 public class UsuarioMapperJPA {
@@ -58,7 +60,7 @@ public class UsuarioMapperJPA {
                 .toList();
 
         if (Objects.equals(domain.getCategoria(), 0)) {
-            Dono dono = domain.obterInstancia(Dono.class);
+            Dono dono = obterInstancia(domain, Dono.class);
 
             List<RestauranteEntityJPA> restaurantes = dono.getRestaurantes()
                     .stream()

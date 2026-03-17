@@ -17,8 +17,6 @@ public class BuscarRestaurantePorIdUseCase implements BuscarRestaurantePorId {
 
     @Override
     public Restaurante buscarPorId(Long usuarioLogadoId, Long restauranteId) {
-        UsuarioBase usuarioBase = buscarUsuarioPorIdUseCase.buscarPorId(usuarioLogadoId);
-
         return restauranteGateway.buscarPorId(restauranteId)
                 .orElseThrow(RestauranteNaoEncontradoException::new);
     }

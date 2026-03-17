@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;
 
-import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.obterInstancia;
+import static br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory.obterInstancia;
 
 @RequiredArgsConstructor
 public class CriarTipoUsuarioUseCase implements CriarTipoUsuario {

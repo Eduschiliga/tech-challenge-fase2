@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Restaurante {
     private Long restauranteId;
     private String nome;

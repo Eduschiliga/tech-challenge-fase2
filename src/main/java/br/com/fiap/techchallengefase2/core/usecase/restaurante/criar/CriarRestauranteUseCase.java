@@ -9,7 +9,7 @@ import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.usecase.usuario.consultar.id.BuscarUsuarioPorIdUseCase;
 import lombok.RequiredArgsConstructor;
 
-import static br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory.obterInstancia;
+import static br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory.obterInstancia;
 
 @RequiredArgsConstructor
 public class CriarRestauranteUseCase implements CriarRestaurante {

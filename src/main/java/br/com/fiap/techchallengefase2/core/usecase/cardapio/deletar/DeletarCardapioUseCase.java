@@ -1,6 +1,6 @@
 package br.com.fiap.techchallengefase2.core.usecase.cardapio.deletar;
 
-import br.com.fiap.techchallengefase2.core.domain.factory.UsuarioFactory;
+import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;

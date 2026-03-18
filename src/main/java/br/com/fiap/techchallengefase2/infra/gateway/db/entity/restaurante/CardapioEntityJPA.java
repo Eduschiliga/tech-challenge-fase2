@@ -21,7 +21,7 @@ public class CardapioEntityJPA {
     @Column(nullable = false)
     private String nome;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurante_id", nullable = false)
     private RestauranteEntityJPA restaurante;
 

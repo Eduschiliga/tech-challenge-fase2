@@ -8,7 +8,6 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Cardapio {
     private Long id;
     private Restaurante restaurante;

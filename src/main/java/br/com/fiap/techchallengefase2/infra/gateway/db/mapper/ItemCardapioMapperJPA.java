@@ -11,5 +11,7 @@ import org.mapstruct.Named;
 public interface ItemCardapioMapperJPA {
 
     ItemCardapioEntityJPA toEntity(ItemCardapio itemCardapio);
+
+    @Mapping(target = "cardapioId", source = "cardapio.id")
     ItemCardapio toDomain(ItemCardapioEntityJPA entity);
 }

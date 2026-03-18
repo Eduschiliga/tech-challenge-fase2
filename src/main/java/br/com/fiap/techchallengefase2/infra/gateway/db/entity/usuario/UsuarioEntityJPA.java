@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -40,7 +41,7 @@ public class UsuarioEntityJPA {
     private CategoriaUsuario categoria;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RestauranteEntityJPA> restauranteList;
+    private Set<RestauranteEntityJPA> restauranteList;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -48,5 +49,5 @@ public class UsuarioEntityJPA {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "tipo_usuario_id")
     )
-    private List<TipoUsuarioEntityJPA> tipoUsuarioList;
+    private Set<TipoUsuarioEntityJPA> tipoUsuarioList;
 }

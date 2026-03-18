@@ -2,6 +2,7 @@ package br.com.fiap.techchallengefase2.infra.gateway.jpa;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.CardapioEntityJPA;
+import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.mapper.CardapioMapperJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.CardapioRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +33,7 @@ class CardapioGatewayJPATest {
 
     private Cardapio cardapio;
     private CardapioEntityJPA cardapioEntity;
+    private RestauranteEntityJPA restauranteEntityJPA;
 
     @BeforeEach
     void setUp() {

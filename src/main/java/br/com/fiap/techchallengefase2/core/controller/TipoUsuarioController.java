@@ -5,8 +5,8 @@ import br.com.fiap.techchallengefase2.core.dto.tipousuario.AtualizarTipoUsuarioI
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.CriarTipoUsuarioInputDTO;
 import br.com.fiap.techchallengefase2.core.dto.tipousuario.TipoUsuarioOutputDTO;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.atualizar.AtualizarTipoUsuario;
-import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.BuscarTipoUsuarioPorUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.id.BuscarTipoUsuarioPorId;
+import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.idusuario.BuscarTipoUsuarioPorUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.todos.BuscarTipoUsuarioPorRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.criar.CriarTipoUsuario;
 import br.com.fiap.techchallengefase2.core.usecase.tipousuario.deletar.DeletarTipoUsuario;

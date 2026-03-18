@@ -2,19 +2,18 @@ package br.com.fiap.techchallengefase2.infra.gateway.jpa;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
+import br.com.fiap.techchallengefase2.core.exception.restaurante.RestauranteNaoEncontradoException;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.CardapioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.mapper.CardapioMapperJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.CardapioRepository;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,122 +33,115 @@ class CardapioGatewayJPATest {
     private RestauranteRepository restauranteRepository;
 
     @InjectMocks
-    private CardapioGatewayJPA cardapioGateway;
+    private CardapioGatewayJPA gateway;
 
-    private Cardapio cardapio;
-    private CardapioEntityJPA cardapioEntity;
-    private RestauranteEntityJPA restauranteEntityJPA;
+    @Test
+    void deveSalvarCardapioComSucesso() {
+        Cardapio cardapio = mock(Cardapio.class);
+        Restaurante restauranteDomain = mock(Restaurante.class);
+        when(cardapio.getRestaurante()).thenReturn(restauranteDomain);
+        when(restauranteDomain.getRestauranteId()).thenReturn(1L);
 
-    @BeforeEach
-    void setUp() {
-        restauranteEntityJPA = new RestauranteEntityJPA();
-        restauranteEntityJPA.setRestauranteId(1L);
+        CardapioEntityJPA entity = new CardapioEntityJPA();
+        RestauranteEntityJPA restauranteEntity = new RestauranteEntityJPA();
 
-        cardapio = new Cardapio(1L, null, null, "Cardápio Teste");
-        cardapioEntity = new CardapioEntityJPA();
-        cardapioEntity.setId(1L);
+        CardapioEntityJPA savedEntity = mock(CardapioEntityJPA.class);
+        when(savedEntity.getId()).thenReturn(10L);
+
+        when(mapper.toEntity(cardapio)).thenReturn(entity);
+        when(restauranteRepository.findById(1L)).thenReturn(Optional.of(restauranteEntity));
+        when(repository.save(entity)).thenReturn(savedEntity);
+
+        Long idResult = gateway.salvar(cardapio);
+
+        assertEquals(10L, idResult);
+        verify(repository).save(entity);
     }
 
     @Test
-    void deveSalvarCardapio() {
-        // Given
-        when(mapper.toEntity(cardapio)).thenReturn(cardapioEntity);
-        when(restauranteRepository.findById(1L)).thenReturn(Optional.ofNullable(restauranteEntityJPA));
-        when(repository.save(cardapioEntity)).thenReturn(cardapioEntity);
+    void deveLancarExcecaoAoSalvarQuandoRestauranteNaoEncontrado() {
+        Cardapio cardapio = mock(Cardapio.class);
+        Restaurante restauranteDomain = mock(Restaurante.class);
+        when(cardapio.getRestaurante()).thenReturn(restauranteDomain);
+        when(restauranteDomain.getRestauranteId()).thenReturn(1L);
 
-        when(repository.save(cardapioEntity)).thenReturn(cardapioEntity);
+        CardapioEntityJPA entity = new CardapioEntityJPA();
 
-        // When
-        Long savedId = cardapioGateway.salvar(cardapio);
+        when(mapper.toEntity(cardapio)).thenReturn(entity);
+        when(restauranteRepository.findById(1L)).thenReturn(Optional.empty());
 
-        // Then
-        assertNotNull(savedId);
-        assertEquals(cardapioEntity.getId(), savedId);
-        verify(mapper, times(1)).toEntity(cardapio);
-        verify(repository, times(1)).save(cardapioEntity);
+        assertThrows(RestauranteNaoEncontradoException.class, () -> gateway.salvar(cardapio));
+        verify(repository, never()).save(any());
     }
 
     @Test
-    void deveBuscarPorId_quandoEncontrado() {
-        // Given
+    void deveBuscarPorIdComSucesso() {
         Long id = 1L;
-        when(repository.findById(id)).thenReturn(Optional.of(cardapioEntity));
-        when(mapper.toDomain(cardapioEntity)).thenReturn(cardapio);
+        CardapioEntityJPA entity = new CardapioEntityJPA();
+        Cardapio cardapioDomain = mock(Cardapio.class);
 
-        // When
-        Optional<Cardapio> result = cardapioGateway.buscarPorId(id);
+        when(repository.findById(id)).thenReturn(Optional.of(entity));
+        when(mapper.toDomain(entity)).thenReturn(cardapioDomain);
 
-        // Then
+        Optional<Cardapio> result = gateway.buscarPorId(id);
+
         assertTrue(result.isPresent());
-        assertEquals(cardapio, result.get());
-        verify(repository, times(1)).findById(id);
-        verify(mapper, times(1)).toDomain(cardapioEntity);
+        assertEquals(cardapioDomain, result.get());
     }
 
     @Test
-    void deveBuscarPorId_quandoNaoEncontrado() {
-        // Given
-        Long id = 99L;
+    void deveRetornarVazioAoBuscarPorIdInexistente() {
+        Long id = 1L;
+
         when(repository.findById(id)).thenReturn(Optional.empty());
 
-        // When
-        Optional<Cardapio> result = cardapioGateway.buscarPorId(id);
+        Optional<Cardapio> result = gateway.buscarPorId(id);
 
-        // Then
-        assertFalse(result.isPresent());
-        verify(repository, times(1)).findById(id);
+        assertTrue(result.isEmpty());
         verify(mapper, never()).toDomain(any());
     }
 
     @Test
     void deveBuscarTodosPorRestauranteId() {
-        // Given
         Long restauranteId = 1L;
-        List<CardapioEntityJPA> entityList = Collections.singletonList(cardapioEntity);
-        when(repository.findAllByRestaurante_RestauranteId(restauranteId)).thenReturn(entityList);
-        when(mapper.toDomain(cardapioEntity)).thenReturn(cardapio);
+        CardapioEntityJPA entity1 = new CardapioEntityJPA();
+        CardapioEntityJPA entity2 = new CardapioEntityJPA();
+        Cardapio cardapioDomain1 = mock(Cardapio.class);
+        Cardapio cardapioDomain2 = mock(Cardapio.class);
 
-        // When
-        List<Cardapio> result = cardapioGateway.buscarTodosPorRestauranteId(restauranteId);
+        when(repository.findAllByRestaurante_RestauranteId(restauranteId)).thenReturn(List.of(entity1, entity2));
+        when(mapper.toDomain(entity1)).thenReturn(cardapioDomain1);
+        when(mapper.toDomain(entity2)).thenReturn(cardapioDomain2);
 
-        // Then
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        assertEquals(1, result.size());
-        assertEquals(cardapio, result.get(0));
-        verify(repository, times(1)).findAllByRestaurante_RestauranteId(restauranteId);
-        verify(mapper, times(1)).toDomain(cardapioEntity);
+        List<Cardapio> result = gateway.buscarTodosPorRestauranteId(restauranteId);
+
+        assertEquals(2, result.size());
+        assertTrue(result.containsAll(List.of(cardapioDomain1, cardapioDomain2)));
     }
 
     @Test
     void deveBuscarTodos() {
-        // Given
-        List<CardapioEntityJPA> entityList = Collections.singletonList(cardapioEntity);
-        when(repository.findAll()).thenReturn(entityList);
-        when(mapper.toDomain(cardapioEntity)).thenReturn(cardapio);
+        CardapioEntityJPA entity1 = new CardapioEntityJPA();
+        CardapioEntityJPA entity2 = new CardapioEntityJPA();
+        Cardapio cardapioDomain1 = mock(Cardapio.class);
+        Cardapio cardapioDomain2 = mock(Cardapio.class);
 
-        // When
-        List<Cardapio> result = cardapioGateway.buscarTodos();
+        when(repository.findAll()).thenReturn(List.of(entity1, entity2));
+        when(mapper.toDomain(entity1)).thenReturn(cardapioDomain1);
+        when(mapper.toDomain(entity2)).thenReturn(cardapioDomain2);
 
-        // Then
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        assertEquals(1, result.size());
-        assertEquals(cardapio, result.get(0));
-        verify(repository, times(1)).findAll();
-        verify(mapper, times(1)).toDomain(cardapioEntity);
+        List<Cardapio> result = gateway.buscarTodos();
+
+        assertEquals(2, result.size());
+        assertTrue(result.containsAll(List.of(cardapioDomain1, cardapioDomain2)));
     }
 
     @Test
     void deveDeletarPorId() {
-        // Given
         Long id = 1L;
-        doNothing().when(repository).deleteById(id);
 
-        // When
-        cardapioGateway.deletarPorId(id);
+        gateway.deletarPorId(id);
 
-        // Then
-        verify(repository, times(1)).deleteById(id);
+        verify(repository).deleteById(id);
     }
 }

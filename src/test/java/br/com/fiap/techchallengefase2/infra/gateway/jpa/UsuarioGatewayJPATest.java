@@ -4,7 +4,6 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.mapper.UsuarioMapperJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.UsuarioRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,153 +27,140 @@ class UsuarioGatewayJPATest {
     private UsuarioMapperJPA usuarioMapperJPA;
 
     @InjectMocks
-    private UsuarioGatewayJPA usuarioGateway;
-
-    private UsuarioBase usuarioBase;
-    private UsuarioEntityJPA usuarioEntity;
-    private final Long usuarioId = 1L;
-
-    @BeforeEach
-    void setUp() {
-        // Como UsuarioBase é abstrata, podemos mocká-la para os testes
-        usuarioBase = mock(UsuarioBase.class);
-        usuarioEntity = new UsuarioEntityJPA();
-        usuarioEntity.setUsuarioId(usuarioId);
-        usuarioEntity.setLogin("testuser");
-        usuarioEntity.setEmail("test@example.com");
-    }
+    private UsuarioGatewayJPA gateway;
 
     @Test
-    void deveBuscarPorId_quandoEncontrado() {
-        // Given
-        when(repository.findByIdWithRelacionamentos(usuarioId)).thenReturn(Optional.of(usuarioEntity));
-        when(usuarioMapperJPA.toDomain(usuarioEntity)).thenReturn(usuarioBase);
+    void deveBuscarPorIdComSucesso() {
+        Long id = 1L;
+        UsuarioEntityJPA entity = new UsuarioEntityJPA();
+        UsuarioBase domain = mock(UsuarioBase.class);
 
-        // When
-        Optional<UsuarioBase> result = usuarioGateway.buscarPorId(usuarioId);
+        when(repository.findByIdWithRelacionamentos(id)).thenReturn(Optional.of(entity));
+        when(usuarioMapperJPA.toDomain(entity)).thenReturn(domain);
 
-        // Then
+        Optional<UsuarioBase> result = gateway.buscarPorId(id);
+
         assertTrue(result.isPresent());
-        assertEquals(usuarioBase, result.get());
-        verify(repository, times(1)).findByIdWithRelacionamentos(usuarioId);
-        verify(usuarioMapperJPA, times(1)).toDomain(usuarioEntity);
+        assertEquals(domain, result.get());
     }
 
     @Test
-    void deveBuscarPorId_quandoNaoEncontrado() {
-        // Given
-        when(repository.findByIdWithRelacionamentos(usuarioId)).thenReturn(Optional.empty());
+    void deveRetornarVazioAoBuscarPorIdInexistente() {
+        Long id = 1L;
+        when(repository.findByIdWithRelacionamentos(id)).thenReturn(Optional.empty());
 
-        // When
-        Optional<UsuarioBase> result = usuarioGateway.buscarPorId(usuarioId);
+        Optional<UsuarioBase> result = gateway.buscarPorId(id);
 
-        // Then
-        assertFalse(result.isPresent());
-        verify(repository, times(1)).findByIdWithRelacionamentos(usuarioId);
+        assertTrue(result.isEmpty());
         verify(usuarioMapperJPA, never()).toDomain(any());
     }
 
     @Test
     void deveDeletarPorId() {
-        // Given
-        doNothing().when(repository).deleteById(usuarioId);
+        Long id = 1L;
 
-        // When
-        usuarioGateway.deletarPorId(usuarioId);
+        gateway.deletarPorId(id);
 
-        // Then
-        verify(repository, times(1)).deleteById(usuarioId);
+        verify(repository).deleteById(id);
     }
 
     @Test
-    void deveSalvarUsuario() {
-        // Given
-        when(usuarioMapperJPA.toEntity(usuarioBase)).thenReturn(usuarioEntity);
-        when(repository.save(usuarioEntity)).thenReturn(usuarioEntity);
-        when(usuarioMapperJPA.toDomain(usuarioEntity)).thenReturn(usuarioBase);
+    void deveSalvarUsuarioComSucesso() {
+        UsuarioBase inputDomain = mock(UsuarioBase.class);
+        UsuarioEntityJPA entityToSave = new UsuarioEntityJPA();
+        UsuarioEntityJPA savedEntity = new UsuarioEntityJPA();
+        UsuarioBase outputDomain = mock(UsuarioBase.class);
 
-        // When
-        UsuarioBase savedUsuario = usuarioGateway.salvar(usuarioBase);
+        when(usuarioMapperJPA.toEntity(inputDomain)).thenReturn(entityToSave);
+        when(repository.save(entityToSave)).thenReturn(savedEntity);
+        when(usuarioMapperJPA.toDomain(savedEntity)).thenReturn(outputDomain);
 
-        // Then
-        assertNotNull(savedUsuario);
-        assertEquals(usuarioBase, savedUsuario);
-        verify(usuarioMapperJPA, times(1)).toEntity(usuarioBase);
-        verify(repository, times(1)).save(usuarioEntity);
-        verify(usuarioMapperJPA, times(1)).toDomain(usuarioEntity);
+        UsuarioBase result = gateway.salvar(inputDomain);
+
+        assertEquals(outputDomain, result);
+        verify(repository).save(entityToSave);
     }
 
     @Test
-    void deveRetornarTrue_quandoExisteUsuarioComLogin() {
-        // Given
-        String login = "testuser";
-        when(repository.findByLogin(login)).thenReturn(Optional.of(usuarioEntity));
+    void deveRetornarVerdadeiroSeUsuarioExisteComLogin() {
+        String login = "admin";
+        when(repository.findByLogin(login)).thenReturn(Optional.of(new UsuarioEntityJPA()));
 
-        // When
-        boolean result = usuarioGateway.existeUsuarioComLogin(login);
+        boolean result = gateway.existeUsuarioComLogin(login);
 
-        // Then
         assertTrue(result);
-        verify(repository, times(1)).findByLogin(login);
     }
 
     @Test
-    void deveRetornarFalse_quandoNaoExisteUsuarioComLogin() {
-        // Given
-        String login = "nonexistentuser";
+    void deveRetornarFalsoSeUsuarioNaoExisteComLogin() {
+        String login = "admin";
         when(repository.findByLogin(login)).thenReturn(Optional.empty());
 
-        // When
-        boolean result = usuarioGateway.existeUsuarioComLogin(login);
+        boolean result = gateway.existeUsuarioComLogin(login);
 
-        // Then
         assertFalse(result);
-        verify(repository, times(1)).findByLogin(login);
     }
 
     @Test
-    void deveRetornarTrue_quandoExisteUsuarioComEmail() {
-        // Given
-        String email = "test@example.com";
-        when(repository.findByEmail(email)).thenReturn(Optional.of(usuarioEntity));
+    void deveRetornarVerdadeiroSeUsuarioExisteComEmail() {
+        String email = "teste@teste.com";
+        when(repository.findByEmail(email)).thenReturn(Optional.of(new UsuarioEntityJPA()));
 
-        // When
-        boolean result = usuarioGateway.existeUsuarioComEmail(email);
+        boolean result = gateway.existeUsuarioComEmail(email);
 
-        // Then
         assertTrue(result);
-        verify(repository, times(1)).findByEmail(email);
     }
 
     @Test
-    void deveRetornarFalse_quandoNaoExisteUsuarioComEmail() {
-        // Given
-        String email = "nonexistent@example.com";
+    void deveRetornarFalsoSeUsuarioNaoExisteComEmail() {
+        String email = "teste@teste.com";
         when(repository.findByEmail(email)).thenReturn(Optional.empty());
 
-        // When
-        boolean result = usuarioGateway.existeUsuarioComEmail(email);
+        boolean result = gateway.existeUsuarioComEmail(email);
 
-        // Then
         assertFalse(result);
-        verify(repository, times(1)).findByEmail(email);
     }
 
     @Test
     void deveBuscarTodos() {
-        // Given
-        when(repository.findAllWithRelacionamentos()).thenReturn(Collections.singletonList(usuarioEntity));
-        when(usuarioMapperJPA.toDomain(usuarioEntity)).thenReturn(usuarioBase);
+        UsuarioEntityJPA entity1 = new UsuarioEntityJPA();
+        UsuarioEntityJPA entity2 = new UsuarioEntityJPA();
+        UsuarioBase domain1 = mock(UsuarioBase.class);
+        UsuarioBase domain2 = mock(UsuarioBase.class);
 
-        // When
-        Collection<UsuarioBase> result = usuarioGateway.buscarTodos();
+        when(repository.findAllWithRelacionamentos()).thenReturn(List.of(entity1, entity2));
+        when(usuarioMapperJPA.toDomain(entity1)).thenReturn(domain1);
+        when(usuarioMapperJPA.toDomain(entity2)).thenReturn(domain2);
 
-        // Then
-        assertNotNull(result);
-        assertFalse(result.isEmpty());
-        assertEquals(1, result.size());
-        assertTrue(result.contains(usuarioBase));
-        verify(repository, times(1)).findAllWithRelacionamentos();
-        verify(usuarioMapperJPA, times(1)).toDomain(usuarioEntity);
+        Collection<UsuarioBase> result = gateway.buscarTodos();
+
+        assertEquals(2, result.size());
+        assertTrue(result.containsAll(List.of(domain1, domain2)));
+    }
+
+    @Test
+    void deveBuscarPorLoginComSucesso() {
+        String login = "admin";
+        UsuarioEntityJPA entity = new UsuarioEntityJPA();
+        UsuarioBase domain = mock(UsuarioBase.class);
+
+        when(repository.findByLogin(login)).thenReturn(Optional.of(entity));
+        when(usuarioMapperJPA.toDomain(entity)).thenReturn(domain);
+
+        Optional<UsuarioBase> result = gateway.buscarPorLogin(login);
+
+        assertTrue(result.isPresent());
+        assertEquals(domain, result.get());
+    }
+
+    @Test
+    void deveRetornarVazioAoBuscarPorLoginInexistente() {
+        String login = "admin";
+        when(repository.findByLogin(login)).thenReturn(Optional.empty());
+
+        Optional<UsuarioBase> result = gateway.buscarPorLogin(login);
+
+        assertTrue(result.isEmpty());
+        verify(usuarioMapperJPA, never()).toDomain(any());
     }
 }

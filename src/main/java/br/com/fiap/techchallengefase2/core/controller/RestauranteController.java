@@ -5,7 +5,7 @@ import br.com.fiap.techchallengefase2.core.dto.restaurante.DadosRestauranteInput
 import br.com.fiap.techchallengefase2.core.dto.restaurante.RestauranteOutputDTO;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.atualizar.AtualizarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorId;
-import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarRestaurantePorUsuarioId;
+import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.idusuario.BuscarRestaurantePorUsuarioId;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.todos.BuscarTodosRestaurantes;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.criar.CriarRestaurante;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.deletar.DeletarRestaurante;

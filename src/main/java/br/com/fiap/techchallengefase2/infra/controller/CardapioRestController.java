@@ -22,7 +22,7 @@ public class CardapioRestController {
 
     @PostMapping("/restaurantes/{restauranteId}")
     public ResponseEntity<Long> criar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long restauranteId,
             @RequestBody CriarCardapioJson json) {
 
@@ -34,7 +34,7 @@ public class CardapioRestController {
 
     @PutMapping("/{cardapioId}")
     public ResponseEntity<Long> atualizar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long cardapioId,
             @RequestBody AtualizarCardapioJson json) {
 
@@ -54,7 +54,7 @@ public class CardapioRestController {
 
     @GetMapping("/restaurantes/{restauranteId}")
     public ResponseEntity<List<CardapioOutputDTO>> buscarTodosPorRestaurante(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long restauranteId) {
 
         var output = cardapioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId);
@@ -63,7 +63,7 @@ public class CardapioRestController {
 
     @DeleteMapping("/{cardapioId}")
     public ResponseEntity<Void> deletar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long cardapioId) {
 
         cardapioController.deletarPorId(usuarioLogadoId, cardapioId);

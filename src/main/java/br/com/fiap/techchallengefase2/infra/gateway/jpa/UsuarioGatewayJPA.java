@@ -52,5 +52,8 @@ public class UsuarioGatewayJPA implements UsuarioGateway {
                 .collect(Collectors.toList());
     }
 
-
+    @Override
+    public Optional<UsuarioBase> buscarPorLogin(String login) {
+        return repository.findByLogin(login).map(usuarioMapperJPA::toDomain);
+    }
 }

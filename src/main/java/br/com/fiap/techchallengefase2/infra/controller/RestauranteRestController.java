@@ -20,7 +20,7 @@ public class RestauranteRestController {
 
     @PostMapping
     public ResponseEntity<Long> criar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody RestauranteJson json) {
 
         DadosRestauranteInputDTO input = new DadosRestauranteInputDTO(
@@ -36,7 +36,7 @@ public class RestauranteRestController {
 
     @PutMapping("/{restauranteId}")
     public ResponseEntity<Long> atualizar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long restauranteId,
             @RequestBody RestauranteJson json) {
 
@@ -53,7 +53,7 @@ public class RestauranteRestController {
 
     @GetMapping("/{restauranteId}")
     public ResponseEntity<RestauranteOutputDTO> buscarPorId(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long restauranteId) {
 
         var restaurante = restauranteController.buscarPorId(usuarioLogadoId, restauranteId);
@@ -62,7 +62,7 @@ public class RestauranteRestController {
 
     @GetMapping("/usuario")
     public ResponseEntity<List<RestauranteOutputDTO>> buscarTodosPorUsuario(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId) {
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId) {
 
         var restaurantes = restauranteController.buscarTodosPorUsuarioId(usuarioLogadoId);
         return ResponseEntity.ok(restaurantes);
@@ -76,7 +76,7 @@ public class RestauranteRestController {
 
     @DeleteMapping("/{restauranteId}")
     public ResponseEntity<Void> deletar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long restauranteId) {
 
         restauranteController.deletarPorId(usuarioLogadoId, restauranteId);

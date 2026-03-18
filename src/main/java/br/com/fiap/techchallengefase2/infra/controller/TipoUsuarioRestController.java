@@ -21,7 +21,7 @@ public class TipoUsuarioRestController {
 
     @PostMapping
     public ResponseEntity<Long> criar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody TipoUsuarioJson json
     ) {
 
@@ -36,7 +36,7 @@ public class TipoUsuarioRestController {
 
     @PutMapping("/{tipoUsuarioId}")
     public ResponseEntity<Long> atualizar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long tipoUsuarioId,
             @RequestBody TipoUsuarioJson json
     ) {
@@ -52,7 +52,7 @@ public class TipoUsuarioRestController {
 
     @GetMapping("/{tipoUsuarioId}")
     public ResponseEntity<TipoUsuarioOutputDTO> buscarPorId(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long tipoUsuarioId) {
 
         var output = tipoUsuarioController.buscarPorId(usuarioLogadoId, tipoUsuarioId);
@@ -61,7 +61,7 @@ public class TipoUsuarioRestController {
 
     @GetMapping("/restaurantes/{restauranteId}")
     public ResponseEntity<List<TipoUsuarioOutputDTO>> buscarTodosPorRestaurante(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long restauranteId) {
 
         var output = tipoUsuarioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId);
@@ -70,7 +70,7 @@ public class TipoUsuarioRestController {
 
     @GetMapping("/usuarios/{usuarioId}")
     public ResponseEntity<List<TipoUsuarioOutputDTO>> buscarTodosPorUsuario(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long usuarioId) {
 
         var output = tipoUsuarioController.buscarTodosPorUsuario(usuarioLogadoId, usuarioId);
@@ -79,7 +79,7 @@ public class TipoUsuarioRestController {
 
     @DeleteMapping("/{tipoUsuarioId}")
     public ResponseEntity<Void> deletar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long tipoUsuarioId) {
 
         tipoUsuarioController.deletarTipoUsuario(usuarioLogadoId, tipoUsuarioId);

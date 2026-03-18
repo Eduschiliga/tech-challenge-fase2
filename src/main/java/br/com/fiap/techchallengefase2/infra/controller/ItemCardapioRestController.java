@@ -21,7 +21,7 @@ public class ItemCardapioRestController {
 
     @PostMapping("/cardapios/{cardapioId}")
     public ResponseEntity<Long> criar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long cardapioId,
             @RequestBody ItemCardapioJson json) {
 
@@ -39,7 +39,7 @@ public class ItemCardapioRestController {
 
     @PutMapping("/{itemCardapioId}")
     public ResponseEntity<Long> atualizar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long itemCardapioId,
             @RequestBody ItemCardapioJson json) {
 
@@ -57,7 +57,7 @@ public class ItemCardapioRestController {
 
     @GetMapping("/{itemCardapioId}")
     public ResponseEntity<ItemCardapioOutputDTO> buscarPorId(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long itemCardapioId) {
 
         var output = itemCardapioController.buscarPorId(usuarioLogadoId, itemCardapioId);
@@ -66,7 +66,7 @@ public class ItemCardapioRestController {
 
     @GetMapping("/cardapios/{cardapioId}")
     public ResponseEntity<List<ItemCardapioOutputDTO>> buscarTodosPorCardapio(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long cardapioId) {
 
         var output = itemCardapioController.buscarTodosPorCardapio(usuarioLogadoId, cardapioId);
@@ -75,7 +75,7 @@ public class ItemCardapioRestController {
 
     @DeleteMapping("/{itemCardapioId}")
     public ResponseEntity<Void> deletar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long itemCardapioId) {
 
         itemCardapioController.deletarPorId(usuarioLogadoId, itemCardapioId);

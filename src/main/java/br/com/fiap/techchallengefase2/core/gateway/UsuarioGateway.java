@@ -18,4 +18,6 @@ public interface UsuarioGateway {
     boolean existeUsuarioComEmail(String email);
 
     Collection<UsuarioBase> buscarTodos();
+
+    Optional<UsuarioBase> buscarPorLogin(String login);
 }

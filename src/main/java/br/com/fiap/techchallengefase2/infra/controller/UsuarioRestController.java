@@ -42,7 +42,7 @@ public class UsuarioRestController {
 
     @PutMapping("/{usuarioId}")
     public ResponseEntity<UsuarioOutputDTO> atualizar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody AtualizarUsuarioJson json
     ) {
         DadosUsuarioInputDTO input = new DadosUsuarioInputDTO(
@@ -54,7 +54,7 @@ public class UsuarioRestController {
 
     @GetMapping("/{usuarioId}")
     public ResponseEntity<UsuarioOutputDTO> buscarPorId(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long usuarioId
     ) {
         var usuarioDTO = usuarioController.buscarUsuarioPorId(usuarioLogadoId, usuarioId);
@@ -62,14 +62,14 @@ public class UsuarioRestController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioOutputDTO>> buscarTodos(@RequestHeader("x-usuario-logado-id") Long usuarioLogadoId) {
+    public ResponseEntity<List<UsuarioOutputDTO>> buscarTodos(@RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId) {
         List<UsuarioOutputDTO> usuarios = usuarioController.buscarTodosUsuarios(usuarioLogadoId);
         return ResponseEntity.ok(usuarios);
     }
 
     @DeleteMapping("/{usuarioId}")
     public ResponseEntity<Void> deletar(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @PathVariable Long usuarioId
     ) {
         usuarioController.deletarUsuarioPorId(usuarioLogadoId, usuarioId);
@@ -78,7 +78,7 @@ public class UsuarioRestController {
 
     @PatchMapping("atribuir")
     public ResponseEntity<Void> atribuirTipoUsuario(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody VincularUsuarioJson json
     ) {
         VincularUsuarioInputDTO input = VincularUsuarioJson.fromInput(json.tipoUsuarioId(), json.usuarioParaAtribuirId());
@@ -88,7 +88,7 @@ public class UsuarioRestController {
 
     @PatchMapping("remover")
     public ResponseEntity<Void> removerTipoUsuario(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody DesvincularUsuarioJson json
     ) {
         DesvincularUsuarioInputDTO input = DesvincularUsuarioJson.fromInput(json.tipoUsuarioId(), json.usuarioParaAtribuirId());
@@ -98,7 +98,7 @@ public class UsuarioRestController {
 
     @PatchMapping("senha")
     public ResponseEntity<Void> atualizarSenhaUsuario(
-            @RequestHeader("x-usuario-logado-id") Long usuarioLogadoId,
+            @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody AtualizarSenhaJson json
     ) {
         AtualizarSenhaInputDTO input = AtualizarSenhaJson.fromInput(json.novaSenha(), json.senhaAtual());

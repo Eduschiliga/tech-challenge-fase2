@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha;
 
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
-import br.com.fiap.techchallengefase2.core.exception.NovaSenhaInvalidaException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.NovaSenhaInvalidaException;
 
 import java.util.Objects;
 

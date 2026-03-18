@@ -2,7 +2,7 @@ package br.com.fiap.techchallengefase2.core.usecase.tipousuario.consultar.todos;
 
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
-import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;

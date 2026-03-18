@@ -1,4 +1,6 @@
-package br.com.fiap.techchallengefase2.core.exception;
+package br.com.fiap.techchallengefase2.core.exception.usuario;
+
+import br.com.fiap.techchallengefase2.core.exception.SystemBaseException;
 
 import java.io.Serial;
 

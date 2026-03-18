@@ -1,6 +1,6 @@
 package br.com.fiap.techchallengefase2.infra.gateway.exception;
 
-import br.com.fiap.techchallengefase2.core.exception.SystemBaseException;
+import br.com.fiap.techchallengefase2.infra.gateway.exception.usuario.SystemBaseException;
 
 public class UsuarioNaoEncontradoException extends SystemBaseException {
     private static final long serialVersionUID = 1L;

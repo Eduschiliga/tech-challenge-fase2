@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.core.usecase.cardapio.consultar.id;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
-import br.com.fiap.techchallengefase2.core.exception.CardapioNaoEncontraoException;
+import br.com.fiap.techchallengefase2.core.exception.cardapio.CardapioNaoEncontraoException;
 import br.com.fiap.techchallengefase2.core.gateway.CardapioGateway;
 import lombok.RequiredArgsConstructor;
 

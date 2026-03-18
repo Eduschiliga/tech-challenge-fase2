@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha;
 
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
-import br.com.fiap.techchallengefase2.core.exception.SenhaAtualIncorretaException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.SenhaAtualIncorretaException;
 
 public class ValidaSenhaAtual implements RuleSenhaUsuario {
     @Override

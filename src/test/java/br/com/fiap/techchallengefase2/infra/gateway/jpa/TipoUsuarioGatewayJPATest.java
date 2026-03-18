@@ -6,7 +6,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.entity.tipousuario.TipoUs
 import br.com.fiap.techchallengefase2.infra.gateway.db.mapper.TipoUsuarioMapperJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.TipoUsuarioRepository;
-import br.com.fiap.techchallengefase2.infra.gateway.exception.RestauranteNaoEncontradoException;
+import br.com.fiap.techchallengefase2.infra.gateway.exception.restaurante.RestauranteNaoEncontradoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

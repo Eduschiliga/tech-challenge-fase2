@@ -4,7 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory;
 import br.com.fiap.techchallengefase2.core.domain.tipousuario.TipoUsuario;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.core.exception.TipoUsuarioNaoEncontradoException;
+import br.com.fiap.techchallengefase2.core.exception.tipousuario.TipoUsuarioNaoEncontradoException;
 import br.com.fiap.techchallengefase2.core.gateway.TipoUsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;

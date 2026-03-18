@@ -1,6 +1,6 @@
 package br.com.fiap.techchallengefase2.core.domain.usuario;
 
-import br.com.fiap.techchallengefase2.core.exception.CategoriaNaoEncontradaException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.CategoriaNaoEncontradaException;
 import lombok.Getter;
 
 import java.util.Arrays;

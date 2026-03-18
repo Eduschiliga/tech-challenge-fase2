@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.infra.gateway.jpa;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
-import br.com.fiap.techchallengefase2.core.exception.RestauranteNaoEncontradoException;
+import br.com.fiap.techchallengefase2.core.exception.restaurante.RestauranteNaoEncontradoException;
 import br.com.fiap.techchallengefase2.core.gateway.CardapioGateway;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.CardapioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;

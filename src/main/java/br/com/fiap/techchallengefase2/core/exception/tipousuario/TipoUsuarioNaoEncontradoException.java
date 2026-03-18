@@ -1,4 +1,6 @@
-package br.com.fiap.techchallengefase2.core.exception;
+package br.com.fiap.techchallengefase2.core.exception.tipousuario;
+
+import br.com.fiap.techchallengefase2.core.exception.SystemBaseException;
 
 public class TipoUsuarioNaoEncontradoException extends SystemBaseException {
     private static final long serialVersionUID = 1L;

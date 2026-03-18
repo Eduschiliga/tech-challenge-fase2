@@ -7,7 +7,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.ItemCa
 import br.com.fiap.techchallengefase2.infra.gateway.db.mapper.ItemCardapioMapperJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.CardapioRepository;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.ItemCardapioRepository;
-import br.com.fiap.techchallengefase2.infra.gateway.exception.CardapioNaoEncontradoException;
+import br.com.fiap.techchallengefase2.infra.gateway.exception.cardapio.CardapioNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

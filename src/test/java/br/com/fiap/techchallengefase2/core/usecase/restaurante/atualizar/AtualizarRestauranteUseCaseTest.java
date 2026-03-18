@@ -2,7 +2,7 @@ package br.com.fiap.techchallengefase2.core.usecase.restaurante.atualizar;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.core.dto.restaurante.DadosRestauranteInputDTO;
-import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.RestauranteGateway;
 import br.com.fiap.techchallengefase2.core.usecase.restaurante.consultar.id.BuscarRestaurantePorIdUseCase;
 import org.junit.jupiter.api.DisplayName;

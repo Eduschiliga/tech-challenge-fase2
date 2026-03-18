@@ -1,6 +1,6 @@
 package br.com.fiap.techchallengefase2.core.domain.usuario;
 
-import br.com.fiap.techchallengefase2.core.exception.CategoriaInvalidaException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.CategoriaInvalidaException;
 
 import java.util.ArrayList;
 

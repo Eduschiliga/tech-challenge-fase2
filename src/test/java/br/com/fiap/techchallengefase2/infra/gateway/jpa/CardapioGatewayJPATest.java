@@ -1,10 +1,12 @@
 package br.com.fiap.techchallengefase2.infra.gateway.jpa;
 
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
+import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.CardapioEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.entity.restaurante.RestauranteEntityJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.mapper.CardapioMapperJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.CardapioRepository;
+import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,6 +30,9 @@ class CardapioGatewayJPATest {
     @Mock
     private CardapioMapperJPA mapper;
 
+    @Mock
+    private RestauranteRepository restauranteRepository;
+
     @InjectMocks
     private CardapioGatewayJPA cardapioGateway;
 
@@ -37,6 +42,9 @@ class CardapioGatewayJPATest {
 
     @BeforeEach
     void setUp() {
+        restauranteEntityJPA = new RestauranteEntityJPA();
+        restauranteEntityJPA.setRestauranteId(1L);
+
         cardapio = new Cardapio(1L, null, null, "Cardápio Teste");
         cardapioEntity = new CardapioEntityJPA();
         cardapioEntity.setId(1L);
@@ -46,6 +54,9 @@ class CardapioGatewayJPATest {
     void deveSalvarCardapio() {
         // Given
         when(mapper.toEntity(cardapio)).thenReturn(cardapioEntity);
+        when(restauranteRepository.findById(1L)).thenReturn(Optional.ofNullable(restauranteEntityJPA));
+        when(repository.save(cardapioEntity)).thenReturn(cardapioEntity);
+
         when(repository.save(cardapioEntity)).thenReturn(cardapioEntity);
 
         // When

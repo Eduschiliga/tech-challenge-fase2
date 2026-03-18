@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.core.exception.EmailInvalidoException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.EmailInvalidoException;
 
 import java.util.Objects;
 import java.util.regex.Pattern;

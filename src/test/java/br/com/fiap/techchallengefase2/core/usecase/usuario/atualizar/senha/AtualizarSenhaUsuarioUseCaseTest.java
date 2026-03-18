@@ -4,7 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
-import br.com.fiap.techchallengefase2.core.exception.SenhaAtualIncorretaException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.SenhaAtualIncorretaException;
 import br.com.fiap.techchallengefase2.core.gateway.CodificadorSenhaGateway;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.RuleSenhaUsuario;

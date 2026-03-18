@@ -1,8 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.Cliente;
-import br.com.fiap.techchallengefase2.core.exception.DadosUsuarioInvalidosException;
-import br.com.fiap.techchallengefase2.core.rule.dados.ValidaSePossuiLogin;
+import br.com.fiap.techchallengefase2.core.exception.usuario.DadosUsuarioInvalidosException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Base64;
 
 @Component
-public class TokenGatewayJWT implements TokenGateway {
+public class TokenGatewayBase64 implements TokenGateway {
 
     // Simple Base64 token for this usecase
     @Override

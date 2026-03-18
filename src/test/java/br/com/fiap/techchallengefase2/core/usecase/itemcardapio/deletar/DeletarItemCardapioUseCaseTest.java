@@ -4,7 +4,7 @@ import br.com.fiap.techchallengefase2.core.domain.restaurante.Cardapio;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.ItemCardapio;
 import br.com.fiap.techchallengefase2.core.domain.restaurante.Restaurante;
 import br.com.fiap.techchallengefase2.core.domain.usuario.Dono;
-import br.com.fiap.techchallengefase2.core.exception.UsuarioNaoDonoException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.UsuarioNaoDonoException;
 import br.com.fiap.techchallengefase2.core.gateway.ItemCardapioGateway;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDono;
 import br.com.fiap.techchallengefase2.core.rule.dono.ValidaSeUsuarioDonoRestaurante;

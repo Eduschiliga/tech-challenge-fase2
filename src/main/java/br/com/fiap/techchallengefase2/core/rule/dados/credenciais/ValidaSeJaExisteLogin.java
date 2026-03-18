@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.dados.credenciais;
 
 import br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioBase;
-import br.com.fiap.techchallengefase2.core.exception.LoginJaCadastradoException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.LoginJaCadastradoException;
 import br.com.fiap.techchallengefase2.core.gateway.UsuarioGateway;
 
 public class ValidaSeJaExisteLogin implements RuleCredenciaisUsuario {

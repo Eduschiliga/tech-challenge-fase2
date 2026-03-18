@@ -1,8 +1,7 @@
 package br.com.fiap.techchallengefase2.core.rule.senha;
 
 import br.com.fiap.techchallengefase2.core.dto.usuario.AtualizarSenhaInputDTO;
-import br.com.fiap.techchallengefase2.core.exception.NovaSenhaInvalidaException;
-import br.com.fiap.techchallengefase2.core.exception.SenhaAtualIncorretaException;
+import br.com.fiap.techchallengefase2.core.exception.usuario.SenhaAtualIncorretaException;
 import br.com.fiap.techchallengefase2.core.rule.dados.credenciais.senha.ValidaSenhaAtual;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

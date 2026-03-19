@@ -76,7 +76,7 @@ public class UsuarioRestController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("atribuir")
+    @PostMapping("tipos-usuario")
     public ResponseEntity<Void> atribuirTipoUsuario(
             @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody VincularUsuarioJson json
@@ -86,7 +86,7 @@ public class UsuarioRestController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("remover")
+    @DeleteMapping("tipos-usuario")
     public ResponseEntity<Void> removerTipoUsuario(
             @RequestHeader(value = "x-usuario-logado-id", required = false) Long usuarioLogadoId,
             @RequestBody DesvincularUsuarioJson json

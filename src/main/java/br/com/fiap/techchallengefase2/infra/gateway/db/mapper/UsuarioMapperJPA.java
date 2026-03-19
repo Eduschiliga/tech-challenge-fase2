@@ -12,6 +12,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.entity.usuario.UsuarioEnt
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,11 +27,11 @@ public class UsuarioMapperJPA {
 
     public UsuarioBase toDomain(UsuarioEntityJPA entity) {
         List<TipoUsuario> tipos = entity.getTipoUsuarioList() != null ?
-                entity.getTipoUsuarioList().stream().map(tipoUsuarioMapperJPA::toDomain).toList() : List.of();
+                entity.getTipoUsuarioList().stream().map(tipoUsuarioMapperJPA::toDomain).collect(Collectors.toCollection(ArrayList::new)) : List.of();
 
         if (entity.getCategoria() == CategoriaUsuario.DONO) {
             List<Restaurante> restaurantes = entity.getRestauranteList() != null ?
-                    entity.getRestauranteList().stream().map(restauranteMapperJPA::toDomain).toList() : List.of();
+                    entity.getRestauranteList().stream().map(restauranteMapperJPA::toDomain).collect(Collectors.toCollection(ArrayList::new)) : List.of();
 
             return new Dono(
                     entity.getUsuarioId(),

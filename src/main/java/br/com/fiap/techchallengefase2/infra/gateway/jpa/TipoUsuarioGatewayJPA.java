@@ -11,8 +11,10 @@ import br.com.fiap.techchallengefase2.infra.gateway.exception.restaurante.Restau
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -48,6 +50,6 @@ public class TipoUsuarioGatewayJPA implements TipoUsuarioGateway {
     public List<TipoUsuario> buscarTodosPorRestauranteId(Long restauranteId) {
         return repository.findAllByRestaurante_RestauranteId(restauranteId).stream()
                 .map(mapper::toDomain)
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

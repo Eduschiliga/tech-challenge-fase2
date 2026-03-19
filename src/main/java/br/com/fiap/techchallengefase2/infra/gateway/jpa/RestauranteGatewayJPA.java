@@ -11,8 +11,10 @@ import br.com.fiap.techchallengefase2.infra.gateway.exception.UsuarioNaoEncontra
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -43,14 +45,14 @@ public class RestauranteGatewayJPA implements RestauranteGateway {
     public List<Restaurante> buscarTodosPorUsuarioId(Long usuarioId) {
         return repository.findAllByUsuario_UsuarioId(usuarioId).stream()
                 .map(mapper::toDomain)
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
     public List<Restaurante> buscarTodos() {
         return repository.findAll().stream()
                 .map(mapper::toDomain)
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override

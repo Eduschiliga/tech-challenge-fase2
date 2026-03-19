@@ -13,9 +13,7 @@ public class BuscarUsuarioPorIdUseCase implements BuscarUsuarioPorId {
 
     @Override
     public UsuarioBase buscarPorId(Long usuarioId) {
-        UsuarioBase usuarioBase = usuarioGateway.buscarPorId(usuarioId)
+        return usuarioGateway.buscarPorId(usuarioId)
                 .orElseThrow(UsuarioNaoEncontradoException::new);
-
-        return obterInstanciaDeAcordoComACategoria(usuarioBase);
     }
 }

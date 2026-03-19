@@ -87,27 +87,4 @@ class BuscarUsuarioPorIdUseCaseTest {
 
         assertEquals("Usuário não encontrado", exception.getMessage());
     }
-
-    @Test
-    @DisplayName("Deve lançar exceção quando a categoria for inválida")
-    void deveLancarExcecaoQuandoCategoriaInvalida() {
-        Long usuarioId = 1L;
-        UsuarioBase usuarioInvalido = new UsuarioBase(
-                usuarioId,
-                "Nome",
-                "email",
-                "login",
-                "senha",
-                "End",
-                99,
-                new ArrayList<>()
-        ) {
-        };
-
-        when(usuarioGateway.buscarPorId(usuarioId)).thenReturn(Optional.of(usuarioInvalido));
-
-        assertThrows(CategoriaInvalidaException.class, () ->
-                buscarUsuarioPorIdUseCase.buscarPorId(usuarioId)
-        );
-    }
 }

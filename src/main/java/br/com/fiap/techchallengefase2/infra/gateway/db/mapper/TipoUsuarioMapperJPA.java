@@ -8,8 +8,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface TipoUsuarioMapperJPA {
 
+    @Mapping(target = "restaurante.restauranteId", source = "restauranteId")
     TipoUsuarioEntityJPA toEntity(TipoUsuario tipoUsuario);
 
-    @Mapping(target = "restauranteId", source = "entity.restaurante.restauranteId")
+    @Mapping(target = "restauranteId", source = "restaurante.restauranteId")
     TipoUsuario toDomain(TipoUsuarioEntityJPA entity);
 }

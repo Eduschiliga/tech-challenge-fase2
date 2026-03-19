@@ -11,8 +11,10 @@ import br.com.fiap.techchallengefase2.infra.gateway.exception.cardapio.CardapioN
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -43,7 +45,7 @@ public class ItemCardapioGatewayJPA implements ItemCardapioGateway {
     public List<ItemCardapio> buscarTodosPorCardapioId(Long cardapioId) {
         return repository.findAllByCardapio_Id(cardapioId).stream()
                 .map(mapper::toDomain)
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override

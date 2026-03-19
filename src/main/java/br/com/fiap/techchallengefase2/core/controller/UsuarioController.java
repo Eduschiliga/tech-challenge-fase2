@@ -17,7 +17,9 @@ import br.com.fiap.techchallengefase2.core.usecase.usuario.tipousuario.atribuir.
 import br.com.fiap.techchallengefase2.core.usecase.usuario.tipousuario.remover.RemoverTipoUsuario;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static br.com.fiap.techchallengefase2.core.domain.usuario.UsuarioFactory.criarUsuario;
 
@@ -69,7 +71,7 @@ public class UsuarioController {
     public List<UsuarioOutputDTO> buscarTodosUsuarios(Long usuarioLogadoId) {
         return buscarTodosUsuarios.buscarTodos().stream()
                 .map(UsuarioOutputDTO::fromDomain)
-                .toList();
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public UsuarioOutputDTO buscarUsuarioPorId(Long usuarioLogadoId, Long usuarioId) {

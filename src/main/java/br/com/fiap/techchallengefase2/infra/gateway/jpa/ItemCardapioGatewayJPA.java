@@ -10,6 +10,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.repository.ItemCardapioRe
 import br.com.fiap.techchallengefase2.infra.gateway.exception.cardapio.CardapioNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ItemCardapioGatewayJPA implements ItemCardapioGateway {
     private final ItemCardapioMapperJPA mapper;
 
     @Override
+    @Transactional
     public Long salvar(ItemCardapio itemCardapio) {
         ItemCardapioEntityJPA entity = mapper.toEntity(itemCardapio);
 
@@ -49,7 +51,19 @@ public class ItemCardapioGatewayJPA implements ItemCardapioGateway {
     }
 
     @Override
+    @Transactional
     public void deletarPorId(Long itemCardapioId) {
-        repository.deleteById(itemCardapioId);
+        Optional<ItemCardapioEntityJPA> itemOpt = repository.findById(itemCardapioId);
+
+        if (itemOpt.isPresent()) {
+            ItemCardapioEntityJPA item = itemOpt.get();
+            CardapioEntityJPA cardapio = item.getCardapio();
+            
+            if (cardapio != null && cardapio.getItens() != null) {
+                cardapio.getItens().remove(item);
+            }
+
+            repository.delete(item);
+        }
     }
 }

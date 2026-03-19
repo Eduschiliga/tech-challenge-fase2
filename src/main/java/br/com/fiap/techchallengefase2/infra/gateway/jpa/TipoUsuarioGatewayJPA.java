@@ -10,6 +10,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.repository.TipoUsuarioRep
 import br.com.fiap.techchallengefase2.infra.gateway.exception.restaurante.RestauranteNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class TipoUsuarioGatewayJPA implements TipoUsuarioGateway {
     private final TipoUsuarioMapperJPA mapper;
 
     @Override
+    @Transactional
     public Long salvar(TipoUsuario tipoUsuario) {
         TipoUsuarioEntityJPA entity = mapper.toEntity(tipoUsuario);
 
@@ -42,6 +44,7 @@ public class TipoUsuarioGatewayJPA implements TipoUsuarioGateway {
     }
 
     @Override
+    @Transactional
     public void deletarPorId(Long tipoUsuarioId) {
         repository.deleteById(tipoUsuarioId);
     }

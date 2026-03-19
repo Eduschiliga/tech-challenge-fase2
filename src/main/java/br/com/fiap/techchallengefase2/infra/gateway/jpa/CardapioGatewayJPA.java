@@ -10,6 +10,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.repository.CardapioReposi
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.RestauranteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public class CardapioGatewayJPA implements CardapioGateway {
     private final RestauranteRepository restauranteRepository;
 
     @Override
+    @Transactional
     public Long salvar(Cardapio cardapio) {
         CardapioEntityJPA entity = mapper.toEntity(cardapio);
 
@@ -56,6 +58,7 @@ public class CardapioGatewayJPA implements CardapioGateway {
     }
 
     @Override
+    @Transactional
     public void deletarPorId(Long id) {
         repository.deleteById(id);
     }

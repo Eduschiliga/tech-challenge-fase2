@@ -7,6 +7,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.mapper.UsuarioMapperJPA;
 import br.com.fiap.techchallengefase2.infra.gateway.db.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -24,11 +25,13 @@ public class UsuarioGatewayJPA implements UsuarioGateway {
     }
 
     @Override
+    @Transactional
     public void deletarPorId(Long usuarioId) {
         repository.deleteById(usuarioId);
     }
 
     @Override
+    @Transactional
     public UsuarioBase salvar(UsuarioBase usuario) {
         UsuarioEntityJPA entity = usuarioMapperJPA.toEntity(usuario);
         UsuarioEntityJPA savedEntity = repository.save(entity);

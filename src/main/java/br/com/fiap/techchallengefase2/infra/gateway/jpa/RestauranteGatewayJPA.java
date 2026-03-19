@@ -10,6 +10,7 @@ import br.com.fiap.techchallengefase2.infra.gateway.db.repository.UsuarioReposit
 import br.com.fiap.techchallengefase2.infra.gateway.exception.UsuarioNaoEncontradoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class RestauranteGatewayJPA implements RestauranteGateway {
     private final RestauranteMapperJPA mapper;
 
     @Override
+    @Transactional
     public Long salvar(Restaurante restaurante) {
         RestauranteEntityJPA entity = mapper.toEntity(restaurante);
 
@@ -56,6 +58,7 @@ public class RestauranteGatewayJPA implements RestauranteGateway {
     }
 
     @Override
+    @Transactional
     public void deletarPorId(Long restauranteId) {
         repository.deleteById(restauranteId);
     }

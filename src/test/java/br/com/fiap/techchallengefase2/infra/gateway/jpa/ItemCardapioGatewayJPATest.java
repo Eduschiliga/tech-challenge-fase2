@@ -55,7 +55,7 @@ class ItemCardapioGatewayJPATest {
         );
 
         cardapioEntity = new CardapioEntityJPA();
-        cardapioEntity.setId(cardapioId);
+        cardapioEntity.setCardapioId(cardapioId);
 
         itemCardapioEntity = new ItemCardapioEntityJPA();
         itemCardapioEntity.setItemCardapioId(itemCardapioId);

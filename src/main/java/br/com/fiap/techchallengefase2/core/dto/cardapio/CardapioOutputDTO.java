@@ -15,7 +15,7 @@ public record CardapioOutputDTO(
 ) {
     public static CardapioOutputDTO fromDomain(Cardapio cardapio) {
         return new CardapioOutputDTO(
-                cardapio.getId(),
+                cardapio.getCardapioId(),
                 cardapio.getRestaurante() != null ? RestauranteOutputDTO.fromDomain(cardapio.getRestaurante()) : null,
                 cardapio.getItens() != null ? cardapio.getItens().stream().map(ItemCardapioOutputDTO::fromDomain).collect(Collectors.toList()) : null,
                 cardapio.getNome()

@@ -16,7 +16,7 @@ public class CardapioEntityJPA {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long cardapioId;
 
     @Column(nullable = false)
     private String nome;

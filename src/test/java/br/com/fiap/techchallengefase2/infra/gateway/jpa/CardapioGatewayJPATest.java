@@ -46,7 +46,7 @@ class CardapioGatewayJPATest {
         RestauranteEntityJPA restauranteEntity = new RestauranteEntityJPA();
 
         CardapioEntityJPA savedEntity = mock(CardapioEntityJPA.class);
-        when(savedEntity.getId()).thenReturn(10L);
+        when(savedEntity.getCardapioId()).thenReturn(10L);
 
         when(mapper.toEntity(cardapio)).thenReturn(entity);
         when(restauranteRepository.findById(1L)).thenReturn(Optional.of(restauranteEntity));

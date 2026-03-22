@@ -33,7 +33,7 @@ public class CardapioGatewayJPA implements CardapioGateway {
 
         entity.setRestaurante(restaurante);
 
-        return repository.save(entity).getId();
+        return repository.save(entity).getCardapioId();
     }
 
     @Override

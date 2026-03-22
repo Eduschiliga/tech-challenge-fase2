@@ -2,14 +2,13 @@ package br.com.fiap.techchallengefase2.core.domain.restaurante;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
 public class Cardapio {
-    private Long id;
+    private Long cardapioId;
     private Restaurante restaurante;
     private List<ItemCardapio> itens;
     private String nome;

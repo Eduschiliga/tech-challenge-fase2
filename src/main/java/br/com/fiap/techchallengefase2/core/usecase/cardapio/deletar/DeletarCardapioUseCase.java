@@ -30,7 +30,7 @@ public class DeletarCardapioUseCase implements DeletarCardapio {
 
         validaSeUsuarioDonoRestaurante.validar(dono, cardapio.getRestaurante().getRestauranteId());
 
-        cardapioGateway.deletarPorId(cardapio.getId());
+        cardapioGateway.deletarPorId(cardapio.getCardapioId());
     }
 
 }

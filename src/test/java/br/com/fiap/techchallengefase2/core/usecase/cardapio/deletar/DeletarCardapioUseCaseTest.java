@@ -53,7 +53,7 @@ class DeletarCardapioUseCaseTest {
         when(buscarCardapioPorIdUseCase.buscarPorId(itemCardapioId)).thenReturn(cardapioMock);
         when(cardapioMock.getRestaurante()).thenReturn(restauranteMock);
         when(restauranteMock.getRestauranteId()).thenReturn(restauranteId);
-        when(cardapioMock.getId()).thenReturn(itemCardapioId);
+        when(cardapioMock.getCardapioId()).thenReturn(itemCardapioId);
 
         deletarCardapioUseCase.deletarPorId(usuarioLogadoId, itemCardapioId);
 

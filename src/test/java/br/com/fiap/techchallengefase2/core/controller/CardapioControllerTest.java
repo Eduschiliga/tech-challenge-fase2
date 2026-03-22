@@ -70,7 +70,7 @@ class CardapioControllerTest {
     void buscarPorId_DeveRetornarOutputDto() {
         Long cardapioId = 100L;
         Cardapio cardapio = mock(Cardapio.class);
-        when(cardapio.getId()).thenReturn(cardapioId);
+        when(cardapio.getCardapioId()).thenReturn(cardapioId);
         when(cardapio.getNome()).thenReturn("Cardápio Principal");
 
         when(buscarCardapioPorId.buscarPorId(cardapioId)).thenReturn(cardapio);
@@ -88,7 +88,7 @@ class CardapioControllerTest {
         Long usuarioLogadoId = 1L;
         Long restauranteId = 10L;
         Cardapio cardapio = mock(Cardapio.class);
-        when(cardapio.getId()).thenReturn(100L);
+        when(cardapio.getCardapioId()).thenReturn(100L);
         when(cardapio.getNome()).thenReturn("Menu Degustação");
 
         when(buscarTodosCardapiosPorRestaurante.buscarTodos(usuarioLogadoId, restauranteId))

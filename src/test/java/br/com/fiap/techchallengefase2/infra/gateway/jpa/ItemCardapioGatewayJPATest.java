@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -129,7 +130,7 @@ class ItemCardapioGatewayJPATest {
     void deveBuscarTodosPorCardapioId() {
         // Given
         List<ItemCardapioEntityJPA> entityList = Collections.singletonList(itemCardapioEntity);
-        when(repository.findAllByCardapio_Id(cardapioId)).thenReturn(entityList);
+        when(repository.findAllByCardapio_CardapioId(cardapioId)).thenReturn(entityList);
         when(mapper.toDomain(itemCardapioEntity)).thenReturn(itemCardapio);
 
         // When
@@ -140,19 +141,25 @@ class ItemCardapioGatewayJPATest {
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
         assertEquals(itemCardapio, result.get(0));
-        verify(repository, times(1)).findAllByCardapio_Id(cardapioId);
+        verify(repository, times(1)).findAllByCardapio_CardapioId(cardapioId);
         verify(mapper, times(1)).toDomain(itemCardapioEntity);
     }
 
     @Test
     void deveDeletarPorId() {
-        // Given
-        doNothing().when(repository).deleteById(itemCardapioId);
+        Long itemCardapioId = 10L;
 
-        // When
+        ItemCardapioEntityJPA entityMock = new ItemCardapioEntityJPA();
+        CardapioEntityJPA cardapioMock = new CardapioEntityJPA();
+        cardapioMock.setItens(new ArrayList<>());
+        entityMock.setCardapio(cardapioMock);
+
+        when(repository.findById(itemCardapioId)).thenReturn(Optional.of(entityMock));
+
         itemCardapioGateway.deletarPorId(itemCardapioId);
 
-        // Then
-        verify(repository, times(1)).deleteById(itemCardapioId);
+        verify(repository, times(1)).findById(itemCardapioId);
+
+        verify(repository, times(1)).delete(entityMock);
     }
 }

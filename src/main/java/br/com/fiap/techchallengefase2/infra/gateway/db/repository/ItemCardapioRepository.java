@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ItemCardapioRepository extends JpaRepository<ItemCardapioEntityJPA, Long> {
-    List<ItemCardapioEntityJPA> findAllByCardapio_Id(Long cardapioId);
+    List<ItemCardapioEntityJPA> findAllByCardapio_CardapioId(Long cardapioId);
 }

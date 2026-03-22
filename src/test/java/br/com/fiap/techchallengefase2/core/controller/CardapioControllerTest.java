@@ -78,7 +78,7 @@ class CardapioControllerTest {
         CardapioOutputDTO result = cardapioController.buscarPorId(cardapioId);
 
         assertNotNull(result);
-        assertEquals(cardapioId, result.id());
+        assertEquals(cardapioId, result.cardapioId());
         assertEquals("Cardápio Principal", result.nome());
         verify(buscarCardapioPorId).buscarPorId(cardapioId);
     }
@@ -97,7 +97,7 @@ class CardapioControllerTest {
         List<CardapioOutputDTO> result = cardapioController.buscarTodosPorRestaurante(usuarioLogadoId, restauranteId);
 
         assertEquals(1, result.size());
-        assertEquals(100L, result.get(0).id());
+        assertEquals(100L, result.get(0).cardapioId());
         verify(buscarTodosCardapiosPorRestaurante).buscarTodos(usuarioLogadoId, restauranteId);
     }
 

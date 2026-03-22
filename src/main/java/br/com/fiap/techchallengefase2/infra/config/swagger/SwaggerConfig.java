@@ -30,7 +30,7 @@ public class SwaggerConfig {
         return (operation, handlerMethod) -> {
             if (operation.getParameters() != null) {
                 // Remove o parâmetro do header injetado via filtro para não exigir no Swagger UI
-                operation.getParameters().removeIf(p -> "x-usuario-logado-id".equals(p.getName()));
+                operation.getParameters().removeIf(p -> "x-usuario-logado-cardapioId".equals(p.getName()));
             }
             return operation;
         };

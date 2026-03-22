@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public record CardapioOutputDTO(
-        Long id,
+        Long cardapioId,
         RestauranteOutputDTO restaurante,
         List<ItemCardapioOutputDTO> itens,
         String nome

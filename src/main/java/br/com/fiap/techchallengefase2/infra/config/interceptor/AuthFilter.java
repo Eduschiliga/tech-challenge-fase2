@@ -42,10 +42,10 @@ public class AuthFilter extends OncePerRequestFilter {
             Long usuarioId = tokenGateway.extrairUsuarioId(token);
 
             if (usuarioId != null) {
-                // Para injetar o header "x-usuario-logado-id" que é exigido nos controllers,
+                // Para injetar o header "x-usuario-logado-cardapioId" que é exigido nos controllers,
                 // usamos um HttpServletRequestWrapper, pois os headers da requisição original são imutáveis.
                 CustomHttpServletRequestWrapper requestWrapper = new CustomHttpServletRequestWrapper(request);
-                requestWrapper.addHeader("x-usuario-logado-id", String.valueOf(usuarioId));
+                requestWrapper.addHeader("x-usuario-logado-cardapioId", String.valueOf(usuarioId));
                 
                 filterChain.doFilter(requestWrapper, response);
                 return;

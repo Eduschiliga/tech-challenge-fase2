@@ -45,7 +45,7 @@ public class ItemCardapioGatewayJPA implements ItemCardapioGateway {
 
     @Override
     public List<ItemCardapio> buscarTodosPorCardapioId(Long cardapioId) {
-        return repository.findAllByCardapio_Id(cardapioId).stream()
+        return repository.findAllByCardapio_CardapioId(cardapioId).stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toCollection(ArrayList::new));
     }

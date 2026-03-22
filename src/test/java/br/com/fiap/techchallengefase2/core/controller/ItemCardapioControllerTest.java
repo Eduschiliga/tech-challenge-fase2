@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -70,7 +69,7 @@ class ItemCardapioControllerTest {
 
         ItemCardapio item = mock(ItemCardapio.class);
         // Verifique se no seu Domain o método é getId() ou getItemCardapioId()
-        // e se no DTO o campo é id() ou cardapioId()
+        // e se no DTO o campo é cardapioId() ou cardapioId()
         when(item.getItemCardapioId()).thenReturn(itemCardapioId);
         when(item.getCardapioId()).thenReturn(cardapioPaiId);
         when(item.getNome()).thenReturn("Hambúrguer");

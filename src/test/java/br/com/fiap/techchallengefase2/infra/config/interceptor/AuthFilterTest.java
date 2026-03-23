@@ -83,7 +83,7 @@ class AuthFilterTest {
         authFilter.doFilterInternal(request, response, mockFilterChain);
 
         verify(mockFilterChain).doFilter(
-                argThat(req -> "10".equals(((HttpServletRequest) req).getHeader("x-usuario-logado-cardapioId"))),
+                argThat(req -> "10".equals(((HttpServletRequest) req).getHeader("x-usuario-logado-id"))),
                 eq(response)
         );
         assertEquals(HttpStatus.OK.value(), response.getStatus());

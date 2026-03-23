@@ -42,7 +42,7 @@ class SwaggerConfigTest {
         Operation operation = new Operation();
         List<Parameter> parameters = new ArrayList<>();
 
-        Parameter p1 = new Parameter().name("x-usuario-logado-cardapioId").in("header");
+        Parameter p1 = new Parameter().name("x-usuario-logado-id").in("header");
         Parameter p2 = new Parameter().name("outro-header").in("header");
 
         parameters.add(p1);
@@ -54,7 +54,7 @@ class SwaggerConfigTest {
         assertEquals(1, operation.getParameters().size());
         assertEquals("outro-header", operation.getParameters().get(0).getName());
         assertFalse(operation.getParameters().stream()
-                .anyMatch(p -> "x-usuario-logado-cardapioId".equals(p.getName())));
+                .anyMatch(p -> "x-usuario-logado-id".equals(p.getName())));
     }
 
     @Test
